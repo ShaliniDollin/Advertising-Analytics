@@ -14,7 +14,8 @@
         <meta name="author" content="Shalini" />
         <link rel="stylesheet" type="text/css" href="/css/demo.css" />
         <link rel="stylesheet" type="text/css" href="/css/style2.css" />
-		<link rel="stylesheet" type="text/css" href="/css/animate-custom.css" />
+		    <link rel="stylesheet" type="text/css" href="/css/animate-custom.css" />
+        <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css">
     </head>
     <body>
         <div class="container">
@@ -57,8 +58,8 @@
                             <form  action="/dashboard" method="post" autocomplete="on">
                                 <h1> Sign up </h1>
                                 <p>
-                                    <label for="usernamesignup" class="uname" data-icon="u">Your username</label>
-                                    <input id="usernamesignup" name="usernamesignup" required="required" type="text" placeholder="mysuperusername690" />
+                                    <label for="emailsignup" class="youmail" class="fa fa-envelope"> Your email</label>
+                                    <input id="emailsignup" name="emailsignup" required="required" type="email" placeholder="&#xf0e0; mysupermail@mail.com"/>
                                 </p>
                                 <p>
                                     <label for="firstnamesignup" class="fname" data-icon="f">FirstName</label>
@@ -69,16 +70,19 @@
                                     <input id="lastnamesignup" name="lastnamesignup" required="required" type="text" placeholder="LastName" />
                                 </p>
                                 <p>
+                                    <label for="dobsignup" class="dob" data-icon="a">Date of Birth</label>
+                                    <input id="dobsignup" name="dobsignup" required="required" type="Date" placeholder="DOB" />
+                                </p>
+                                <p>
                                     <input type="radio" id="vendor" name="typeofuser"  value="Vendor" checked/>
                                     <label for="vendor"><span></span>Product Vendor</label>
                                     &nbsp; &nbsp; &nbsp;
                                     <input type="radio" id="Event" name="typeofuser"  value="Event"/>
                                     <label for="Event" ><span></span>Event Organiser</label>
                                 </p>
-
                                 <p>
-                                    <label for="emailsignup" class="youmail" data-icon="e" > Your email</label>
-                                    <input id="emailsignup" name="emailsignup" required="required" type="email" placeholder="mysupermail@mail.com"/>
+                                    <label for="orgsignup" class="orgname" data-icon="u">Organisation Name</label>
+                                    <input id="orgsignup" name="orgsignup" required="required" type="text" placeholder="Organisation Name" />
                                 </p>
                                 <p>
                                     <label for="passwordsignup" class="youpasswd" data-icon="p">Your password </label>

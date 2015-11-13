@@ -19,6 +19,17 @@
     font-weight: normal;
     font-style: normal;
 }
+@font-face{
+    font-family:'FontAwesome';
+    font-weight:normal;
+    font-style:normal;
+    src:url('../fonts/fontawesome-webfont.eot');
+    src:url('../fonts/fontawesome-webfont.eot') format('embedded-opentype'),
+        url('../fonts/fontawesome-webfont.woff') format('woff2'),
+        url('../fonts/fontawesome-webfont.woff') format('woff'),
+        url('../fonts/fontawesome-webfont.ttf') format('truetype'),
+        url('../fonts/fontawesome-webfont.svg') format('svg');
+}
 @font-face {
     font-family: 'FranchiseRegular';
     src: url('../fonts/franchise-bold-webfont.eot');
@@ -150,7 +161,7 @@ input {
 /** the magic icon trick ! **/
 [data-icon]:after {
     content: attr(data-icon);
-    font-family: 'FontomasCustomRegular';
+    font-family: 'FontAwesome';
     color: rgb(106, 159, 171);
     position: absolute;
     left: 10px;
@@ -158,7 +169,20 @@ input {
 	width: 30px;
 }
 
-
+#wrapper input {
+	font-family: 'FontAwesome';
+	position: relative;
+	color:red;
+	left: -5px;
+	content: "\f007";
+}
+#register input {
+	font-family: 'FontAwesome';
+	position: relative;
+	color:red;
+	left: -5px;
+	content: "\f007";
+}
 
 
 input[type="radio"] {

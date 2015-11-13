@@ -16,9 +16,12 @@
 
     <!-- Custom CSS -->
     <link href="/css/landing-page.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/style-responsive.css" rel="stylesheet" />
 
     <!-- Custom Fonts -->
     <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
 
     <!---  JS files  -->
     <script type="text/javascript" src="/js/cookie_maintainence.js" ></script>
@@ -56,7 +59,7 @@
                         <a href="#contact">Contact</a>
                     </li>
                     <li>
-                       <a href="/login" id="Loginbutton" onclick="show()">Login</a>
+                      <a href="#" data-toggle="modal" style="color:blue;" id="welcome" data-target="#LoginModal">Login</a>
                      </li>
                 </ul>
             </div>
@@ -64,6 +67,100 @@
         </div>
         <!-- /.container -->
     </nav>
+
+    <!--- Login Modal   -->
+    <div class="modal fade" id="LoginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content" >
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <div class="modal-title" id="myModalLabel" style="text-align:center;display:block;color:blue"><h4>Login </h4>
+              </div>
+            </div>
+            <div class="modal-body">
+                      <div class="form">
+                        <form class="form-validate " role="form"   id="login_form" method="get" action="">
+                          <div class="form-group ">
+                              <label for="email" class="control-label">Email <span class="required">*</span></label>
+                              <input class="form-control " id="email" name="email" type="email" />
+                          </div>
+                          <div class="form-group ">
+                              <label for="password" class="control-label">Password <span class="required">*</span></label>
+                              <input class="form-control " id="password" name="password" type="password" />
+                          </div>
+                          <div class="form-group centered">
+                            <button class="btn btn-primary " style="margin-left:45%;background-color:blue;" type="submit">Login</button>
+                          </div>
+                        </form>
+                      </div>
+            </div>
+            <div class="modal-footer">
+              <p> Not a member yet ?    <span onclick="showsignup()" style="color:blue;cursor:pointer;">Join Us</span></p>
+            </div>
+        </div>
+      </div>
+    </div>
+
+<!---   Signup Modal --->
+      <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content" >
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <div class="modal-title" id="myModalLabel" style="text-align:center;display:block;color:blue;"><h4>Sign Up </h4>
+                </div>
+              </div>
+              <div class="modal-body">
+                        <div class="form">
+                          <form class="form-validate " role="form"   id="register_form" method="get" action="">
+                            <div class="form-group ">
+                                <label for="fname" class="control-label">First Name <span class="required">*</span></label>
+                                <input class=" form-control" id="fname" name="fname" type="text" />
+                            </div>
+                            <div class="form-group ">
+                                <label for="lname" class="control-label">Last Name <span class="required">*</span></label>
+                                <input class=" form-control" id="lname" name="lname" type="text" />
+                            </div>
+                            <div class="form-group ">
+                                <label for="address" class="control-label">Organization Name <span class="required">*</span></label>
+                                <input class=" form-control" id="address" name="address" type="text" />
+                            </div>
+                            <div class="form-group ">
+                                <label for="dob" class="control-label">Date of Birth <span class="required">*</span></label>
+                                <input class="form-control " id="dob" name="dob" type="Date" />
+                            </div>
+                            <div class="form-group ">
+                                <label for="email" class="control-label">Email <span class="required">*</span></label>
+                                <input class="form-control " id="email" name="email" type="email" />
+                            </div>
+                            <div class="form-group ">
+                                <label for="password" class="control-label">Password <span class="required">*</span></label>
+                                <input class="form-control " id="password" name="password" type="password" />
+                            </div>
+                            <div class="form-group ">
+                                <label for="confirm_password" class="control-label">Confirm Password <span class="required">*</span></label>
+                                <input class="form-control " id="confirm_password" name="confirm_password" type="password" />
+                            </div>
+                            <div class="form-group " id="agree">
+                                <input type="radio" id="vendor" name="typeofuser"  value="Vendor" checked/>
+                                <label for="vendor" class="control-label">Product Vendor</label>
+                                &nbsp; &nbsp; &nbsp;
+                                <input type="radio" id="Event" name="typeofuser"  value="Event"/>
+                                <label for="Event" class="control-label">Event Organiser</label>
+                            </div>
+                            <div class="form-group">
+                              <button class="btn btn-primary" style="margin-left:45%;background-color:blue;" type="submit">Sign Up</button>
+                            </div>
+                          </form>
+                        </div>
+              </div>
+              <div class="modal-footer">
+                <p> Already have an account ?  <span onclick="showlogin()" style="color:blue;cursor:pointer;">Login</span></p>
+              </div>
+          </div>
+        </div>
+      </div>
+
 
     <!-- Header -->
     <a name="about"></a>
@@ -158,8 +255,7 @@
                     <hr class="section-heading-spacer">
                     <div class="clearfix"></div>
                     <h2 class="section-heading">Why US?</h2>
-                    <p class="lead">Our Application finds the relevance of a marketing Campaign/Advertisement to an event by Analyzing Demographic data of the Event and Product. Our application will be a great  place for companies to find leading events to Advertise their products which will lead to higher Sales and Revenue.
-</p>
+                    <p class="lead">Our Application finds the relevance of a marketing Campaign/Advertisement to an event by Analyzing Demographic data of the Event and Product. Our application will be a great  place for companies to find leading events to Advertise their products which will lead to higher Sales and Revenue</p>
                 </div>
                 <div class="col-lg-5 col-lg-offset-2 col-sm-6">
                     <img class="img-responsive" src="img/phones.png" alt="">
@@ -231,12 +327,28 @@
     </footer>
 
     <!-- jQuery -->
-    <script src="js/jquery.js"></script>
+    <script src="/js/jquery.js"></script>
 
     <!--- javascript file ---->
-      <script src="js/index.js"></script>
+
     <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+
+    <!-- jquery validate js -->
+    <script type="text/javascript" src="/js/jquery.validate.min.js"></script>
+
+    <!-- custom form validation script for this page-->
+    <script src="/js/form-validation-script.js"></script>
+    <script type="text/javascript" >
+        function showlogin() {
+          $('#signupModal').modal('hide') ;
+          $('#LoginModal').modal('show');
+         }
+         function showsignup() {
+           $('#signupModal').modal('show') ;
+           $('#LoginModal').modal('hide');
+          }
+      </script>
 
 
 </body>

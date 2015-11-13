@@ -207,7 +207,7 @@ table tr th { color: #688a7e;}
 }
 .form .required{
     font-size: 16px;
-    color: #00a0df;
+    color: red;
 }
 
 .login-wrap {
@@ -4044,7 +4044,7 @@ ul.amounts li {
 .form-validate .form-group label.error {
     display: inline;
     margin: 5px 0;
-    color: #00a0df;
+    color: red;
     font-weight: 400;
 }
 
@@ -4483,7 +4483,13 @@ table.sliders tr td {
 .datepicker td span.active:hover, .datepicker td span.active:active, .datepicker td span.active.active, .datepicker td span.active.disabled, .datepicker td span.active[disabled]{
     background: #688a7e;
 }
+#wrapper input {
+  font-family: FontAwesome;
+}
 
+#register input {
+  font-family: FontAwesome;
+}
 .daterangepicker .calendar th, .daterangepicker .calendar td {
     font-family: 'Lato', sans-serif;
     font-weight: 300;

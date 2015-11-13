@@ -7,19 +7,40 @@ var Script = function () {
     $().ready(function() {
         // validate the comment form when it is submitted
         $("#feedback_form").validate();
+        $("#login_form").validate({
+            rules: {
+                password: {
+                    required: true,
+                    minlength: 5
+                },
+                email: {
+                    required: true,
+                    email: true
+                }
+            },
+            messages: {
 
+                password: {
+                    required: "Please provide a password.",
+                    minlength: "Your password must be at least 5 characters long."
+                },
+
+                email: "Please enter a valid email address.",
+
+            }
+        });
         // validate signup form on keyup and submit
         $("#register_form").validate({
             rules: {
-                fullname: {
+                fname: {
                     required: true,
-                    minlength: 6
+                    minlength: 3
+                },
+                lname: {
+                    required: true,
+                    minlength: 2
                 },
                 address: {
-                    required: true,
-                    minlength: 10
-                },
-                username: {
                     required: true,
                     minlength: 5
                 },
@@ -35,25 +56,20 @@ var Script = function () {
                 email: {
                     required: true,
                     email: true
-                },
-                topic: {
-                    required: "#newsletter:checked",
-                    minlength: 2
-                },
-                agree: "required"
+                }
             },
-            messages: {                
-                fullname: {
-                    required: "Please enter a Full Name.",
-                    minlength: "Your Full Name must consist of at least 6 characters long."
+            messages: {
+                fname: {
+                    required: "Please enter a First Name.",
+                    minlength: "Your First Name must consist of at least 3 characters long."
+                },
+                lname: {
+                    required: "Please enter a Last Name.",
+                    minlength: "Your Last Name must consist of at least 2 characters long."
                 },
                 address: {
-                    required: "Please enter a Address.",
-                    minlength: "Your Address must consist of at least 10 characters long."
-                },
-                username: {
-                    required: "Please enter a Username.",
-                    minlength: "Your username must consist of at least 5 characters long."
+                    required: "Please enter a Organization Name.",
+                    minlength: "Your Organization must consist of at least 5 characters long."
                 },
                 password: {
                     required: "Please provide a password.",
@@ -65,7 +81,7 @@ var Script = function () {
                     equalTo: "Please enter the same password as above."
                 },
                 email: "Please enter a valid email address.",
-                agree: "Please accept our terms & condition."
+
             }
         });
 
@@ -90,6 +106,5 @@ var Script = function () {
             topicInputs.attr("disabled", !this.checked);
         });
     });
-
-
+  
 }();

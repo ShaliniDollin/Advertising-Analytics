@@ -23,7 +23,7 @@ $(function () {
 
 
     var stack = 0, bars = true, lines = false, steps = false;
-    
+
     function plotWithOptions() {
         $.plot($("#bar-chart"), [ d1, d2 ], {
             series: {
@@ -45,7 +45,7 @@ $(function () {
     }
 
     plotWithOptions();
-    
+
     $(".stackControls input").click(function (e) {
         e.preventDefault();
         stack = $(this).val() == "With stacking" ? true : null;
@@ -86,7 +86,7 @@ $(function () {
          {"period": "2006 Q4", "licensed": 2974, "sorned": 2562},
          {"period": "2005 Q4", "licensed": 1235, "sorned": 150}
       ];
-      
+
       Morris.Line({
         element: 'chart1',
         data: tax_data,
@@ -100,7 +100,7 @@ $(function () {
     chart1();
     // Resize First Chart on page resize
     $(window).resize(debounce(chart1,200));
-    
+
     // Second Chart
     var graph2 = function(){
       $("#graph2").html("");
@@ -121,7 +121,7 @@ $(function () {
     graph2();
     // Resize Second Chart on page resize
     $(window).resize(debounce(graph2,200));
-    
+
     // Third Chart
     var chart1 = function(){
       $("#bar-chart2").html("");
@@ -142,31 +142,31 @@ $(function () {
         labels: ['Series A', 'Series B'],
         barColors: [ "#56626B","#486b60", "#999"]
       });
-    
+
     }
     // Init Third Chart
     chart1();
     // Resize Third Chart on page resize
     $(window).resize(debounce(chart1,200));
-    
+
     $("#pie-chart4").sparkline([55, 100, 120, 110], {
       type: 'pie',
       height: 300,
       sliceColors: ['#c5ced6','#486b60','#59646e','#C0CA55','#384b5e','#999999']
     });
-    
+
     $("#pie-chart5").sparkline([55, 100, 44, 13], {
       type: 'pie',
       height: 70,
       sliceColors: ['#59646e','#999999','#c5ced6','#C0CA55','#384b5e','#486b60']
     });
-    
+
     $("#pie-chart6").sparkline([55, 100, 120, 110], {
       type: 'pie',
       height: 70,
       sliceColors: ['#c5ced6','#486b60','#59646e','#C0CA55','#384b5e','#999999']
     });
-    
+
     $('#reportrange').daterangepicker({
         startDate: moment().subtract('days', 29),
         endDate: moment(),
@@ -208,5 +208,5 @@ $(function () {
      });
      $('#reportrange span').html(moment().subtract('days', 29).format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
 
-    
+
 });
