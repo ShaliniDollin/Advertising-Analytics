@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html>
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,30 +20,410 @@
     <link href="/css/font-awesome.min.css" rel="stylesheet" />
     <!-- full calendar css-->
     <link href="/assets/fullcalendar/fullcalendar/bootstrap-fullcalendar.css" rel="stylesheet" />
-	<link href="/assets/fullcalendar/fullcalendar/fullcalendar.css" rel="stylesheet" />
+    <link href="/assets/fullcalendar/fullcalendar/fullcalendar.css" rel="stylesheet" />
     <!-- easy pie chart-->
     <link href="/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
     <!-- owl carousel -->
     <link rel="stylesheet" href="/css/owl.carousel.css" type="text/css">
-	<link href="/css/jquery-jvectormap-1.2.2.css" rel="stylesheet">
+    <link href="/css/jquery-jvectormap-1.2.2.css" rel="stylesheet">
     <!-- Custom styles -->
-	<link rel="stylesheet" href="/css/fullcalendar.css">
-	<link href="/css/widgets.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/fullcalendar.css">
+    <link href="/css/widgets.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
     <link href="/css/style-responsive.css" rel="stylesheet" />
-	<link href="/css/xcharts.min.css" rel=" stylesheet">
-	<link href="/css/jquery-ui-1.10.4.min.css" rel="stylesheet">
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
-    <!--[if lt IE 9]>
-      <script src="/js/html5shiv.js"></script>
-      <script src="/js/respond.min.js"></script>
-      <script src="/js/lte-ie7.js"></script>
-    <![endif]-->
-  </head>
+    <link href="/css/xcharts.min.css" rel=" stylesheet">
+    <link href="/css/jquery-ui-1.10.4.min.css" rel="stylesheet">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    
 
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <style type="text/css">
+${demo.css}
+    </style>
+    <script type="text/javascript">
+$(function () {
+    $('#container6').highcharts({
+        chart: {
+            type: 'area'
+        },
+        title: {
+            text: 'Cosmetic Division Sales Based on Region'
+        },
+        
+        xAxis: {
+            categories: ['2014', '2013', '2012', '2011', '2010', '2009', '2008','2007','2006','2005'],
+            tickmarkPlacement: 'on',
+            title: {
+                enabled: false
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'Sales in £ millions'
+            },
+            labels: {
+                formatter: function () {
+                    return this.value / 1000;
+                }
+            }
+        },
+        tooltip: {
+            shared: true,
+            valueSuffix: ' millions'
+        },
+        plotOptions: {
+            area: {
+                stacking: 'normal',
+                lineColor: '#666666',
+                lineWidth: 1,
+                marker: {
+                    lineWidth: 1,
+                    lineColor: '#666666'
+                }
+            }
+        },
+        series: [{
+            name: 'North America',
+            data: [5389,5356,5210,4406,4291,4262,4167,4426,3953, 3868]
+        }, {
+            name: 'Western Europe',
+            data: [7697,7467,7382,7247,7181,7621,7984,7851,6992,6742]
+        }, {
+            name: 'New Market',
+            data: [8571,8464,8189,7218,6667,5588,5389,4784,4065,3604]
+        }]
+    });
+});
+
+
+
+$(function () {
+    $('#container1').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Advertizing Cost'
+        },
+        
+        xAxis: {
+            type: 'category',
+            labels: {
+                rotation: -45,
+                style: {
+                    fontSize: '13px',
+                    fontFamily: 'Verdana, sans-serif'
+                }
+            }
+        },
+        yAxis: {
+            min: 3000,
+            title: {
+                text: 'Cost of Advertizing £ (millions)'
+                
+            }
+            
+        },
+        legend: {
+            enabled: false
+        },
+        tooltip: {
+            pointFormat: 'Advertizing Cost: <b>£ {point.y:.1f}  millions</b>'
+        },
+        series: [{
+            name: 'Advertizing Cost',
+            data: [
+                ['2014', 6558],
+                ['2013', 6621],
+                ['2012', 6531],
+                ['2011', 6292],
+                ['2010', 6029],
+                ['2009', 5389],
+                ['2008', 5269],
+                ['2007', 5126],
+                ['2006', 4783],
+                ['2005', 4367],
+                
+            ],
+            dataLabels: {
+                enabled: true,
+                rotation: -90,
+                color: '#190707',
+                align: 'right',
+                format: '{point.y:.1f}', // one decimal
+                y: 25, // 10 pixels down from the top
+                style: {
+                    fontSize: '10px',
+                    fontFamily: 'Verdana, sans-serif'
+                }
+            }
+        }]
+    });
+});
+
+
+
+
+
+
+$(function () {
+    $('#container2').highcharts({
+        chart: {
+            type: 'bar'
+        },
+        title: {
+            text: 'Cosmetic Division Sales Based on Business Segment'
+        },
+        
+        xAxis: {
+            categories: ['hair care', 'hair colourants', 'makeup', 'perfumes', 'skin care','others'],
+            title: {
+                text: null
+            }
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Sales £ (millions)',
+                align: 'high'
+            },
+            labels: {
+                overflow: 'justify'
+            }
+        },
+        tooltip: {
+            valueSuffix: ' millions'
+        },
+        plotOptions: {
+            bar: {
+                dataLabels: {
+                    enabled: false
+                }
+            }
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'top',
+            x: -40,
+            y: 80,
+            floating: true,
+            borderWidth: 1,
+            backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+            shadow: true
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            name: 'Year 2014',
+            data: [4449,2860,4751,2123, 6489, 986]
+        }, {
+            name: 'Year 2013',
+            data: [4422,2931,4616,2029, 6303,987]
+        },{
+            name: 'Year 2012',
+            data: [4356,2943,4468,2010,6039,968]
+        },
+        {
+            name: 'Year 2011',
+            data: [4029,2760,4057,1840,5257,928]
+        },  
+        {
+            name: 'Year 2010',
+            data: [3846,2716,4017,1815,4936,809]
+        }]
+    });
+});
+
+
+$(function () {
+    $('#container3').highcharts({
+        title: {
+            text: 'Cosmetic Division Sales ',
+            x: -20 //center
+        },
+        
+        xAxis: {
+            categories: ['2014', '2013', '2012', '2011', '2010', '2009',
+                '2008', '2007', '2006', '2005']
+        },
+        yAxis: {
+
+            title: {
+                text: 'Sales £ (millions)'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            valueSuffix: '£ (millions)'
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series: [{
+            name: 'active cosmetics',
+            data: [1660,1576,1499,1422,1386,1233,1289,1248,1127,985]
+        }, {
+            name: 'consumer products',
+            data: [10767,10873,10713, 9835,9530,8555,8354,8280,7903,7499]
+        }, {
+            name: 'loreal luxe',
+            data: [6197,5865,5568,4800,4506, 4079,4169,3927,3773,3582]
+        }, {
+            name: 'professional product',
+            data: [3032,2973,3002,2814, 2717,2388,2471,2391,2125,2060]
+        }]
+    });
+});
+
+
+$(function () {
+    $('#container4').highcharts({
+        chart: {
+            type: 'pie',
+            options3d: {
+                enabled: true,
+                alpha: 45
+            }
+        },
+        title: {
+            text: 'Financial Highlights of 2014'
+        },
+        
+        plotOptions: {
+            pie: {
+                innerSize: 100,
+                depth: 45
+            }
+        },
+        series: [{
+            name: ' £ (millions) ',
+            data: [
+                ['Sales', 22532],
+                ['Cost of Sales', 6500],
+                ['Gross Profit', 16031],
+                ['Net Income', 3890],
+                ['Advertizing Cost', 6558],
+                ['R&D Cost', 760],
+                ['General Selling Expenses', 4821]
+                
+            ]
+        }]
+    });
+});
+
+
+$(function () {
+    $('#container5').highcharts({
+        title: {
+            text: 'Financial Summary'
+        },
+        xAxis: {
+            categories: [2014,2013,2012,2011,2010,0,2009,2008,2007,2006,2005]
+        },
+        labels: {
+            items: [{
+                
+                style: {
+                    left: '50px',
+                    top: '18px',
+                    color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
+                }
+            }]
+        },
+        series: [{
+            type: 'column',
+            name: 'Sales',
+            data: [22532,22124,21638,20343,19496,0,17473,17542,17062,15790,14532]
+        }, {
+            type: 'column',
+            name: 'Cost of Sales',
+            data: [6500,6379,6388,5851,5697,0,5162,5187,4941,4569,4347]
+        }, {
+            type: 'column',
+            name: 'Gross Profit',
+            data: [16031,15744,15250,14492,13799,0,12311,12355,12121,11221,10185]
+        }, 
+{
+            type: 'column',
+            name: 'R&D Expense',
+            data: [760,748,680,720,665,0,609,588,559,532,496]
+        },
+
+        {
+            type: 'column',
+            name: 'Advertizing Cost',
+            data: [6558,6621,6531,6292,6029,0,5389,5269,5126,4783,4367]
+        },
+        {
+            type: 'column',
+            name: 'Net Income',
+            data: [3890,3760,3558,3293,3057,0,2578,2725,2816,2596,2312],
+            marker: {
+                lineWidth: 2,
+                lineColor: Highcharts.getOptions().colors[3],
+                fillColor: 'white'
+            }
+        }, {
+            type: 'pie',
+            name: '£ (millions)',
+            data: [{
+                name: 'Sales ',
+                y:188528 ,
+                color: Highcharts.getOptions().colors[0] 
+            }, {
+                name: 'Cost of Sales ',
+                y:81296,
+                color: Highcharts.getOptions().colors[1] 
+            }, 
+
+            {
+                name: 'Gross Profit ',
+                y:133509,
+                color: Highcharts.getOptions().colors[2] 
+            },
+
+            {
+                name: 'R&D Expense ',
+                y:6537,
+                color: Highcharts.getOptions().colors[3] 
+            },
+
+            {
+                name: 'Advertizing Cost ',
+                y:56963,
+                color: Highcharts.getOptions().colors[4] 
+            },
+
+            {
+                name: 'Net Income ',
+                y:30585,
+                color: Highcharts.getOptions().colors[5] 
+            }],
+            center: [478, 100],
+            size: 150,
+            showInLegend: false,
+            dataLabels: {
+                enabled: false
+            }
+        }]
+    });
+});
+    </script>
+  </head>
   <body>
-  <!-- container section start -->
-  <section id="container" class="">
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+<section id="container" class="">
 
 
       <nav class="navbar navbar-default navbar-fixed-top topnav" style="top: 0px;border-color: white; color:#777">
@@ -168,7 +548,7 @@
                           <span>Dashboard</span>
                       </a>
                   </li>
-				          <li class="">
+                          <li class="">
                       <a href="statistics" class="">
                         <i class="icon_piechart"></i>
                         <span>Statistics</span>
@@ -201,202 +581,39 @@
      <!--main content start-->      
       <section id="main-content">
         <section class="wrapper">
-		<div class="row">
-				<div class="col-lg-12">
-					<h3 class="page-header"><i class="icon_piechart"></i> Statistics</h3>
-					<ol class="breadcrumb">
-						<li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
-						<li><i class="icon_piechart"></i>Statistics</li>
-						
-					</ol>
-				</div>
-			</div>
+        <div class="row">
+                <div class="col-lg-12">
+                    <h3 class="page-header"><i class="icon_piechart"></i> Statistics</h3>
+                    <ol class="breadcrumb">
+                        <li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
+                        <li><i class="icon_piechart"></i>Statistics</li>
+                        
+                    </ol>
+                </div>
+            </div>
             <div class="row">
               <!-- chart morris start -->
-              <div class="col-lg-12">
-                  <section class="panel">
-                      <header class="panel-heading">
-                          <h3>General Chart</Char>
-                      </header>
-                      <div class="panel-body">
-                        <div class="tab-pane" id="chartjs">
-                      <div class="row">
-                          <!-- Line -->
-                          <div class="col-lg-6">
-                              <section class="panel">
-                                  <header class="panel-heading">
-                                      Line
-                                  </header>
-                                  <div class="panel-body text-center">
-                                      <canvas id="line" height="300" width="450"></canvas>
-                                  </div>
-                              </section>
-                          </div>                      
-                          <!-- Bar -->
-                          <div class="col-lg-6">
-                              <section class="panel">
-                                  <header class="panel-heading">
-                                      Bar
-                                  </header>
-                                  <div class="panel-body text-center">
-                                      <canvas id="bar" height="300" width="500"></canvas>
-                                  </div>
-                              </section>
-                          </div>
-                      </div>
-                      <div class="row">
-                          <!-- Radar -->
-                          <div class="col-lg-6">
-                              <section class="panel">
-                                  <header class="panel-heading">
-                                      Radar
-                                  </header>
-                                  <div class="panel-body text-center">
-                                      <canvas id="radar" height="300" width="400"></canvas>
-                                  </div>
-                              </section>
-                          </div>
-                          <!-- Polar Area -->
-                          <div class="col-lg-6">
-                              <section class="panel">
-                                  <header class="panel-heading">
-                                      Polar Area
-                                  </header>
-                                  <div class="panel-body text-center">
-                                      <canvas id="polarArea" height="300" width="400"></canvas>
-                                  </div>
-                              </section>
-                          </div>
-                      </div>
-                      <div class="row">
-                          
-                          <!-- Pie -->
-                          <div class="col-lg-6">
-                              <section class="panel">
-                                  <header class="panel-heading">
-                                      Pie
-                                  </header>
-                                  <div class="panel-body text-center">
-                                      <canvas id="pie" height="300" width="400"></canvas>
-                                  </div>
-                              </section>
-                          </div>
-                          <!-- Doughnut -->
-                          <div class="col-lg-6">
-                              <section class="panel">
-                                  <header class="panel-heading">
-                                      Doughnut
-                                  </header>
-                                  <div class="panel-body text-center">
-                                      <canvas id="doughnut" height="300" width="400"></canvas>
-                                  </div>
-                              </section>
-                          </div>
-                      </div>
-                  </div>
-                      </div>
-                      </div>
-                    </section>
-              </div>
-              <!-- chart morris start -->
-            </div>
-      </section>
+              
       <!--main content end-->
   </section>
-  <!-- container section end -->
 
-<!-- End, so adding jquery -->
-    <!-- javascripts -->
-    <script src="/js/jquery.js"></script>
-	<script src="/js/jquery-ui-1.10.4.min.js"></script>
-    <script src="/js/jquery-1.8.3.min.js"></script>
-    <script type="text/javascript" src="/js/jquery-ui-1.9.2.custom.min.js"></script>
-    <!-- bootstrap -->
-    <script src="/js/bootstrap.min.js"></script>
-    <!-- nice scroll -->
-    <script src="/js/jquery.scrollTo.min.js"></script>
-    <script src="/js/jquery.nicescroll.js" type="text/javascript"></script>
-    <!-- charts scripts -->
-    <script src="/assets/jquery-knob//js/jquery.knob.js"></script>
-    <script src="/js/jquery.sparkline.js" type="text/javascript"></script>
-    <script src="/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
-    <script src="/js/owl.carousel.js" ></script>
-    <!-- jQuery full calendar -->
-    <<script src="/js/fullcalendar.min.js"></script> <!-- Full Google Calendar - Calendar -->
-	<script src="/assets/fullcalendar/fullcalendar/fullcalendar.js"></script>
-    <!--script for this page only-->
-    <script src="/js/calendar-custom.js"></script>
-	<script src="/js/jquery.rateit.min.js"></script>
-    <!-- custom select -->
-    <script src="/js/jquery.customSelect.min.js" ></script>
-	<script src="/assets/chart-master/Chart.js"></script>
 
-    <!--custome script for all page-->
-    <script src="/js/scripts.js"></script>
-    <!-- custom script for this page-->
-    <script src="/js/sparkline-chart.js"></script>
-    <script src="/js/easy-pie-chart.js"></script>
-	<script src="/js/jquery-jvectormap-1.2.2.min.js"></script>
-	<script src="/js/jquery-jvectormap-world-mill-en.js"></script>
-	<script src="/js/xcharts.min.js"></script>
-	<script src="/js/jquery.autosize.min.js"></script>
-	<script src="/js/jquery.placeholder.min.js"></script>
-	<script src="/js/gdp-data.js"></script>
-	<script src="/js/morris.min.js"></script>
-	<script src="/js/sparklines.js"></script>
-	<script src="/js/charts.js"></script>
-	<script src="/js/jquery.slimscroll.min.js"></script>
-	<!-- custom chart script for this page only-->
-    <script src="js/chartjs-custom.js"></script>
-  <script>
+<div id="container4" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
-      //knob
-      $(function() {
-        $(".knob").knob({
-          'draw' : function () {
-            $(this.i).val(this.cv + '%')
-          }
-        })
-      });
+<div id="container5" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
-      //carousel
-      $(document).ready(function() {
-          $("#owl-slider").owlCarousel({
-              navigation : true,
-              slideSpeed : 300,
-              paginationSpeed : 400,
-              singleItem : true
 
-          });
-      });
+<div id="container6" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
-      //custom select box
+<div id="container1" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
-      $(function(){
-          $('select.styled').customSelect();
-      });
+<div id="container2" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
-	  /* ---------- Map ---------- */
-	$(function(){
-	  $('#map').vectorMap({
-	    map: 'world_mill_en',
-	    series: {
-	      regions: [{
-	        values: gdpData,
-	        scale: ['#000', '#000'],
-	        normalizeFunction: 'polynomial'
-	      }]
-	    },
-		backgroundColor: '#eef3f7',
-	    onLabelShow: function(e, el, code){
-	      el.html(el.html()+' (GDP - '+gdpData[code]+')');
-	    }
-	  });
-	});
+<div id="container3" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
 
 
-  </script>
+
 
   </body>
 </html>
