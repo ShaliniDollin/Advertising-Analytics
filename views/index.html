@@ -112,7 +112,7 @@
               </div>
               <div class="modal-body">
                         <div class="form">
-                          <form class="form-validate " role="form"   id="register_form" method="get" action="">
+                          <form class="form-validate " role="form"   id="register_form" method="post" action="/users">
                             <div class="form-group ">
                                 <label for="fname" class="control-label">First Name <span class="required">*</span></label>
                                 <input class=" form-control" id="fname" name="fname" type="text" />
@@ -127,25 +127,25 @@
                             </div>
                             <div class="form-group ">
                                 <label for="dob" class="control-label">Date of Birth <span class="required">*</span></label>
-                                <input class="form-control " id="dob" name="dob" type="Date" />
+                                <input class="form-control dob" id="dob" name="dob" type="Date" />
                             </div>
                             <div class="form-group ">
                                 <label for="email" class="control-label">Email <span class="required">*</span></label>
                                 <input class="form-control " id="email" name="email" type="email" />
                             </div>
                             <div class="form-group ">
-                                <label for="password" class="control-label">Password <span class="required">*</span></label>
-                                <input class="form-control " id="password" name="password" type="password" />
+                                <label for="password1" class="control-label">Password <span class="required">*</span></label>
+                                <input class="form-control " id="password1" name="password1" type="password" />
                             </div>
                             <div class="form-group ">
                                 <label for="confirm_password" class="control-label">Confirm Password <span class="required">*</span></label>
                                 <input class="form-control " id="confirm_password" name="confirm_password" type="password" />
                             </div>
                             <div class="form-group " id="agree">
-                                <input type="radio" id="vendor" name="typeofuser"  value="Vendor" checked/>
+                                <input type="radio" class="typeofuser" name="typeofuser"  value="Vendor" checked/>
                                 <label for="vendor" class="control-label">Product Vendor</label>
                                 &nbsp; &nbsp; &nbsp;
-                                <input type="radio" id="Event" name="typeofuser"  value="Event"/>
+                                <input type="radio" class="typeofuser" name="typeofuser"  value="Event"/>
                                 <label for="Event" class="control-label">Event Organiser</label>
                             </div>
                             <div class="form-group">
@@ -328,7 +328,6 @@
 
     <!-- jQuery -->
     <script src="/js/jquery.js"></script>
-
     <!--- javascript file ---->
 
     <!-- Bootstrap Core JavaScript -->
@@ -339,7 +338,8 @@
 
     <!-- custom form validation script for this page-->
     <script src="/js/form-validation-script.js"></script>
-    <script type="text/javascript" >
+
+    <script type="text/javascript">
         function showlogin() {
           $('#signupModal').modal('hide') ;
           $('#LoginModal').modal('show');
@@ -347,7 +347,7 @@
          function showsignup() {
            $('#signupModal').modal('show') ;
            $('#LoginModal').modal('hide');
-          }
+         }
       </script>
 
 

@@ -3,11 +3,13 @@ var Script = function () {
     $.validator.setDefaults({
         submitHandler: function() { alert("submitted!"); }
     });
-
-    $().ready(function() {
+    $.validator.addMethod("password_not_same", function(value, element) {
+        console.log($('#password1').val());
+        console.log($('#confirm_password').val());
+         return str($('#password').val()) === str($('#confirm_password').val()) ;
+      }, "Please enter the same password as above.");
         // validate the comment form when it is submitted
-        $("#feedback_form").validate();
-        $("#login_form").validate({
+    $("#login_form").validate({
             rules: {
                 password: {
                     required: true,
@@ -31,6 +33,7 @@ var Script = function () {
         });
         // validate signup form on keyup and submit
         $("#register_form").validate({
+
             rules: {
                 fname: {
                     required: true,
@@ -44,14 +47,14 @@ var Script = function () {
                     required: true,
                     minlength: 5
                 },
-                password: {
+                password1: {
                     required: true,
                     minlength: 5
                 },
                 confirm_password: {
                     required: true,
                     minlength: 5,
-                    equalTo: "#password"
+                    password_not_same: true
                 },
                 email: {
                     required: true,
@@ -71,14 +74,13 @@ var Script = function () {
                     required: "Please enter a Organization Name.",
                     minlength: "Your Organization must consist of at least 5 characters long."
                 },
-                password: {
+                password1: {
                     required: "Please provide a password.",
                     minlength: "Your password must be at least 5 characters long."
                 },
                 confirm_password: {
                     required: "Please provide a password.",
                     minlength: "Your password must be at least 5 characters long.",
-                    equalTo: "Please enter the same password as above."
                 },
                 email: "Please enter a valid email address.",
 
@@ -105,6 +107,5 @@ var Script = function () {
             topics[this.checked ? "removeClass" : "addClass"]("gray");
             topicInputs.attr("disabled", !this.checked);
         });
-    });
-  
-}();
+
+} ();

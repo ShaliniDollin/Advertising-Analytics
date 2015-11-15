@@ -3,11 +3,11 @@
  * Module dependencies.
  */
 
-var express = require('express')
-  , routes = require('./routes')
-  , user = require('./routes/user')
-  , http = require('http')
-  , path = require('path');
+var express = require('express');
+var routes = require('./routes');
+var http = require('http');
+var path = require('path');
+var bodyParser = require('body-parser');
 
 var app = express();
 
@@ -18,7 +18,7 @@ app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 app.use(express.favicon());
 app.use(express.logger('dev'));
-app.use(express.bodyParser());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
@@ -29,7 +29,10 @@ if ('development' === app.get('env')) {
 }
 
 app.get('/', routes.index);
-app.get('/users', user.list);
+app.get('/users', routes.createuser);//checked
+app.post('/users', routes.createuser);//checked
+app.get('/users/:userId', routes.getUserById);//checked
+app.get('/users/:userId/:password', routes.validateUser);
 app.get('/login', routes.login);
 app.get('/dashboard', routes.dashboard);
 app.get('/statistics', routes.statistics);
