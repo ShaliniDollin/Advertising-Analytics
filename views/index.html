@@ -58,8 +58,32 @@
                     <li>
                         <a href="#contact">Contact</a>
                     </li>
-                    <li id="logshow">
-                      <a href="#" data-toggle="modal" style="color:blue;" id="welcome" data-target="#LoginModal"> Login </a>
+                    <li id="welcome" >
+                      <a href="#" data-toggle="modal" data-target="#LoginModal"> Login </a>
+                     </li>
+                     <li id="hidelog" class="dropdown">
+                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                             <span class="username">Welcome <%= user.fname %>!</span>
+                             <b class="caret"></b>
+                         </a>
+                         <ul class="dropdown-menu extended logout">
+                             <div class="log-arrow-up"></div>
+                             <li class="eborder-top">
+                                 <a href="/"><i class="icon_house_alt"></i> Home</a>
+                             </li>
+                             <li>
+                                 <a href="#"><i class="icon_mail_alt"></i> My Inbox</a>
+                             </li>
+                             <li>
+                                 <a href="#"><i class="icon_clock_alt"></i> Timeline</a>
+                             </li>
+                             <li>
+                                 <a href="#"><i class="icon_chat_alt"></i> Chats</a>
+                             </li>
+                             <li>
+                                 <a href="/logout"><i class="icon_key_alt"></i> Log Out</a>
+                             </li>
+                             </ul>
                      </li>
                 </ul>
             </div>
@@ -93,7 +117,6 @@
                           </div>
                         </form>
                       </div>
-
             </div>
             <div class="modal-footer">
               <p> Not a member yet ?    <span onclick="showsignup()" style="color:blue;cursor:pointer;">Join Us</span></p>
@@ -339,15 +362,22 @@
 
     <!-- custom form validation script for this page-->
     <script src="/js/form-validation-script.js"></script>
-    
+
     <script type="text/javascript" >
-    var result = <%- result %>;
-    if(typeof result === 'object'){
-         $('#dash').show();
-     }
-     else{
-         $('#dash').hide();
-     }
+    $( document ).ready(function() {
+      var user = <%- user %> ;
+      if(typeof user === 'object'){
+           $('#dash').show();
+           $('#hidelog').show();
+           $('#welcome ').hide();
+       }
+       else{
+            $('#welcome').show();
+           $('#hidelog').hide();
+           $('#dash').hide();
+       }
+    });
+
     function showlogin() {
       $('#signupModal').modal('hide') ;
       $('#LoginModal').modal('show');

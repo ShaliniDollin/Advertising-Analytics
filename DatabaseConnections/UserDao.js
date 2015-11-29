@@ -13,7 +13,7 @@ var client = new cassandra.Client(options);
 
 var insertQ = 'INSERT INTO advertising.user (fname, lname, company_event, dob, email, password, type_user) VALUES(?, ?, ?, ?, ?, ?, ?)';
 var checkQ = 'select * from advertising.user where email = ?';
-var authQ = 'select password from advertising.user where email = ?';
+var authQ = 'select * from advertising.user where email = ?';
 
 
 function UserDao() {
@@ -63,27 +63,28 @@ UserDao.prototype.createUser = function(callback, fname, lname, company_event, d
 
 UserDao.prototype.validateUser = function(callback, email, password){
 		var param = [email];
-    console.log("email"+email);
-		client.execute(authQ, param, {prepare: true}, function (err, pwd){
+		console.log("email" +email);
+		client.execute(authQ, param, {prepare: true}, function (err, result){
       if(!err){
-			if (pwd.rows.length < 1){
-				console.log('Not Found');
-				callback('Not Found',null);
+			if (result.rows.length > 0){
+          var user = result.rows[0];
+          if(user.password === password){
+            callback(null, user);
+          }
+          else{
+            callback( "Incorrect Password",null);
+          }
+
 			}
 			else{
-				var pwd1 = pwd.rows[0];
-				if(password === pwd1){
-					callback( null,email);
+					callback( "Incorrect Email and Password",null);
 				}
+      }
 				else{
-					callback('Incorrect Password', null);
+          console.log(err);
+					callback('Error', null);
 				}
-			}
-    }
-    else{
-      callback('ERROR', null);
-    }
-		});
+			});
 	};
 
 UserDao.prototype.getUserById = function (callback, email){

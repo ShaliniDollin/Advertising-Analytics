@@ -8,6 +8,7 @@
   "dependencies": {
     "cassandra-driver": "^2.1.2",
     "ejs": "*",
-    "express": "3.2.6"
+    "express": "3.2.6",
+     "express-session": "^1.0.2"
   }
 }

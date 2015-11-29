@@ -1,11 +1,18 @@
 var user = require('../Model/User');
 var ejs = require("ejs");
+var express = require('express');
+
+var session = require('express-session');
+// create our app
+var app = express();
+
+app.use(session({secret: 'ssshhhhh'}));
 /*
  * GET home page.
  */
 
 exports.index = function(req, res){
-  res.render('index', { title: 'Express', result: 'name'});
+  res.render('index', { title: 'Express', user: 'name'});
 };
 
 exports.login = function(req, res){
@@ -37,6 +44,7 @@ exports.adAnalytics = function(req, res){
 };
 
 exports.validateUser =function(req,res){
+  var sess = req.session;
 	console.log("validate user");
 	var newUser = new user();
 	newUser.validateUser(function(err,result) {
@@ -45,16 +53,25 @@ exports.validateUser =function(req,res){
 			throw(err);
 		}else
 		{
-
-			res.render('index', { title: 'Express'});
+      sess.user = result;
+			res.render('index', { title: 'Express', user:sess.user});
 		}
 
 	},req.body);
 
-	console.log("Username "+ req.param('email'));
+
   };
+  exports.logout =function(req,res){
+    var sess = req.session;
+  	console.log("validate user");
+    req.session.destroy(function(err) {
+      // cannot access session here
+    });
+  			res.render('index', { title: 'Express', user:'name'});
+    };
 
  exports.createuser =function(req,res){
+   var sess=req.session;
   	var newUser = new user();
   	newUser.createUser(function(err,result) {
   		if(err){
@@ -63,8 +80,8 @@ exports.validateUser =function(req,res){
   			res.json(err);
   		}else
   		{
-  			console.log("in index after" +result);
-  			res.render('index', { title: 'Express' , result: result});
+        sess.user = result;
+  			res.render('index', { title: 'Express' , user: sess.user});
   		}
 
   	},req.body);
