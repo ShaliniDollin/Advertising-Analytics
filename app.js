@@ -29,7 +29,6 @@ if ('development' === app.get('env')) {
 }
 
 app.get('/', routes.index);
-app.get('/users', routes.createuser);//checked
 app.post('/users', routes.createuser);//checked
 app.get('/users/:userId', routes.getUserById);//checked
 app.post('/validateUser', routes.validateUser);

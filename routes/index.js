@@ -5,7 +5,7 @@ var ejs = require("ejs");
  */
 
 exports.index = function(req, res){
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'Express', result: 'name'});
 };
 
 exports.login = function(req, res){
@@ -41,7 +41,8 @@ exports.validateUser =function(req,res){
 			throw(err);
 		}else
 		{
-			res.render('index', { title: 'Express' });
+
+			res.render('index', { title: 'Express'});
 		}
 
 	},req.body);
@@ -58,7 +59,8 @@ exports.validateUser =function(req,res){
   			res.json(err);
   		}else
   		{
-  			res.render('index', { title: 'Express' });
+  			console.log("in index after" +result);
+  			res.render('index', { title: 'Express' , result: result});
   		}
 
   	},req.body);
