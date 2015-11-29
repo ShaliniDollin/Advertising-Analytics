@@ -13,7 +13,11 @@ exports.login = function(req, res){
 };
 
 exports.dashboard = function(req, res){
-	  res.render('dashboard', { title: 'Express' });
+	var user = {};
+
+	user.year = (new Date()).getFullYear();
+
+	res.render('dashboard', { user: user });
 };
 
 exports.statistics = function(req, res){
