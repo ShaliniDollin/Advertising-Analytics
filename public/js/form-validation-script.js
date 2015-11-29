@@ -1,8 +1,5 @@
 var Script = function () {
 
-    $.validator.setDefaults({
-        submitHandler: function() { alert("submitted!"); }
-    });
     $.validator.addMethod("password_not_same", function(value, element) {
         console.log($('#password1').val());
         console.log($('#confirm_password').val());

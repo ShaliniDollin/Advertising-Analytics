@@ -41,7 +41,7 @@ exports.validateUser =function(req,res){
 			throw(err);
 		}else
 		{
-			res.json(result);
+			res.render('index', { title: 'Express' });
 		}
 
 	},req.body);
@@ -58,8 +58,7 @@ exports.validateUser =function(req,res){
   			res.json(err);
   		}else
   		{
-  			console.log(result);
-  			res.json(result);
+  			res.render('index', { title: 'Express' });
   		}
 
   	},req.body);
@@ -76,9 +75,7 @@ exports.validateUser =function(req,res){
 			//res.json(res.json({"status": err}));
 			//throw(err);
 		}else{
-			//return number of rows that deleted
-			console.log("return "+result);
-			res.json(result);
+			res.render('index', { title: 'Express' });
 		}
 
 	}, req.params.email);
