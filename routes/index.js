@@ -12,15 +12,21 @@ app.use(session({secret: 'ssshhhhh'}));
  */
 
 exports.index = function(req, res){
-  res.render('index', { title: 'Express', user: 'name'});
+  var sess = req.session;
+  if(!sess.user){
+    sess.user ='name';
+  }
+  res.render('index', { title: 'Express', user: sess.user});
 };
 
 exports.login = function(req, res){
+  var sess = req.session;
   res.render('Login', { title: 'Express' });
 };
 
 exports.dashboard = function(req, res){
-	var user = {};
+  var sess = req.session;
+	var user = sess.user;
 
 	user.year = (new Date()).getFullYear();
 
@@ -28,18 +34,22 @@ exports.dashboard = function(req, res){
 };
 
 exports.statistics = function(req, res){
+  var sess = req.session;
 	res.render('statistics', {title: 'Statistics'});
 };
 
 exports.products = function(req, res){
+  var sess = req.session;
 	res.render('products', {title: 'products'});
 };
 
 exports.events = function(req, res){
+  var sess = req.session;
 	res.render('events', {title: 'events'});
 };
 
 exports.adAnalytics = function(req, res){
+  var sess = req.session;
 	res.render('adAnalytics', {title: 'adAnalytics'});
 };
 
@@ -89,6 +99,7 @@ exports.validateUser =function(req,res){
   };
 
  exports.getUserById = function(req,res){
+   var sess = req.session;
 	console.log("In get user by id"+req.params.email);
 	var newUser = new user();
 	newUser.getUserById(function(err,result){

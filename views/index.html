@@ -16,8 +16,9 @@
 
     <!-- Custom CSS -->
     <link href="/css/landing-page.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/style-responsive.css" rel="stylesheet" />
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/style-responsive.css" rel="stylesheet" />
+    <link href="/css/elegant-icons-style.css" rel="stylesheet" />
 
     <!-- Custom Fonts -->
     <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
@@ -58,9 +59,6 @@
                     <li>
                         <a href="#contact">Contact</a>
                     </li>
-                    <li id="welcome" >
-                      <a href="#" data-toggle="modal" data-target="#LoginModal"> Login </a>
-                     </li>
                      <li id="hidelog" class="dropdown">
                          <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                              <span class="username">Welcome <%= user.fname %>!</span>
@@ -85,6 +83,9 @@
                              </li>
                              </ul>
                      </li>
+                     <li id="please" style="color:blue; display:none;">
+                       <a href="#" data-toggle="modal" data-target="#LoginModal" > Login </a>
+                      </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -365,14 +366,14 @@
 
     <script type="text/javascript" >
     $( document ).ready(function() {
-      var user = <%- user %> ;
+      var user = <%- user %>;
+
       if(typeof user === 'object'){
            $('#dash').show();
            $('#hidelog').show();
-           $('#welcome ').hide();
        }
        else{
-            $('#welcome').show();
+           $('#please').show();
            $('#hidelog').hide();
            $('#dash').hide();
        }

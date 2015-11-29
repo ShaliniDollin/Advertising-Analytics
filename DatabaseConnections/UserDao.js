@@ -68,6 +68,7 @@ UserDao.prototype.validateUser = function(callback, email, password){
       if(!err){
 			if (result.rows.length > 0){
           var user = result.rows[0];
+          console.log(user);
           if(user.password === password){
             callback(null, user);
           }
