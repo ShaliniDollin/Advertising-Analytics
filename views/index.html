@@ -46,7 +46,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <li>
+                    <li id= "dash">
                       <a href="/dashboard">Dashboard</a>
                     </li>
                     <li>
@@ -58,8 +58,8 @@
                     <li>
                         <a href="#contact">Contact</a>
                     </li>
-                    <li>
-                      <a href="#" data-toggle="modal" style="color:blue;" id="welcome" data-target="#LoginModal">Login</a>
+                    <li id="logshow">
+                      <a href="#" data-toggle="modal" style="color:blue;" id="welcome" data-target="#LoginModal"> Login </a>
                      </li>
                 </ul>
             </div>
@@ -93,6 +93,7 @@
                           </div>
                         </form>
                       </div>
+
             </div>
             <div class="modal-footer">
               <p> Not a member yet ?    <span onclick="showsignup()" style="color:blue;cursor:pointer;">Join Us</span></p>
@@ -338,17 +339,26 @@
 
     <!-- custom form validation script for this page-->
     <script src="/js/form-validation-script.js"></script>
+    
+    <script type="text/javascript" >
+    var result = <%- result %>;
+    if(typeof result === 'object'){
+         $('#dash').show();
+     }
+     else{
+         $('#dash').hide();
+     }
+    function showlogin() {
+      $('#signupModal').modal('hide') ;
+      $('#LoginModal').modal('show');
+     }
+     function showsignup() {
+       $('#signupModal').modal('show') ;
+       $('#LoginModal').modal('hide');
+     }
 
-    <script type="text/javascript">
-        function showlogin() {
-          $('#signupModal').modal('hide') ;
-          $('#LoginModal').modal('show');
-         }
-         function showsignup() {
-           $('#signupModal').modal('show') ;
-           $('#LoginModal').modal('hide');
-         }
-      </script>
+
+     </script>
 
 
 </body>

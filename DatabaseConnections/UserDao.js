@@ -11,8 +11,8 @@ var options = {
 };
 var client = new cassandra.Client(options);
 
-var insertQ = 'INSERT INTO advertising.user (fname, lname, dob, company_event, email, password, type_user) VALUES(?, ?, ?, ?, ?, ?)';
-var checkQ = 'select count(*) from advertising.user where email = ?';
+var insertQ = 'INSERT INTO advertising.user (fname, lname, company_event, dob, email, password, type_user) VALUES(?, ?, ?, ?, ?, ?, ?)';
+var checkQ = 'select * from advertising.user where email = ?';
 var authQ = 'select password from advertising.user where email = ?';
 
 
@@ -28,12 +28,24 @@ UserDao.prototype.createUser = function(callback, fname, lname, company_event, d
 					 var param1 = [fname, lname, company_event, dob, email, password, type_user];
 					 client.execute(insertQ, param1, {prepare: true}, function(err1){
 					 if( !err1 ) {
-							 console.log( 'created');
-               callback( null,fname);
-					  } else {
-							 console.log( err1 );
+                client.execute(checkQ, param, {prepare: true}, function(error, json){
+                  if(!error){
+                    if(json.rows.length > 0){
+                          var user = json.rows[0];
+                          console.log( 'created'+ user.fname);
+                          callback( null,user);
+                    }
+                  }
+                  else{
+                    console.log( err1 );
+                    callback('ERROR1',null);
+                  }
+                });
+              }
+             else{
+               console.log( err1 );
 							 callback('ERROR1',null);
-						}
+             }
 					 });
 				 }
 		 		 else{

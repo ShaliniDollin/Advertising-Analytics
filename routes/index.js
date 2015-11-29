@@ -5,7 +5,7 @@ var ejs = require("ejs");
  */
 
 exports.index = function(req, res){
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'Express', result: 'name'});
 };
 
 exports.login = function(req, res){
@@ -13,7 +13,11 @@ exports.login = function(req, res){
 };
 
 exports.dashboard = function(req, res){
-	  res.render('dashboard', { title: 'Express' });
+	var user = {};
+
+	user.year = (new Date()).getFullYear();
+
+	res.render('dashboard', { user: user });
 };
 
 exports.statistics = function(req, res){
@@ -41,7 +45,8 @@ exports.validateUser =function(req,res){
 			throw(err);
 		}else
 		{
-			res.render('index', { title: 'Express' });
+
+			res.render('index', { title: 'Express'});
 		}
 
 	},req.body);
@@ -58,7 +63,8 @@ exports.validateUser =function(req,res){
   			res.json(err);
   		}else
   		{
-  			res.render('index', { title: 'Express' });
+  			console.log("in index after" +result);
+  			res.render('index', { title: 'Express' , result: result});
   		}
 
   	},req.body);
