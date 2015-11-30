@@ -1,7 +1,7 @@
 var user = require('../Model/User');
 var ejs = require("ejs");
 var express = require('express');
-
+var googleFinance = require('google-finance');
 var session = require('express-session');
 // create our app
 var app = express();
@@ -27,15 +27,43 @@ exports.login = function(req, res){
 exports.dashboard = function(req, res){
   var sess = req.session;
 	var user = sess.user;
-
 	user.year = (new Date()).getFullYear();
 
-	res.render('dashboard', { user: user });
+  if(user.company_event === 'nike'){
+    symbol = 'NASDAQ:NKE';
+  }
+  else {
+    symbol = 'NASDAQ:OR';
+  }
+  googleFinance.companyNews({
+  symbol: symbol
+  }, function (err, news) {
+    if(news){
+      sess.news = news;
+    }
+    else{
+      sess.news = user.company_event;
+    }
+  });
+  googleFinance.historical({
+  symbol: symbol,
+  from: '2015-01-01',
+  to: '2015-11-29'
+  }, function (err, quotes) {
+    if (quotes){
+      sess.quotes = quotes;
+    }
+    else{
+      sess.quotes = "2$";
+    }
+  });
+  res.render('dashboard', { user: user, news: news, quotes:quotes});
 };
 exports.maincontent = function(req, res){
   var sess = req.session;
 	var user = sess.user;
-	res.render('maincontent', { user: user });
+  res.render('maincontent', { user: user});
+
 };
 exports.statistics = function(req, res){
   var sess = req.session;
