@@ -154,31 +154,31 @@
               <!-- sidebar menu start-->
               <ul class="sidebar-menu">
                   <li class="active">
-                      <a  href="dashboard" target="myiframe">
+                      <a  href="/<%=user.fname%>_<%=user.lname%>/dashboard" target="myiframe">
                           <i class="icon_house_alt"></i>
                           <span>Dashboard</span>
                       </a>
                   </li>
 				          <li class="">
-                      <a href="statistics" target="myiframe">
+                      <a href="/<%=user.fname%>_<%=user.lname%>/statistics" target="myiframe">
                         <i class="icon_piechart"></i>
                         <span>Statistics</span>
                       </a>
                   </li>
                   <li class="">
-                      <a href="/products" target="myiframe">
+                      <a href="/<%=user.fname%>_<%=user.lname%>/products" target="myiframe">
                           <i class="icon_documents_alt"></i>
                           <span>Products</span>
                       </a>
                   </li>
                   <li>
-                      <a class="" href="events" target="myiframe">
+                      <a class="" href="/<%=user.fname%>_<%=user.lname%>/events" target="myiframe">
                           <i class="icon_table"></i>
                           <span>Events</span>
                       </a>
                   </li>
                   <li>
-                      <a class="" href="adAnalytics" target="myiframe">
+                      <a class="" href="/<%=user.fname%>_<%=user.lname%>/adAnalytics" target="myiframe">
                           <i class="icon_genius"></i>
                           <span>Ad Analytics</span>
                       </a>
@@ -191,7 +191,7 @@
 
 <section id="main-content">
     <section class="wrapper">
-    <iframe src="/dashboard" width="100%" height="750" name="myiframe" id="myiframe" style="overflow: hidden;">
+    <iframe src="/<%=user.fname%>_<%=user.lname%>/dashboard" width="100%" height="750" name="myiframe" id="myiframe" style="overflow: hidden;">
       <!--main content start-->
 
       <!--main content end-->

@@ -37,12 +37,12 @@ app.get('/logout', routes.logout);
 app.get('/users/:userId', routes.getUserById);//checked
 
 
-app.get('/maincontent', routes.maincontent);
-app.get('/dashboard', routes.dashboard);
-app.get('/statistics', routes.statistics);
-app.get('/:userid/products', routes.products);
-app.get('/events', routes.events);
-app.get('/adAnalytics', routes.adAnalytics);
+app.get('/:fname_lname/maincontent', routes.maincontent);
+app.get('/:fname_lname/dashboard', routes.dashboard);
+app.get('/:fname_lname/statistics', routes.statistics);
+app.get('/:fname_lname/products', routes.products);
+app.get('/:fname_lname/events', routes.events);
+app.get('/:fname_lname/adAnalytics', routes.adAnalytics);
 
 
 http.createServer(app).listen(app.get('port'), function(){
