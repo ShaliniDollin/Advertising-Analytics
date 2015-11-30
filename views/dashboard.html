@@ -67,7 +67,7 @@
       				<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
       					<div class="info-box brown-bg">
       						<!-- <i class="fa fa-shopping-cart"></i> -->
-      						<div class="count">143,258.34</div>
+      						<div class="count"><%= user.netIncome %></div>
       						<div class="title">Net Income</div>
       					</div><!--/.info-box-->
       				</div><!--/.col-->
@@ -121,12 +121,12 @@
                       <a href="index.html#" class="btn-close"><i class="fa fa-times"></i></a>
                     </div>
                   </div>
-                  <ul class="list-group">
-                    <li class="list-group-item">Cras justo odio</li>
-                    <li class="list-group-item">Dapibus ac facilisis in</li>
-                    <li class="list-group-item">Morbi leo risus</li>
-                    <li class="list-group-item">Porta ac consectetur ac</li>
-                    <li class="list-group-item">Vestibulum at eros</li>
+                  <ul class="list-group" id="news_list">
+                    <li class="list-group-item"></li>
+                    <li class="list-group-item"></li>
+                    <li class="list-group-item"></li>
+                    <li class="list-group-item"></li>
+                    <li class="list-group-item"></li>
                   </ul>
 
 
@@ -191,7 +191,6 @@
 
       		  <!-- Today status end -->
             <div class="row">
-<<<<<<< Updated upstream
 
       				<div class="col-md-4">
 
@@ -244,72 +243,6 @@
 
       				</div><!--/col-->
 
-=======
-				<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-					<div class="info-box blue-bg">
-						<!--<i class="fa fa-cloud-download"></i>-->
-						<div class="count"><%= user.year %></div>
-						<div class="title">Year</div>
-					</div><!--/.info-box-->
-				</div><!--/.col-->
-
-				<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-					<div class="info-box brown-bg">
-						<!-- <i class="fa fa-shopping-cart"></i> -->
-						<div class="count"><%= user.netIncome%></div>
-						<div class="title">Net Income</div>
-					</div><!--/.info-box-->
-				</div><!--/.col-->
-
-				<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-					<div class="info-box dark-bg">
-						<!-- <i class="fa fa-thumbs-o-up"></i> -->
-						<div class="count">40,032.45</div>
-						<div class="title">Advertising Investment</div>
-					</div><!--/.info-box-->
-				</div><!--/.col-->
-
-				<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-					<div class="info-box green-bg">
-						<i class="fa fa-cubes"></i>
-						<div class="count">14.26</div>
-						<div class="title">Stock</div>
-					</div><!--/.info-box-->
-				</div><!--/.col-->
-
-			</div><!--/.row-->
-
-
-      <div class="row">
-        <!--
-		    <div class="col-lg-9 col-md-12">
-
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<h2><i class="fa fa-map-marker red"></i><strong>Countries</strong></h2>
-							<div class="panel-actions">
-								<a href="index.html#" class="btn-setting"><i class="fa fa-rotate-right"></i></a>
-								<a href="index.html#" class="btn-minimize"><i class="fa fa-chevron-up"></i></a>
-								<a href="index.html#" class="btn-close"><i class="fa fa-times"></i></a>
-							</div>
-						</div>
-						<div class="panel-body-map">
-							<div id="map" style="height:380px;"></div>
-						</div>
-
-					</div>
-				</div>
-        -->
-        <div class= "col-lg-5 col-md-6">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-              <h2><strong>News</strong></h2>
-              <div class="panel-actions">
-                <a href="index.html#" class="btn-setting"><i class="fa fa-rotate-right"></i></a>
-                <a href="index.html#" class="btn-minimize"><i class="fa fa-chevron-up"></i></a>
-                <a href="index.html#" class="btn-close"><i class="fa fa-times"></i></a>
-              </div>
->>>>>>> Stashed changes
             </div>
             <!-- statics end -->
 
@@ -363,15 +296,13 @@
 	<script src="/js/charts.js"></script>
 	<script src="/js/jquery.slimscroll.min.js"></script>
   <script type="text/javascript" >
-      var news = <%- news %>;
-      for (var i =0 ; i<5; i++){
-        var newNums = [];
-
+      var user = <%- user %>;
+      console.log("inhtml"+user);
+      var nums = document.getElementById("news_list");
+      var listItem = nums.getElementsByTagName("li");
       for (var i=0; i < listItem.length; i++) {
-      newNums.push( parseInt( listItem[i].innerHTML, 10 ) );
+          listItem[i].innerHTML = user.news[i].summary;
       }
-
-            }
 
       //knob
       $(function() {

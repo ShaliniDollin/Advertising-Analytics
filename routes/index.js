@@ -34,41 +34,46 @@ exports.dashboard = function(req, res){
 	newVendor.getVendorIncome(function(err, result){
 		if(!err){
 			user.netIncome= result;
-			console.log("getIncome" + result);
+      if(user.company_event === 'nike'){
+        symbol = 'NASDAQ:NKE';
+      }
+      else {
+        symbol = 'NASDAQ:OR';
+      }
+      googleFinance.companyNews({
+      symbol: symbol
+      }, function (err, news) {
+        if(news){
+          user.news= JSON.stringify(news);
+          googleFinance.historical({
+            symbol: symbol,
+            from: '2015-01-01',
+            to: '2015-11-29'
+            }, function (err, quotes) {
+            if (quotes){
+                user.quotes = JSON.stringify(quotes);
+                res.render('dashboard', { user: user});
+              }
+            else{
+                user.quotes = "2$";
+                res.render('dashboard', { user: user});
+              }
+            });
+          }
+          else{
+              user.news = user.company_event;
+              res.render('dashboard', { user: user});
+            }
+          });
+
+
 		}else{
 			console.log(err);
 		}
 	},user.year,user.company_event);
 
-  if(user.company_event === 'nike'){
-    symbol = 'NASDAQ:NKE';
-  }
-  else {
-    symbol = 'NASDAQ:OR';
-  }
-  googleFinance.companyNews({
-  symbol: symbol
-  }, function (err, news) {
-    if(news){
-      sess.news = news;
-    }
-    else{
-      sess.news = user.company_event;
-    }
-  });
-  googleFinance.historical({
-  symbol: symbol,
-  from: '2015-01-01',
-  to: '2015-11-29'
-  }, function (err, quotes) {
-    if (quotes){
-      sess.quotes = quotes;
-    }
-    else{
-      sess.quotes = "2$";
-    }
-  });
-  res.render('dashboard', { user: user, news: news, quotes:quotes});
+
+
 
 };
 exports.maincontent = function(req, res){
