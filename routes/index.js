@@ -1,5 +1,13 @@
 var user = require('../Model/User');
 var ejs = require("ejs");
+var Twit = require("twit");
+
+var T = new Twit({
+    consumer_key:         'xN4oXDCpCnSiB6NC1jRrtPXoy'
+  , consumer_secret:      'vJHikZDxYZJnS3pVAxYCZmjKZPVnR6yCaQKPV2lthAE4l2Ve1R'
+  , access_token:         '2352759175-WGtz2PeYg6Y1wP22wsOXrfmRXYU56wzS6R8emeY'
+  , access_token_secret:  '4xmKRd2KGSalnXUUbaA3WdNQwMzI1GUnUm8BWvsyerU65'
+});
 /*
  * GET home page.
  */
@@ -14,8 +22,20 @@ exports.login = function(req, res){
 
 exports.dashboard = function(req, res){
 	var user = {};
+    
+
+   user.tweet=T.get('search/tweets', { q: 'banana since:2011-11-11', count: 100 }, function(err, data, response) {
+  console.log(data)
+});
 
 	user.year = (new Date()).getFullYear();
+
+    
+
+
+
+
+
 
 	res.render('dashboard', { user: user });
 };
