@@ -32,7 +32,11 @@ exports.dashboard = function(req, res){
 
 	res.render('dashboard', { user: user });
 };
-
+exports.maincontent = function(req, res){
+  var sess = req.session;
+	var user = sess.user;
+	res.render('maincontent', { user: user });
+};
 exports.statistics = function(req, res){
   var sess = req.session;
 	res.render('statistics', {title: 'Statistics'});

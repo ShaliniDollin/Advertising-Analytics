@@ -37,6 +37,7 @@ app.get('/logout', routes.logout);
 app.get('/users/:userId', routes.getUserById);//checked
 
 
+app.get('/maincontent', routes.maincontent);
 app.get('/dashboard', routes.dashboard);
 app.get('/statistics', routes.statistics);
 app.get('/:userid/products', routes.products);
