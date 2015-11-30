@@ -1,4 +1,5 @@
 var user = require('../Model/User');
+var vendor = require('../Model/Vendor');
 var ejs = require("ejs");
 var express = require('express');
 var googleFinance = require('google-finance');
@@ -28,7 +29,25 @@ exports.dashboard = function(req, res){
   var sess = req.session;
 	var user = sess.user;
 	user.year = (new Date()).getFullYear();
+	
+	var newVendor = new vendor();
+	newVendor.getVendorIncome(function(err, result){
+		if(!err){
+			user.netIncome= result;
+			console.log("getIncome" + result);
+			res.render('dashboard', { user: user });
+		}else{
+			console.log(err);
+		}
+	},user.year,user.company_event);
+	
+	
 
+	
+	
+	
+
+<<<<<<< HEAD
   if(user.company_event === 'nike'){
     symbol = 'NASDAQ:NKE';
   }
@@ -58,6 +77,9 @@ exports.dashboard = function(req, res){
     }
   });
   res.render('dashboard', { user: user, news: news, quotes:quotes});
+=======
+	//res.render('dashboard', { user: user });
+>>>>>>> 23e4053c0bfbfe3f03ad2c8278b494ebfed4b48d
 };
 exports.maincontent = function(req, res){
   var sess = req.session;
