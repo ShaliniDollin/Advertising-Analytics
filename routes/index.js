@@ -1,4 +1,5 @@
 var user = require('../Model/User');
+var vendor = require('../Model/Vendor');
 var ejs = require("ejs");
 var express = require('express');
 
@@ -27,10 +28,26 @@ exports.login = function(req, res){
 exports.dashboard = function(req, res){
   var sess = req.session;
 	var user = sess.user;
-
 	user.year = (new Date()).getFullYear();
+	
+	var newVendor = new vendor();
+	newVendor.getVendorIncome(function(err, result){
+		if(!err){
+			user.netIncome= result;
+			console.log("getIncome" + result);
+			res.render('dashboard', { user: user });
+		}else{
+			console.log(err);
+		}
+	},user.year,user.company_event);
+	
+	
 
-	res.render('dashboard', { user: user });
+	
+	
+	
+
+	//res.render('dashboard', { user: user });
 };
 exports.maincontent = function(req, res){
   var sess = req.session;
