@@ -366,7 +366,7 @@
 
     <script type="text/javascript" >
     $( document ).ready(function() {
-      var user = <%- user %>;
+      var user = <%- JSON.stringify(user) %>;
 
       if(typeof user === 'object'){
            $('#dash').show();

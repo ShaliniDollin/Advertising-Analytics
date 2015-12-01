@@ -83,7 +83,7 @@
       				<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
       					<div class="info-box green-bg">
       						<i class="fa fa-cubes"></i>
-      						<div class="count">14.26</div>
+      						<div class="count">$<%= user.stock %></div>
       						<div class="title">Stock</div>
       					</div><!--/.info-box-->
       				</div><!--/.col-->
@@ -296,12 +296,14 @@
 	<script src="/js/charts.js"></script>
 	<script src="/js/jquery.slimscroll.min.js"></script>
   <script type="text/javascript" >
-      var user = <%- user %>;
-      console.log("inhtml"+user);
+      
+      var user = <%- JSON.stringify(user) %>;
+      var news = JSON.parse(user.news);
+      
       var nums = document.getElementById("news_list");
       var listItem = nums.getElementsByTagName("li");
       for (var i=0; i < listItem.length; i++) {
-          listItem[i].innerHTML = user.news[i].summary;
+          listItem[i].innerHTML = news[i].summary;
       }
 
       //knob
@@ -315,7 +317,7 @@
 
       //carousel
       $(document).ready(function() {
-        var user = <%- user %>;
+        var user = <%- JSON.stringify(user) %>;
           $("#owl-slider").owlCarousel({
               navigation : true,
               slideSpeed : 300,
