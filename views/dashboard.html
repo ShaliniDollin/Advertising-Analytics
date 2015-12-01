@@ -301,6 +301,7 @@
 
           </div>
         </div>
+        <div><%= user.tweet %></div>
 
         <div class="col-md-3">
               <!-- List starts -->
@@ -377,7 +378,7 @@
 						<i class="fa fa-twitter"></i>
 						<ul>
 							<li>
-								<strong><%= user.tweet %></strong>
+								<strong><%= user.count %></strong>
 								<span>followers</span>
 							</li>
 							<li>
@@ -476,7 +477,7 @@
       });
 
 	  /* ---------- Map ---------- */
-	$(function(){
+	/*$(function(){
 	  $('#map').vectorMap({
 	    map: 'world_mill_en',
 	    series: {
@@ -493,9 +494,12 @@
 	  });
 	});
 
+</script>
 
 
-  </script>
+
+
+  
 
   </body>
 </html>

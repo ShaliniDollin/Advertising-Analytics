@@ -39,24 +39,26 @@ exports.dashboard = function(req, res){
 	var user = {};
     
 
-   user.tweet=T.get('search/tweets', { q: 'banana since:2011-11-11', count: 100 }, function(err, data, response) {
-  console.log(data)
+
+
+  var stream = T.stream('statuses/filter', { track: 'nike'})
+ 
+stream.on('tweet', function (tweet) {
+	user.count=tweet.user.followers_count;
+	
+  console.log(user.count);
+  user.year = (new Date()).getFullYear();
+res.render('dashboard', { user: user });
+
 });
 
-  var sess = req.session;
-	var user = sess.user;
 
 
-	user.year = (new Date()).getFullYear();
-
-    
-
+  //var sess = req.session;
+	//var user = sess.user;
 
 
-
-
-
-	res.render('dashboard', { user: user });
+	
 };
 
 exports.statistics = function(req, res){
