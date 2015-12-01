@@ -41,16 +41,11 @@ exports.dashboard = function(req, res){
 
 
 
-  var stream = T.stream('statuses/filter', { track: 'nike'})
  
-stream.on('tweet', function (tweet) {
-	user.count=tweet.user.followers_count;
-	
-  console.log(user.count);
   user.year = (new Date()).getFullYear();
 res.render('dashboard', { user: user });
 
-});
+
 
 
 
@@ -60,7 +55,11 @@ res.render('dashboard', { user: user });
 
 	
 };
-
+exports.maincontent = function(req, res){
+  var sess = req.session;
+	var user = sess.user;
+	res.render('maincontent', { user: user });
+};
 exports.statistics = function(req, res){
   var sess = req.session;
 	res.render('statistics', {title: 'Statistics'});
