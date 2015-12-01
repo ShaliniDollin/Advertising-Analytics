@@ -90,7 +90,13 @@ exports.maincontent = function(req, res){
 };
 exports.statistics = function(req, res){
   var sess = req.session;
-	res.render('statistics', {title: 'Statistics'});
+  var user = sess.user;
+  if (user.company_event === 'nike'){
+    res.render('statistics1', {title: 'Statistics'});
+  }else{
+    res.render('statistics2', {title: 'Statistics'});
+  }
+	
 };
 
 exports.products = function(req, res){
