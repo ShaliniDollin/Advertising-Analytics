@@ -255,7 +255,7 @@
 
       //carousel
       $(document).ready(function() {
-        var user = <%- user %>;
+        var user = <%- JSON.stringify(user) %>;
           $("#owl-slider").owlCarousel({
               navigation : true,
               slideSpeed : 300,

@@ -3,6 +3,7 @@ var vendor = require('../Model/Vendor');
 var ejs = require("ejs");
 var express = require('express');
 var googleFinance = require('google-finance');
+var yahooFinance = require('yahoo-finance');
 var session = require('express-session');
 // create our app
 var app = express();
@@ -36,26 +37,31 @@ exports.dashboard = function(req, res){
 			user.netIncome= result;
       if(user.company_event === 'nike'){
         symbol = 'NASDAQ:NKE';
+        stocksymbol = 'NKE';
       }
       else {
         symbol = 'NASDAQ:OR';
+        stocksymbol = 'OR';
       }
       googleFinance.companyNews({
       symbol: symbol
       }, function (err, news) {
         if(news){
+
           user.news= JSON.stringify(news);
-          googleFinance.historical({
-            symbol: symbol,
-            from: '2015-01-01',
-            to: '2015-11-29'
-            }, function (err, quotes) {
-            if (quotes){
-                user.quotes = JSON.stringify(quotes);
+          
+          yahooFinance.snapshot({
+            symbol: stocksymbol,
+            fields: ['l1']
+            }, function (err, snapshot) {
+            if (!err){
+                user.stock = snapshot.lastTradePriceOnly;
+                console.log(user.stock);
                 res.render('dashboard', { user: user});
               }
             else{
-                user.quotes = "2$";
+                console.log(err);
+                user.stock = "2";
                 res.render('dashboard', { user: user});
               }
             });
