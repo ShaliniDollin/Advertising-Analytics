@@ -1,0 +1,629 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
+    <meta name="author" content="Shalini">
+    <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
+    <link rel="shortcut icon" href="/img/favicon.png">
+
+    <title>Advertising Analytics</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- bootstrap theme -->
+    <link href="/css/bootstrap-theme.css" rel="stylesheet">
+    <!--external css-->
+    <!-- font icon -->
+    <link href="/css/elegant-icons-style.css" rel="stylesheet" />
+    <link href="/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- full calendar css-->
+    <link href="/assets/fullcalendar/fullcalendar/bootstrap-fullcalendar.css" rel="stylesheet" />
+    <link href="/assets/fullcalendar/fullcalendar/fullcalendar.css" rel="stylesheet" />
+    <!-- easy pie chart-->
+    <link href="/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
+    <!-- owl carousel -->
+    <link rel="stylesheet" href="/css/owl.carousel.css" type="text/css">
+    <link href="/css/jquery-jvectormap-1.2.2.css" rel="stylesheet">
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="/css/fullcalendar.css">
+    <link href="/css/widgets.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/style-responsive.css" rel="stylesheet" />
+    <link href="/css/xcharts.min.css" rel=" stylesheet">
+    <link href="/css/jquery-ui-1.10.4.min.css" rel="stylesheet">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <style type="text/css">
+${demo.css}
+    </style>
+    <script type="text/javascript">
+$(function () {
+    $('#container6').highcharts({
+        chart: {
+            type: 'area'
+        },
+        title: {
+            text: 'Cosmetic Division Sales Based on Region'
+        },
+        
+        xAxis: {
+            categories: ['2014', '2013', '2012', '2011', '2010', '2009', '2008','2007','2006','2005'],
+            tickmarkPlacement: 'on',
+            title: {
+                enabled: false
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'Sales in £ millions'
+            },
+            labels: {
+                formatter: function () {
+                    return this.value / 1000;
+                }
+            }
+        },
+        tooltip: {
+            shared: true,
+            valueSuffix: ' millions'
+        },
+        plotOptions: {
+            area: {
+                stacking: 'normal',
+                lineColor: '#666666',
+                lineWidth: 1,
+                marker: {
+                    lineWidth: 1,
+                    lineColor: '#666666'
+                }
+            }
+        },
+        series: [{
+            name: 'North America',
+            data: [5389,5356,5210,4406,4291,4262,4167,4426,3953, 3868]
+        }, {
+            name: 'Western Europe',
+            data: [7697,7467,7382,7247,7181,7621,7984,7851,6992,6742]
+        }, {
+            name: 'New Market',
+            data: [8571,8464,8189,7218,6667,5588,5389,4784,4065,3604]
+        }]
+    });
+});
+
+
+
+$(function () {
+    $('#container1').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Advertizing Cost'
+        },
+        
+        xAxis: {
+            type: 'category',
+            labels: {
+                rotation: -45,
+                style: {
+                    fontSize: '13px',
+                    fontFamily: 'Verdana, sans-serif'
+                }
+            }
+        },
+        yAxis: {
+            min: 3000,
+            title: {
+                text: 'Cost of Advertizing £ (millions)'
+                
+            }
+            
+        },
+        legend: {
+            enabled: false
+        },
+        tooltip: {
+            pointFormat: 'Advertizing Cost: <b>£ {point.y:.1f}  millions</b>'
+        },
+        series: [{
+            name: 'Advertizing Cost',
+            data: [
+                ['2014', 6558],
+                ['2013', 6621],
+                ['2012', 6531],
+                ['2011', 6292],
+                ['2010', 6029],
+                ['2009', 5389],
+                ['2008', 5269],
+                ['2007', 5126],
+                ['2006', 4783],
+                ['2005', 4367],
+                
+            ],
+            dataLabels: {
+                enabled: true,
+                rotation: -90,
+                color: '#190707',
+                align: 'right',
+                format: '{point.y:.1f}', // one decimal
+                y: 25, // 10 pixels down from the top
+                style: {
+                    fontSize: '10px',
+                    fontFamily: 'Verdana, sans-serif'
+                }
+            }
+        }]
+    });
+});
+
+
+
+
+
+
+$(function () {
+    $('#container2').highcharts({
+        chart: {
+            type: 'bar'
+        },
+        title: {
+            text: 'Cosmetic Division Sales Based on Business Segment'
+        },
+        
+        xAxis: {
+            categories: ['hair care', 'hair colourants', 'makeup', 'perfumes', 'skin care','others'],
+            title: {
+                text: null
+            }
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Sales £ (millions)',
+                align: 'high'
+            },
+            labels: {
+                overflow: 'justify'
+            }
+        },
+        tooltip: {
+            valueSuffix: ' millions'
+        },
+        plotOptions: {
+            bar: {
+                dataLabels: {
+                    enabled: false
+                }
+            }
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'top',
+            x: -40,
+            y: 80,
+            floating: true,
+            borderWidth: 1,
+            backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+            shadow: true
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            name: 'Year 2014',
+            data: [4449,2860,4751,2123, 6489, 986]
+        }, {
+            name: 'Year 2013',
+            data: [4422,2931,4616,2029, 6303,987]
+        },{
+            name: 'Year 2012',
+            data: [4356,2943,4468,2010,6039,968]
+        },
+        {
+            name: 'Year 2011',
+            data: [4029,2760,4057,1840,5257,928]
+        },  
+        {
+            name: 'Year 2010',
+            data: [3846,2716,4017,1815,4936,809]
+        }]
+    });
+});
+
+
+$(function () {
+    $('#container3').highcharts({
+        title: {
+            text: 'Cosmetic Division Sales ',
+            x: -20 //center
+        },
+        
+        xAxis: {
+            categories: ['2014', '2013', '2012', '2011', '2010', '2009',
+                '2008', '2007', '2006', '2005']
+        },
+        yAxis: {
+
+            title: {
+                text: 'Sales £ (millions)'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            valueSuffix: '£ (millions)'
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series: [{
+            name: 'active cosmetics',
+            data: [1660,1576,1499,1422,1386,1233,1289,1248,1127,985]
+        }, {
+            name: 'consumer products',
+            data: [10767,10873,10713, 9835,9530,8555,8354,8280,7903,7499]
+        }, {
+            name: 'loreal luxe',
+            data: [6197,5865,5568,4800,4506, 4079,4169,3927,3773,3582]
+        }, {
+            name: 'professional product',
+            data: [3032,2973,3002,2814, 2717,2388,2471,2391,2125,2060]
+        }]
+    });
+});
+
+
+$(function () {
+    $('#container4').highcharts({
+        chart: {
+            type: 'pie',
+            options3d: {
+                enabled: true,
+                alpha: 45
+            }
+        },
+        title: {
+            text: 'Financial Highlights of 2014'
+        },
+        
+        plotOptions: {
+            pie: {
+                innerSize: 100,
+                depth: 45
+            }
+        },
+        series: [{
+            name: ' £ (millions) ',
+            data: [
+                ['Sales', 22532],
+                ['Cost of Sales', 6500],
+                ['Gross Profit', 16031],
+                ['Net Income', 3890],
+                ['Advertizing Cost', 6558],
+                ['R&D Cost', 760],
+                ['General Selling Expenses', 4821]
+                
+            ]
+        }]
+    });
+});
+
+
+$(function () {
+    $('#container5').highcharts({
+        title: {
+            text: 'Financial Summary'
+        },
+        xAxis: {
+            categories: [2014,2013,2012,2011,2010,0,2009,2008,2007,2006,2005]
+        },
+        labels: {
+            items: [{
+                
+                style: {
+                    left: '50px',
+                    top: '18px',
+                    color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
+                }
+            }]
+        },
+        series: [{
+            type: 'column',
+            name: 'Sales',
+            data: [22532,22124,21638,20343,19496,0,17473,17542,17062,15790,14532]
+        }, {
+            type: 'column',
+            name: 'Cost of Sales',
+            data: [6500,6379,6388,5851,5697,0,5162,5187,4941,4569,4347]
+        }, {
+            type: 'column',
+            name: 'Gross Profit',
+            data: [16031,15744,15250,14492,13799,0,12311,12355,12121,11221,10185]
+        }, 
+{
+            type: 'column',
+            name: 'R&D Expense',
+            data: [760,748,680,720,665,0,609,588,559,532,496]
+        },
+
+        {
+            type: 'column',
+            name: 'Advertizing Cost',
+            data: [6558,6621,6531,6292,6029,0,5389,5269,5126,4783,4367]
+        },
+        {
+            type: 'column',
+            name: 'Net Income',
+            data: [3890,3760,3558,3293,3057,0,2578,2725,2816,2596,2312],
+            marker: {
+                lineWidth: 2,
+                lineColor: Highcharts.getOptions().colors[3],
+                fillColor: 'white'
+            }
+        }, {
+            type: 'pie',
+            name: '£ (millions)',
+            data: [{
+                name: 'Sales ',
+                y:188528 ,
+                color: Highcharts.getOptions().colors[0] 
+            }, {
+                name: 'Cost of Sales ',
+                y:81296,
+                color: Highcharts.getOptions().colors[1] 
+            }, 
+
+            {
+                name: 'Gross Profit ',
+                y:133509,
+                color: Highcharts.getOptions().colors[2] 
+            },
+
+            {
+                name: 'R&D Expense ',
+                y:6537,
+                color: Highcharts.getOptions().colors[3] 
+            },
+
+            {
+                name: 'Advertizing Cost ',
+                y:56963,
+                color: Highcharts.getOptions().colors[4] 
+            },
+
+            {
+                name: 'Net Income ',
+                y:30585,
+                color: Highcharts.getOptions().colors[5] 
+            }],
+            center: [478, 100],
+            size: 150,
+            showInLegend: false,
+            dataLabels: {
+                enabled: false
+            }
+        }]
+    });
+});
+    </script>
+  </head>
+  <body>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+<section id="container" class="">
+
+
+      <nav class="navbar navbar-default navbar-fixed-top topnav" style="top: 0px;border-color: white; color:#777">
+            <div class="toggle-nav">
+                <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"></div>
+            </div>
+
+            <!--logo start-->
+            <a class="navbar-brand topnav" id="logo" href="/" style="margin-top:-12px;color:Black;">Advertising Analytics<img src="/img/handshake_icon.png" width="50" height="50" style="display: inline;padding-left:10px;"></a>
+            <!--logo end-->
+
+            <div class="nav search-row" id="top_menu">
+                <!--  search form start -->
+                <ul class="nav top-menu">
+                    <li>
+                        <form class="navbar-form">
+                            <input class="form-control" placeholder="Search" type="text">
+                        </form>
+                    </li>
+                </ul>
+                <!--  search form end -->
+            </div>
+
+            <div class="top-nav notification-row">
+                <!-- notificatoin dropdown start-->
+                <ul class="nav pull-right top-menu">
+                    <!-- alert notification start-->
+                    <li id="alert_notificatoin_bar" class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+
+                            <i class="icon-bell-l"></i>
+                            <span class="badge bg-important">4</span>
+                        </a>
+                        <ul class="dropdown-menu extended notification">
+                            <div class="notify-arrow notify-arrow-blue"></div>
+                            <li>
+                                <p class="blue">You have <span>4</span> new notifications</p>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span class="label label-primary"><i class="icon_profile"></i></span>
+                                    Friend Request
+                                    <span class="small italic pull-right">5 mins</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span class="label label-warning"><i class="icon_pin"></i></span>
+                                    John location.
+                                    <span class="small italic pull-right">50 mins</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span class="label label-danger"><i class="icon_book_alt"></i></span>
+                                    Project 3 Completed.
+                                    <span class="small italic pull-right">1 hr</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span class="label label-success"><i class="icon_like"></i></span>
+                                    Mick appreciated your work.
+                                    <span class="small italic pull-right"> Today</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">See all notifications</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- alert notification end-->
+                    <!-- user login dropdown start-->
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="profile-ava">
+                                <img alt="" src="img/avatar1_small.jpg">
+                            </span>
+                            <span class="username">Jenifer Smith</span>
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu extended logout">
+                            <div class="log-arrow-up"></div>
+                            <li class="eborder-top">
+                                <a href="#"><i class="icon_profile"></i> My Profile</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="icon_mail_alt"></i> My Inbox</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="icon_clock_alt"></i> Timeline</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="icon_chat_alt"></i> Chats</a>
+                            </li>
+                            <li>
+                                <a href="login.html"><i class="icon_key_alt"></i> Log Out</a>
+                            </li>
+                            <li>
+                                <a href="documentation.html"><i class="icon_key_alt"></i> Documentation</a>
+                            </li>
+                            <li>
+                                <a href="documentation.html"><i class="icon_key_alt"></i> Documentation</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- user login dropdown end -->
+                </ul>
+                <!-- notificatoin dropdown end-->
+            </div>
+      </nav>
+      <!--header end-->
+
+      <!--sidebar start-->
+      <aside>
+          <div id="sidebar"  class="nav-collapse ">
+              <!-- sidebar menu start-->
+              <ul class="sidebar-menu">
+                  <li class="active">
+                      <a class="" href="dashboard">
+                          <i class="icon_house_alt"></i>
+                          <span>Dashboard</span>
+                      </a>
+                  </li>
+                          <li class="">
+                      <a href="statistics" class="">
+                        <i class="icon_piechart"></i>
+                        <span>Statistics</span>
+                      </a>
+                  </li>
+                  <li class="">
+                      <a href="products" class="">
+                          <i class="icon_documents_alt"></i>
+                          <span>Products</span>
+                      </a>
+                  </li>
+                  <li>
+                      <a class="" href="events">
+                          <i class="icon_table"></i>
+                          <span>Events</span>
+                      </a>
+                  </li>
+                  <li>
+                      <a class="" href="adAnalytics">
+                          <i class="icon_genius"></i>
+                          <span>Ad Analytics</span>
+                      </a>
+                  </li>
+              </ul>
+              <!-- sidebar menu end-->
+          </div>
+      </aside>
+      <!--sidebar end-->
+
+     <!--main content start-->      
+      <section id="main-content">
+        <section class="wrapper">
+        <div class="row">
+                <div class="col-lg-12">
+                    <h3 class="page-header"><i class="icon_piechart"></i> Statistics</h3>
+                    <ol class="breadcrumb">
+                        <li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
+                        <li><i class="icon_piechart"></i>Statistics</li>
+                        
+                    </ol>
+                </div>
+            </div>
+            <div class="row">
+              <!-- chart morris start -->
+              
+      <!--main content end-->
+  </section>
+
+
+<div id="container4" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+<div id="container5" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+
+<div id="container6" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+<div id="container1" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+<div id="container2" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+<div id="container3" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+
+		
+
+  <!-- container section end -->
+
+<!-- End, so adding jquery -->
+    <!-- javascripts -->
+   
+
+
+
+  
+
+
+  </body>
+</html>
