@@ -2,12 +2,7 @@ var user = require('../Model/User');
 var ejs = require("ejs");
 var Twit = require("twit");
 
-var T = new Twit({
-    consumer_key:         'xN4oXDCpCnSiB6NC1jRrtPXoy'
-  , consumer_secret:      'vJHikZDxYZJnS3pVAxYCZmjKZPVnR6yCaQKPV2lthAE4l2Ve1R'
-  , access_token:         '2352759175-WGtz2PeYg6Y1wP22wsOXrfmRXYU56wzS6R8emeY'
-  , access_token_secret:  '4xmKRd2KGSalnXUUbaA3WdNQwMzI1GUnUm8BWvsyerU65'
-});
+
 
 var express = require('express');
 
