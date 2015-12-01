@@ -67,7 +67,7 @@
       				<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
       					<div class="info-box brown-bg">
       						<!-- <i class="fa fa-shopping-cart"></i> -->
-      						<div class="count">143,258.34</div>
+      						<div class="count"><%= user.netIncome %></div>
       						<div class="title">Net Income</div>
       					</div><!--/.info-box-->
       				</div><!--/.col-->
@@ -121,13 +121,15 @@
                       <a href="index.html#" class="btn-close"><i class="fa fa-times"></i></a>
                     </div>
                   </div>
-                  <ul class="list-group">
-                    <li class="list-group-item">Cras justo odio</li>
-                    <li class="list-group-item">Dapibus ac facilisis in</li>
-                    <li class="list-group-item">Morbi leo risus</li>
-                    <li class="list-group-item">Porta ac consectetur ac</li>
-                    <li class="list-group-item">Vestibulum at eros</li>
+                  <ul class="list-group" id="news_list">
+                    <li class="list-group-item"></li>
+                    <li class="list-group-item"></li>
+                    <li class="list-group-item"></li>
+                    <li class="list-group-item"></li>
+                    <li class="list-group-item"></li>
                   </ul>
+
+
 
 
                 </div>
@@ -144,11 +146,11 @@
                     </div>
                   </div>
                   <ul class="list-group">
-                    <li class="list-group-item">Cras justo odio</li>
-                    <li class="list-group-item">Dapibus ac facilisis in</li>
-                    <li class="list-group-item">Morbi leo risus</li>
-                    <li class="list-group-item">Porta ac consectetur ac</li>
-                    <li class="list-group-item">Vestibulum at eros</li>
+                    <li class="list-group-item"></li>
+                    <li class="list-group-item"></li>
+                    <li class="list-group-item"></li>
+                    <li class="list-group-item"></li>
+                    <li class="list-group-item"></li>
                   </ul>
 
                 </div>
@@ -407,7 +409,14 @@
 	<script src="/js/sparklines.js"></script>
 	<script src="/js/charts.js"></script>
 	<script src="/js/jquery.slimscroll.min.js"></script>
-  <script>
+  <script type="text/javascript" >
+      var user = <%- user %>;
+      console.log("inhtml"+user);
+      var nums = document.getElementById("news_list");
+      var listItem = nums.getElementsByTagName("li");
+      for (var i=0; i < listItem.length; i++) {
+          listItem[i].innerHTML = user.news[i].summary;
+      }
 
       //knob
       $(function() {

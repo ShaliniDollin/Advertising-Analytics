@@ -1,11 +1,12 @@
 var user = require('../Model/User');
+var vendor = require('../Model/Vendor');
 var ejs = require("ejs");
 var Twit = require("twit");
 
 
 
 var express = require('express');
-
+var googleFinance = require('google-finance');
 var session = require('express-session');
 // create our app
 var app = express();
@@ -30,6 +31,7 @@ exports.login = function(req, res){
 };
 
 exports.dashboard = function(req, res){
+<<<<<<< HEAD
 
 	var user = {};
     
@@ -49,11 +51,63 @@ res.render('dashboard', { user: user });
 
 
 	
+=======
+  var sess = req.session;
+	var user = sess.user;
+	user.year = (new Date()).getFullYear();
+
+	var newVendor = new vendor();
+	newVendor.getVendorIncome(function(err, result){
+		if(!err){
+			user.netIncome= result;
+      if(user.company_event === 'nike'){
+        symbol = 'NASDAQ:NKE';
+      }
+      else {
+        symbol = 'NASDAQ:OR';
+      }
+      googleFinance.companyNews({
+      symbol: symbol
+      }, function (err, news) {
+        if(news){
+          user.news= JSON.stringify(news);
+          googleFinance.historical({
+            symbol: symbol,
+            from: '2015-01-01',
+            to: '2015-11-29'
+            }, function (err, quotes) {
+            if (quotes){
+                user.quotes = JSON.stringify(quotes);
+                res.render('dashboard', { user: user});
+              }
+            else{
+                user.quotes = "2$";
+                res.render('dashboard', { user: user});
+              }
+            });
+          }
+          else{
+              user.news = user.company_event;
+              res.render('dashboard', { user: user});
+            }
+          });
+
+
+		}else{
+			console.log(err);
+		}
+	},user.year,user.company_event);
+
+
+
+
+>>>>>>> master
 };
 exports.maincontent = function(req, res){
   var sess = req.session;
 	var user = sess.user;
-	res.render('maincontent', { user: user });
+  res.render('maincontent', { user: user});
+
 };
 exports.statistics = function(req, res){
   var sess = req.session;
