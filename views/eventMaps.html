@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Complex icons</title>
+    
+  </head>
+  <body>
+    <div id="map" style="height:380px;width:400px;"></div>
+    <script>
+
+// The following example creates complex markers to indicate beaches near
+// Sydney, NSW, Australia. Note that the anchor is set to (0,32) to correspond
+// to the base of the flagpole.
+
+function initMap() {
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 2,
+    center: {lat: 35.746512, lng: -39.462891}
+  });
+
+  setMarkers(map);
+}
+
+// Data for the markers consisting of a name, a LatLng and a zIndex for the
+// order in which these markers should display on top of each other.
+var events= [
+  ['san jose',37.338208,-121.886329,5],
+  ['san francisco',37.774929,-122.419416,6],
+  ['new york',40.712784,-74.005941,7],
+  ['los angeles',34.052234,-118.243685,8],
+  ['chicago',41.878114,-87.629798,9],
+  ['houston',29.760427,-95.369803,10],
+  ['philidelphia',39.952584,-75.165222,11],
+  ['phoenix',33.448377,-112.074037,12],
+  ['san antonio',29.424122,-98.493628,13],
+  ['san deiago',32.715738,-117.161084,14],
+  ['instanbul',41.008238,28.978359,15],
+  ['moscow',55.755826,37.617300,16],
+  ['london',51.507351,-0.127758,17],
+  ['berlin',52.520007,13.404954,18],
+  ['rome',41.902783,12.496366,19],
+  ['paris',48.856614,2.352222,20],
+  ['mumbai',19.075984,72.877656,21],
+  ['delhi',28.613939,77.209021,22],
+  ['banglore',12.971599,77.594563,23],
+  ['bejing',39.904211,116.407395,24],
+  ['singapore',1.352083,103.819836,25],
+  ['tokyo',35.689487,139.691706,26]
+
+];
+
+function setMarkers(map) {
+  // Adds markers to the map.
+
+  // Marker sizes are expressed as a Size of X,Y where the origin of the image
+  // (0,0) is located in the top left of the image.
+
+  // Origins, anchor positions and coordinates of the marker increase in the X
+  // direction to the right and in the Y direction down.
+  var image = {
+    url: '/img/Germany1.png',
+    // This marker is 20 pixels wide by 32 pixels high.
+    size: new google.maps.Size(20, 32),
+    // The origin for this image is (0, 0).
+    origin: new google.maps.Point(0, 0),
+    // The anchor for this image is the base of the flagpole at (0, 32).
+    anchor: new google.maps.Point(0, 32)
+  };
+  // Shapes define the clickable region of the icon. The type defines an HTML
+  // <area> element 'poly' which traces out a polygon as a series of X,Y points.
+  // The final coordinate closes the poly by connecting to the first coordinate.
+  var shape = {
+    coords: [1, 1, 1, 20, 18, 20, 18, 1],
+    type: 'poly'
+  };
+  for (var i = 0; i < events.length; i++) {
+    var event = events[i];
+    var marker = new google.maps.Marker({
+      position: {lat: event[1], lng: event[2]},
+      map: map,
+      icon: image,
+      shape: shape,
+      title: event[0],
+      zIndex: event[3]
+    });
+  }
+}
+
+    </script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvvq6byHH3zyBR4S31N9IKG7lFikH9qxw&signed_in=true&callback=initMap"></script>
+  </body>
+</html>
