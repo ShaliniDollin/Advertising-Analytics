@@ -57,8 +57,32 @@
 				<header class="panel-heading">
 					Products:
 				</header>
-				<div class="panel-body">
-				</div>
+        <div class="table-responsive">          
+          <table class="table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Gender</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Tag</th>
+              </tr>
+            </thead>
+            <tbody>
+               <% for (i = 0; i < products.rows.length; i++){ %>
+              <tr>
+                <td><%= i+1 %></td>
+                <td><%= products.rows[i].name %></td>
+                <td><%= products.rows[i].audience_gender %></td>
+                <td><%= products.rows[i].category %></td>
+                <td><%= products.rows[i].description %></td>
+                <td><%= products.rows[i].tag %></td>
+              </tr>
+              <%}%>
+            </tbody>
+          </table>
+        </div>
 			</div>
 				    <div class="panel">
             <header class="panel-heading">
@@ -69,30 +93,94 @@
                 <!-- <a class="btn btn-success" data-toggle="modal" href="#myModal">
                     Add
                 </a> -->
-                <!-- Modal -->
-                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="right:50%;">
-                  <div class="modal-dialog" role="document">
+
+            </div>
+            </div>
+            <!-- Modal -->
+                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                  <div class="" role="document" style="100%">
                       <div class="modal-content">
                           <div class="modal-header">
                               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                              <h4 class="modal-title">Modal Tittle</h4>
+                              <h4 class="modal-title">Add a Product</h4>
                           </div>
                           <div class="modal-body">
 
-                              Body goes here...
+                             <form action="/<%= user.fname %>_<%= user.lname %>/addProduct" method="post" autocomplete="on">
+
+                                <p>
+                                    <label for="productName" class="uname" > Name </label>
+                                    <input id="productName" name="productName" required="required" type="text" placeholder="Product Name"/>
+                                </p>
+
+                                <p>
+                                    <label for="ageGroup" class="uname" > Age Group </label>
+                                    <select id="ageGroup" name="ageGroup">
+                                      <option value="5">0 - 5</option>
+                                      <option value="11">6 - 11</option>
+                                      <option value="19">12 - 19</option>
+                                      <option value="30">20 - 30</option>
+                                      <option value="40">40+</option>
+                                    </select>  
+                                </p>
+
+                                <p>
+                                    <label for="gender" class="uname" > Gender</label>
+                                    <select id="gender" name="gender">
+                                      <option value="men">Men</option>
+                                      <option value="women">Women</option>
+                                      <option value="young_atheletes">Young Athletes</option>
+                                      <option value="others">Others</option>
+                                    </select>  
+                                </p>
+                               
+                                <p>
+                                    <label for="category" class="uname" > Cagtegory </label>
+                                    <select id="category" name="category">
+                                      <option value="footwear">Footwear</option>
+                                      <option value="equipment">Equipment</option>
+                                      <option value="brand_division">Brand Division</option>
+                                      <option value="apparel">Apparel</option>
+                                    </select>  
+                                </p>
+
+                                <p>
+                                    <label for="description" class="uname" > Description </label>
+                                    <textarea class="" rows="5" cols="50" id="" placeholder="Enter description" name="description"></textarea>
+                                </p>
+
+
+                                  <p>
+                                    <label for="tags" class="uname" > Tags </label>
+                                    <select id="tags" name="tags">
+                                      <option value="action_sports">Action Sports</option>
+                                      <option value="basketball">Basketball</option>
+                                      <option value="football">Football</option>
+                                      <option value="golf">Golf</option>
+                                      <option value="mens_training">Mens Training</option>
+                                      <option value="running">Running</option>
+                                      <option value="sportswear">Sportswear</option>
+                                      <option value="womens_training">Womens Training</option>
+                                      <option value="others">Others</option>
+                                    </select>  
+                                </p>
+
+
+                             
+                             
 
                           </div>
                           <div class="modal-footer">
                               <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
-                              <button class="btn btn-success" type="button">Save changes</button>
+                              <input class="btn btn-success" type="submit" name="Save"></input>
                           </div>
+                          </form>
                       </div>
                   </div>
                  </div>
                 <!-- modal -->
-            </div>
 
-  </div>
+  
 
   <!-- container section end -->
 
