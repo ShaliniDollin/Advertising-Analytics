@@ -5,6 +5,7 @@ var express = require('express');
 var googleFinance = require('google-finance');
 var yahooFinance = require('yahoo-finance');
 var session = require('express-session');
+var product = require('../Model/Product');
 // create our app
 var app = express();
 
@@ -93,7 +94,7 @@ exports.statistics = function(req, res){
   var user = sess.user;
   if (user.company_event === 'nike'){
     res.render('statistics1', {title: 'Statistics'});
-  }else{
+  }else {
     res.render('statistics2', {title: 'Statistics'});
   }
 	
@@ -101,7 +102,18 @@ exports.statistics = function(req, res){
 
 exports.products = function(req, res){
   var sess = req.session;
-	res.render('products', {title: 'products'});
+  var user = sess.user;
+  var products = new product;
+  products.getProducts(function(err, result){
+    if(!err){
+      res.render('products', {title: 'products', user: user, products: result});
+    }
+    else{
+      res.render('error', {user:user, error : err});
+    }
+  }, req);
+
+	
 };
 
 exports.events = function(req, res){
@@ -176,3 +188,28 @@ exports.validateUser =function(req,res){
 	}, req.params.email);
 
   };
+
+
+exports.addProduct = function(req, res){
+
+    var sess = req.session;
+    var user = sess.user;
+
+    var newProduct = new product();
+
+    newProduct.addProduct(function(err, success){
+      if(!err){
+        res.redirect('/'+user.fname+'_'+user.lname+'/products');
+      }else{
+        //Render a error page
+        res.render('error', {user: user});
+
+      }
+    }, req);
+
+  };
+
+
+exports.error = function(req, res){
+  res.render('error', {user: req.session.user});
+}

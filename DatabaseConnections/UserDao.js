@@ -14,6 +14,8 @@ var client = new cassandra.Client(options);
 var insertQ = 'INSERT INTO advertising.user (fname, lname, company_event, dob, email, password, type_user) VALUES(?, ?, ?, ?, ?, ?, ?)';
 var checkQ = 'select * from advertising.user where email = ?';
 var authQ = 'select * from advertising.user where email = ?';
+var insertProductQ = 'INSERT INTO advertising.product (name, aud_age_e, aud_age_s, audience_gender, category, description, genre, tag) VALUES (?,?,?,?,?,?,?,?)';
+var getProductsQ = 'select * from advertising.product where genre = ?';
 
 
 function UserDao() {
@@ -101,6 +103,55 @@ UserDao.prototype.getUserById = function (callback, email){
 			}
 		});
 	};
+
+
+UserDao.prototype.addProduct = function(callback, name, age_group, gender, category, description, genre, tags ){
+	var aud_age_s, aud_age_e;
+	switch(parseInt(age_group)){
+		case 5:
+			aud_age_s = "0";
+			aud_age_e = "5";
+			break;
+		case 11:
+			aud_age_s = "6";
+			aud_age_e = "11";
+			break;
+		case 19:
+			aud_age_s = "12";
+			aud_age_e = "19";
+			break;
+		case 30:
+			aud_age_s = "20";
+			aud_age_e = "30";
+			break;
+		case 40:
+			aud_age_s = "30";
+			aud_age_e = "40";
+			break;
+		default:
+			aud_age_s = "41";
+			aud_age_e = "100";
+	};
+	var param = [name, aud_age_s, aud_age_e, gender, category, description, genre, tags];
+	client.execute(insertProductQ, param, {prepare: true}, function(err){
+		if(err){
+			console.log(err);
+			callback("ERROR", null);
+		}
+		callback(null, "Product Inserted");
+	});
+}
+
+UserDao.prototype.getProducts = function(callback, company){
+	var param = [company];
+	client.execute(getProductsQ, param, {prepare: true}, function(err, result){
+		if(!err){
+			callback(null, result);
+		}else{
+			callback(err, result);
+		}
+	});
+}
 
 //db.connection.close();
 module.exports = UserDao;

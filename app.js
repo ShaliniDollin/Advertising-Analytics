@@ -43,7 +43,12 @@ app.get('/:fname_lname/statistics', routes.statistics);
 app.get('/:fname_lname/products', routes.products);
 app.get('/:fname_lname/events', routes.events);
 app.get('/:fname_lname/adAnalytics', routes.adAnalytics);
+//Product adding
+app.post('/:fname_lname/addProduct', routes.addProduct);
 
+
+//Error Handelling
+app.get('/:fname_lname/error', routes.error);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
