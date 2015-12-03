@@ -15,7 +15,7 @@ var options1 = {
 
 var client1;
 
-var netIncome='select net_income from financial_data where year=?';
+var netIncomeQ='select net_income from financial_data where year=?';
 
 function VendorDao() {
 
@@ -23,10 +23,10 @@ function VendorDao() {
 
 
 VendorDao.prototype.getVendorIncome = function(callback, year,vendor){
-	 var param = [year];
+	 var param = [parseInt(year) - 1];
 	 options1.keyspace = vendor;	 
 	 client1 = new cassandra.Client(options1);	 
-	 client1.execute(netIncome, param, {prepare: true}, function(err, result){
+	 client1.execute(netIncomeQ, param, {prepare: true}, function(err, result){
 		 //Close connection
 		 if(!err){		 
 			 console.log( 'query executed');
@@ -48,14 +48,5 @@ VendorDao.prototype.getVendorIncome = function(callback, year,vendor){
        }
 	});
 };
-
-
-
-
-
-
-
-
-
 
 module.exports = VendorDao;

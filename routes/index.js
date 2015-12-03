@@ -19,7 +19,7 @@ exports.index = function(req, res){
   if(!sess.user){
     sess.user ='name';
   }
-  res.render('index', { title: 'Express', user: sess.user});
+   res.render('index', { title: 'Advertising Analytics', user: sess.user});
 };
 
 exports.login = function(req, res){
@@ -50,14 +50,15 @@ exports.dashboard = function(req, res){
         if(news){
 
           user.news= JSON.stringify(news);
-          
+          console.log(user.news);
           yahooFinance.snapshot({
             symbol: stocksymbol,
             fields: ['l1']
             }, function (err, snapshot) {
+              console.log(snapshot);
             if (!err){
                 user.stock = snapshot.lastTradePriceOnly;
-                console.log(user.stock);
+                
                 res.render('dashboard', { user: user});
               }
             else{
@@ -87,8 +88,9 @@ exports.maincontent = function(req, res){
   var sess = req.session;
 	var user = sess.user;
   res.render('maincontent', { user: user});
-
 };
+
+
 exports.statistics = function(req, res){
   var sess = req.session;
   var user = sess.user;
@@ -133,11 +135,10 @@ exports.validateUser =function(req,res){
 	newUser.validateUser(function(err,result) {
 		if(err){
 			console.log("Error"+err);
-			throw(err);
-		}else
-		{
+			res.render('error', {error: err});
+		}else{
       sess.user = result;
-			res.render('index', { title: 'Express', user:sess.user});
+      res.redirect('/'+ sess.user.company_event +'/' + sess.user.fname +'_' + sess.user.lname + '/index');			
 		}
 
 	},req.body);
@@ -199,7 +200,7 @@ exports.addProduct = function(req, res){
 
     newProduct.addProduct(function(err, success){
       if(!err){
-        res.redirect('/'+user.fname+'_'+user.lname+'/products');
+        res.redirect('/'+ sess.user.company_event + '/'+user.fname+'_'+user.lname+'/products');
       }else{
         //Render a error page
         res.render('error', {user: user});
@@ -212,4 +213,9 @@ exports.addProduct = function(req, res){
 
 exports.error = function(req, res){
   res.render('error', {user: req.session.user});
+}
+
+
+exports.NotFoundErrorPage = function(req,res){
+  res.render('NotFoundErrorPage');
 }
