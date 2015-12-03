@@ -9,7 +9,7 @@
     <meta name="description" content="Advertising Analytics">
     <meta name="author" content="Shalini">
 
-    <title>Landing Page - Start Bootstrap Theme</title>
+    <title><%= title %></title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -48,7 +48,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li id= "dash">
-                      <a href="/<%=user.fname%>_<%=user.lname%>/maincontent">Dashboard</a>
+                      <a href="/<%= user.company_event %>/<%=user.fname%>_<%=user.lname%>/maincontent">Dashboard</a>
                     </li>
                     <li>
                         <a href="#about">About</a>
@@ -126,7 +126,7 @@
       </div>
     </div>
 
-<!---   Signup Modal --->
+<!--   Signup Modal -->
       <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
           <div class="modal-dialog" role="document">
             <div class="modal-content" >

@@ -106,7 +106,7 @@
                           </div>
                           <div class="modal-body">
 
-                             <form action="/<%= user.fname %>_<%= user.lname %>/addProduct" method="post" autocomplete="on">
+                             <form action="/<%= user.company_event %>/<%= user.fname %>_<%= user.lname %>/addProduct" method="post" autocomplete="on">
 
                                 <p>
                                     <label for="productName" class="uname" > Name </label>
@@ -123,7 +123,7 @@
                                       <option value="40">40+</option>
                                     </select>  
                                 </p>
-
+                                <% if (user.company_event == 'nike'){ %>
                                 <p>
                                     <label for="gender" class="uname" > Gender</label>
                                     <select id="gender" name="gender">
@@ -133,7 +133,11 @@
                                       <option value="others">Others</option>
                                     </select>  
                                 </p>
-                               
+                                <% }else {%>
+                                    <input id="gender" name="gender" type="hidden" value="Women" />
+                                <% } %>
+
+                                <% if (user.company_event == 'nike'){ %>
                                 <p>
                                     <label for="category" class="uname" > Cagtegory </label>
                                     <select id="category" name="category">
@@ -143,13 +147,23 @@
                                       <option value="apparel">Apparel</option>
                                     </select>  
                                 </p>
-
+                                <% }else {%>
+                                <p>
+                                    <label for="category" class="uname" > Cagtegory </label>
+                                    <select id="category" name="category">
+                                      <option value="active cosmetics">Active Cosmetics</option>
+                                      <option value="consumer products">Consumer Products</option>
+                                      <option value="loreal luxe">Loreal Luxe</option>
+                                      <option value="professional product">Professional Product</option>
+                                    </select>  
+                                </p>
+                                <% }%>
                                 <p>
                                     <label for="description" class="uname" > Description </label>
                                     <textarea class="" rows="5" cols="50" id="" placeholder="Enter description" name="description"></textarea>
                                 </p>
 
-
+                                <% if (user.company_event == 'nike'){ %>
                                   <p>
                                     <label for="tags" class="uname" > Tags </label>
                                     <select id="tags" name="tags">
@@ -164,7 +178,22 @@
                                       <option value="others">Others</option>
                                     </select>  
                                 </p>
-
+                                <% }else {%>
+                                  <p>
+                                    <label for="tags" class="uname" > Tags </label>
+                                    <select id="tags" name="tags">
+                                      <option value="makeup">Makeup</option>
+                                      <option value="perfumes">Perfumes</option>
+                                      <option value="skin care">Skin Care</option>
+                                      <option value="hair care and styling">Hair Care and Styling</option>
+                                      <option value="hair colourants">Hair Colourants</option>
+                                      <option value="hair care">Hair Care</option>
+                                      <option value="shampoo and hair care">Shampoo and Hair Care</option>
+                                      <option value="styling and textures">Styling and Textures</option>
+                                      <option value="others">Others</option>
+                                    </select>  
+                                </p>
+                                <% }%>
 
                              
                              
