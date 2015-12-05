@@ -47,6 +47,8 @@ app.get('/:company_name/:fname_lname/maincontent', routes.maincontent);
 app.get('/:company_name/:fname_lname/dashboard', routes.dashboard);
 app.get('/:company_name/:fname_lname/statistics', routes.statistics);
 app.get('/:company_name/:fname_lname/products', routes.products);
+app.get('/news', routes.news);
+app.get('/lastTradePriceOnly', routes.lastTradePriceOnly);
 app.get('/:company_name/:fname_lname/events', routes.events);
 app.get('/:company_name/:fname_lname/adAnalytics', routes.adAnalytics);
 app.post('/:company_name/:fname_lname/addProduct', routes.addProduct);

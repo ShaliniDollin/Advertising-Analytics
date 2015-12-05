@@ -57,7 +57,7 @@
 				<header class="panel-heading">
 					Products:
 				</header>
-        <div class="table-responsive">          
+        <div class="table-responsive">
           <table class="table">
             <thead>
               <tr>
@@ -89,7 +89,7 @@
                 Add Products
             </header>
         	<div class="panel-body">
-                <a href="#" data-toggle="modal" data-target="#myModal" class="btn btn-success"> Add </a>
+                <a href="#" data-toggle="modal" data-target="#productmodal" class="btn btn-success"> Add </a>
                 <!-- <a class="btn btn-success" data-toggle="modal" href="#myModal">
                     Add
                 </a> -->
@@ -97,14 +97,14 @@
             </div>
             </div>
             <!-- Modal -->
-                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                 <div class="modal fade" id="productmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                   <div class="" role="document" style="100%">
                       <div class="modal-content">
                           <div class="modal-header">
                               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                               <h4 class="modal-title">Add a Product</h4>
                           </div>
-                          <div class="modal-body">
+                          <div class="modal-body formcontainer">
 
                              <form action="/<%= user.company_event %>/<%= user.fname %>_<%= user.lname %>/addProduct" method="post" autocomplete="on">
 
@@ -112,7 +112,7 @@
                                     <label for="productName" class="uname" > Name </label>
                                     <input id="productName" name="productName" required="required" type="text" placeholder="Product Name"/>
                                 </p>
-
+                                <br>
                                 <p>
                                     <label for="ageGroup" class="uname" > Age Group </label>
                                     <select id="ageGroup" name="ageGroup">
@@ -121,8 +121,9 @@
                                       <option value="19">12 - 19</option>
                                       <option value="30">20 - 30</option>
                                       <option value="40">40+</option>
-                                    </select>  
+                                    </select>
                                 </p>
+                                <br>
                                 <% if (user.company_event == 'nike'){ %>
                                 <p>
                                     <label for="gender" class="uname" > Gender</label>
@@ -131,8 +132,9 @@
                                       <option value="women">Women</option>
                                       <option value="young_atheletes">Young Athletes</option>
                                       <option value="others">Others</option>
-                                    </select>  
+                                    </select>
                                 </p>
+                                <br>
                                 <% }else {%>
                                     <input id="gender" name="gender" type="hidden" value="Women" />
                                 <% } %>
@@ -145,8 +147,9 @@
                                       <option value="equipment">Equipment</option>
                                       <option value="brand_division">Brand Division</option>
                                       <option value="apparel">Apparel</option>
-                                    </select>  
+                                    </select>
                                 </p>
+                                <br>
                                 <% }else {%>
                                 <p>
                                     <label for="category" class="uname" > Cagtegory </label>
@@ -155,14 +158,15 @@
                                       <option value="consumer products">Consumer Products</option>
                                       <option value="loreal luxe">Loreal Luxe</option>
                                       <option value="professional product">Professional Product</option>
-                                    </select>  
+                                    </select>
                                 </p>
+                                <br>
                                 <% }%>
                                 <p>
-                                    <label for="description" class="uname" > Description </label>
+                                    <label for="description" class="uname" > Description     </label>
                                     <textarea class="" rows="5" cols="50" id="" placeholder="Enter description" name="description"></textarea>
                                 </p>
-
+                                <br>
                                 <% if (user.company_event == 'nike'){ %>
                                   <p>
                                     <label for="tags" class="uname" > Tags </label>
@@ -176,8 +180,9 @@
                                       <option value="sportswear">Sportswear</option>
                                       <option value="womens_training">Womens Training</option>
                                       <option value="others">Others</option>
-                                    </select>  
+                                    </select>
                                 </p>
+                                <br>
                                 <% }else {%>
                                   <p>
                                     <label for="tags" class="uname" > Tags </label>
@@ -191,12 +196,13 @@
                                       <option value="shampoo and hair care">Shampoo and Hair Care</option>
                                       <option value="styling and textures">Styling and Textures</option>
                                       <option value="others">Others</option>
-                                    </select>  
+                                    </select>
                                 </p>
+                                <br>
                                 <% }%>
 
-                             
-                             
+
+
 
                           </div>
                           <div class="modal-footer">
@@ -209,7 +215,7 @@
                  </div>
                 <!-- modal -->
 
-  
+
 
   <!-- container section end -->
 

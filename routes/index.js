@@ -6,6 +6,8 @@ var googleFinance = require('google-finance');
 var yahooFinance = require('yahoo-finance');
 var session = require('express-session');
 var product = require('../Model/Product');
+var http = require('http');
+var https = require("https");
 // create our app
 var app = express();
 
@@ -31,59 +33,75 @@ exports.dashboard = function(req, res){
   var sess = req.session;
 	var user = sess.user;
 	user.year = (new Date()).getFullYear();
-
 	var newVendor = new vendor();
 	newVendor.getVendorIncome(function(err, result){
 		if(!err){
-			user.netIncome= result;
+			sess.user.netIncome= result;
+      res.render('dashboard', { user: sess.user});
+    }
+    else{
+      res.render('error', { error: error});
+    }
+  },user.year,user.company_event);
+};
+
+exports.news = function(req, res) {
+      console.log("you came");
+      var sess = req.session;
+      var user = sess.user;
       if(user.company_event === 'nike'){
         symbol = 'NASDAQ:NKE';
         stocksymbol = 'NKE';
       }
       else {
-        symbol = 'NASDAQ:OR';
+        symbol = 'EPA:OR';
         stocksymbol = 'OR';
       }
       googleFinance.companyNews({
-      symbol: symbol
+        symbol: symbol
       }, function (err, news) {
         if(news){
+          console.log("you send");
+          console.log(JSON.stringify(news));
+          res.send(news);
+        }
+        else{
+          res.render('error', { error: error});
+        }
+        });
+  };
 
-          user.news= JSON.stringify(news);
-          console.log(user.news);
+exports.lastTradePriceOnly = function(req, res) {
+          console.log("stock price");
+          var sess = req.session;
+          var user = sess.user;
+          if(user.company_event === 'nike'){
+            symbol = 'NASDAQ:NKE';
+            stocksymbol = 'NKE';
+          }
+          else {
+            symbol = 'EPA:OR';
+            stocksymbol = 'OR';
+          }
           yahooFinance.snapshot({
             symbol: stocksymbol,
             fields: ['l1']
             }, function (err, snapshot) {
-              console.log(snapshot);
             if (!err){
-                user.stock = snapshot.lastTradePriceOnly;
-                
-                res.render('dashboard', { user: user});
+                var stock = snapshot.lastTradePriceOnly;
+                console.log("stock not price");
+                console.log(stock);
+                res.send(stock);
               }
             else{
-                console.log(err);
-                user.stock = "2";
-                res.render('dashboard', { user: user});
+                var stock1 = "2";
+                res.send(stock1);
               }
-            });
-          }
-          else{
-              user.news = user.company_event;
-              res.render('dashboard', { user: user});
-            }
-          });
-
-
-		}else{
-			console.log(err);
-		}
-	},user.year,user.company_event);
-
-
-
-
+      });
 };
+
+
+
 exports.maincontent = function(req, res){
   var sess = req.session;
 	var user = sess.user;
@@ -99,13 +117,13 @@ exports.statistics = function(req, res){
   }else {
     res.render('statistics2', {title: 'Statistics'});
   }
-	
+
 };
 
 exports.products = function(req, res){
   var sess = req.session;
   var user = sess.user;
-  var products = new product;
+  var products = new product();
   products.getProducts(function(err, result){
     if(!err){
       res.render('products', {title: 'products', user: user, products: result});
@@ -115,7 +133,7 @@ exports.products = function(req, res){
     }
   }, req);
 
-	
+
 };
 
 exports.events = function(req, res){
@@ -138,7 +156,7 @@ exports.validateUser =function(req,res){
 			res.render('error', {error: err});
 		}else{
       sess.user = result;
-      res.redirect('/'+ sess.user.company_event +'/' + sess.user.fname +'_' + sess.user.lname + '/index');			
+      res.redirect('/'+ sess.user.company_event +'/' + sess.user.fname +'_' + sess.user.lname + '/index');
 		}
 
 	},req.body);
