@@ -33,6 +33,7 @@ exports.dashboard = function(req, res){
   var sess = req.session;
 	var user = sess.user;
 	user.year = (new Date()).getFullYear();
+
 	var newVendor = new vendor();
 	newVendor.getVendorIncome(function(err, result){
 		if(!err){
@@ -105,7 +106,11 @@ exports.lastTradePriceOnly = function(req, res) {
 exports.maincontent = function(req, res){
   var sess = req.session;
 	var user = sess.user;
-  res.render('maincontent', { user: user});
+  if(user.type_user == 'Vendor'){
+    res.render('vendormaincontent', { user: user});
+  }else{
+    res.render('eventmaincontent', {user: user});
+  }
 };
 
 
