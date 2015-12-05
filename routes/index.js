@@ -234,6 +234,37 @@ exports.addProduct = function(req, res){
   };
 
 
+//EVENTS ROUTES
+exports.event_dashboard = function(req, res){
+
+    var sess = req.session;
+    var user = sess.user;
+
+    res.render('event_dashboard', {user:user});
+
+};
+
+exports.event_statistics= function(req, res){
+
+    var sess = req.session;
+    var user = sess.user;
+
+    res.render('event_statistics', {user:user});
+
+};
+
+exports.event_events = function(req, res){
+
+    var sess = req.session;
+    var user = sess.user;
+
+    res.render('event_events', {user:user});
+
+};
+
+
+
+//ERROR API
 exports.error = function(req, res){
   res.render('error', {user: req.session.user});
 }

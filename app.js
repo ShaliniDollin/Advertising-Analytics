@@ -42,7 +42,7 @@ app.get('/users/:userId', routes.getUserById);//checked
 //Index for two kinds of users
 app.get('/:company_name/:fname_lname/index', routes.index);
 
-//API
+// VENDOR API
 app.get('/:company_name/:fname_lname/maincontent', routes.maincontent);
 app.get('/:company_name/:fname_lname/dashboard', routes.dashboard);
 app.get('/:company_name/:fname_lname/statistics', routes.statistics);
@@ -53,12 +53,15 @@ app.get('/:company_name/:fname_lname/events', routes.events);
 app.get('/:company_name/:fname_lname/adAnalytics', routes.adAnalytics);
 app.post('/:company_name/:fname_lname/addProduct', routes.addProduct);
 
+// EVENT API
+app.get('/:company_name/:fname_lname/event_dashboard', routes.event_dashboard);
+app.get('/:company_name/:fname_lname/event_statistics', routes.event_statistics);
+app.get('/:company_name/:fname_lname/event_events', routes.event_events);
+
 
 //Error Handelling
 app.get('/:fname_lname/error', routes.error);
 app.get('*', routes.NotFoundErrorPage);
-
-
 
 
 http.createServer(app).listen(app.get('port'), function(){
