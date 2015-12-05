@@ -42,6 +42,7 @@ exports.dashboard = function(req, res){
   var sess = req.session;
 	var user = sess.user;
 	user.year = (new Date()).getFullYear();
+
 	var newVendor = new vendor();
 	newVendor.getVendorIncome(function(err, result){
 		if(!err){
@@ -129,7 +130,11 @@ exports.lastTradePriceOnly = function(req, res) {
 exports.maincontent = function(req, res){
   var sess = req.session;
 	var user = sess.user;
-  res.render('maincontent', { user: user});
+  if(user.type_user == 'Vendor'){
+    res.render('vendormaincontent', { user: user});
+  }else{
+    res.render('eventmaincontent', {user: user});
+  }
 };
 
 
@@ -253,6 +258,46 @@ exports.addProduct = function(req, res){
   };
 
 
+//EVENTS ROUTES
+exports.event_dashboard = function(req, res){
+
+    var sess = req.session;
+    var user = sess.user;
+
+    res.render('event_dashboard', {user:user});
+
+};
+
+exports.event_statistics= function(req, res){
+
+    var sess = req.session;
+    var user = sess.user;
+
+    res.render('event_statistics', {user:user});
+
+};
+
+exports.event_events = function(req, res){
+
+    var sess = req.session;
+    var user = sess.user;
+
+    res.render('event_events', {user:user});
+
+};
+
+exports.addEvent = function(req, res){
+
+    var sess = req.session;
+    var user = sess.user;
+
+    res.render('event_events', {user:user});
+
+};
+
+
+
+//ERROR API
 exports.error = function(req, res){
   res.render('error', {user: req.session.user});
 }
