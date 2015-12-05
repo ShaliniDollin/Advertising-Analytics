@@ -1,1 +1,387 @@
-event_events.html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
+    <meta name="author" content="Shalini">
+    <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
+    <link rel="shortcut icon" href="/img/favicon.png">
+
+    <title>Advertising Analytics</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- bootstrap theme -->
+    <link href="/css/bootstrap-theme.css" rel="stylesheet">
+    <!--external css-->
+    <!-- font icon -->
+    <link href="/css/elegant-icons-style.css" rel="stylesheet" />
+    <link href="/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- full calendar css-->
+    <link href="/assets/fullcalendar/fullcalendar/bootstrap-fullcalendar.css" rel="stylesheet" />
+	<link href="/assets/fullcalendar/fullcalendar/fullcalendar.css" rel="stylesheet" />
+    <!-- easy pie chart-->
+    <link href="/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
+    <!-- owl carousel -->
+    <link rel="stylesheet" href="/css/owl.carousel.css" type="text/css">
+	<link href="/css/jquery-jvectormap-1.2.2.css" rel="stylesheet">
+    <!-- Custom styles -->
+	<link rel="stylesheet" href="/css/fullcalendar.css">
+	<link href="/css/widgets.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/style-responsive.css" rel="stylesheet" />
+	<link href="/css/xcharts.min.css" rel=" stylesheet">
+	<link href="/css/jquery-ui-1.10.4.min.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
+    <!--[if lt IE 9]>
+      <script src="/js/html5shiv.js"></script>
+      <script src="/js/respond.min.js"></script>
+      <script src="/js/lte-ie7.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+			<div class="row">
+				<div class="col-lg-12">
+					<h3 class="page-header"><i class="icon_table"></i> Events</h3>
+					<ol class="breadcrumb">
+						<li><i class="fa fa-home"></i><a href="/">Home</a></li>
+						<li><i class="icon_table"></i>Events</li>
+					</ol>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-12">
+				<div class = "panel">
+				<header class="panel-heading">
+					Events:
+				</header>
+				<div class="panel-body">
+				</div>
+			</div>
+			</div>
+			</div>
+			<div class="panel">
+            <header class="panel-heading">
+                Add Events
+            </header>
+        	<div class="panel-body">
+                <a href="#" data-toggle="modal" data-target="#productmodal" class="btn btn-success"> Add </a>
+                <!-- <a class="btn btn-success" data-toggle="modal" href="#myModal">
+                    Add
+                </a> -->
+
+            </div>
+            </div>
+            <!-- Modal -->
+                 <div class="modal fade" id="productmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                  <div class="" role="document" style="100%">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                              <h4 class="modal-title">Add an Event</h4>
+                          </div>
+                          <div class="modal-body formcontainer">
+
+                             <form action="/<%= user.company_event %>/<%= user.fname %>_<%= user.lname %>/addEvent" method="post" autocomplete="on">
+
+                                <p>
+                                    <label for="productName" class="uname" > Name </label>
+                                    <input id="productName" name="productName" required="required" type="text" placeholder="Product Name"/>
+                                </p>
+                                <br>
+                                <p>
+                                    <label for="ageGroup" class="uname" > Age Group </label>
+                                    <select id="ageGroup" name="ageGroup">
+                                      <option value="5">0 - 5</option>
+                                      <option value="11">6 - 11</option>
+                                      <option value="19">12 - 19</option>
+                                      <option value="30">20 - 30</option>
+                                      <option value="40">40+</option>
+                                    </select>
+                                </p>
+                                <br>
+                                
+                                <p>
+                                    <label for="gender" class="uname" > Gender</label>
+                                    <select id="gender" name="gender">
+                                      <option value="men">Male</option>
+                                      <option value="women">Female</option>
+                                      <option value="both">Both</option>
+                                    </select>
+                                </p>
+                                <br>
+
+                                <p>
+                                    <label for="audienceNumber" class="uname" > Audience Excepting </label>
+                                    <input id="audienceNumber" name="audienceNumber" required="required" type="number"  min ='1'/>
+                                </p>
+
+                                <br>
+                                <p>
+                                    <label for="genre" class="uname" > Genre </label>
+                                    <select id="genre" name="category">
+                                      <option value="sports">Sports</option>
+                                      <option value="beauty">Beauty</option>
+                                    </select>
+                                </p>
+                                <br>
+
+								<p>
+                                    <label for="description" class="uname" > Description     </label>
+                                    <textarea class="" rows="5" cols="50" id="" placeholder="Enter description" name="description"></textarea>
+                                </p>
+                                <br>
+
+                                <p>
+                                    <label for="organizerContact" class="uname" > Organizer Contact </label>
+                                    <input id="organizerContact" name="organizerContact" required="required" type="tel" />
+                                </p>
+
+                                <p>
+                                    <label for="organizerName" class="uname" > Organizer Name </label>
+                                    <input id="organizerName" name="organizerName" required="required" type="text" />
+                                </p>
+
+                                <br>
+
+                                <p>
+                                    <label for="place" class="uname" > City </label>
+                                    <input id="place" name="place" required="required" type="text" />
+                                </p>
+
+                                 <p>
+                                    <label for="tags" class="uname" > Tags </label>
+                                    <input type="checkbox" name="tags" value="action_sports">Action Sports</input>
+                                    <input type="checkbox" name="tags" value="basketball">Basketball</input>
+                                    <input type="checkbox" name="tags" value="golf">Golf</input>
+                                    <input type="checkbox" name="tags" value="football">Football</input>
+                                    <input type="checkbox" name="tags" value="mens_training">Mens Training</input>
+                                    <input type="checkbox" name="tags" value="running">Running</input>
+                                    <input type="checkbox" name="tags" value="sportswear">Sportswear</input>
+                                    <input type="checkbox" name="tags" value="womens_training">Womens Training</input>
+                                    <input type="checkbox" name="tags" value="makeup">Makeup</input>
+                                    <input type="checkbox" name="tags" value="perfumes">Perfumes</input>
+                                    <input type="checkbox" name="tags" value="skin care">Skin Care</input>
+                                    <input type="checkbox" name="tags" value="hair care and styling">Hair Care and Styling</input>
+                                    <input type="checkbox" name="tags" value="hair colourants">Hair Colourants</input>
+    								<input type="checkbox" name="tags" value="hair care">Hair Care</input>
+                                    <input type="checkbox" name="tags" value="shampoo and hair care">Shampoo and Hair Care</input>
+                                    <input type="checkbox" name="tags" value="Styling and Textures">Styling and Textures</input>
+                                </p>
+                                <br>
+
+
+
+
+                          </div>
+                          <div class="modal-footer">
+                              <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+                              <input class="btn btn-success" type="submit" name="Save"></input>
+                          </div>
+                          </form>
+                      </div>
+                  </div>
+                 </div>
+                <!-- modal -->
+
+
+			<br><br><br>
+			<div class="row">
+			<div class="col-lg-6">
+				
+					
+					<div class="panel-body-map">
+						<div id="map" style="height:380px;width:1080px"></div>
+					</div>
+
+				
+				</div>
+			</div>
+	  
+
+<!-- End, so adding jquery -->
+    <!-- javascripts -->
+    <script src="/js/jquery.js"></script>
+	<script src="/js/jquery-ui-1.10.4.min.js"></script>
+    <script src="/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="/js/jquery-ui-1.9.2.custom.min.js"></script>
+    <!-- bootstrap -->
+    <script src="/js/bootstrap.min.js"></script>
+    <!-- nice scroll -->
+    <script src="/js/jquery.scrollTo.min.js"></script>
+    <script src="/js/jquery.nicescroll.js" type="text/javascript"></script>
+    <!-- charts scripts -->
+    <script src="/assets/jquery-knob//js/jquery.knob.js"></script>
+    <script src="/js/jquery.sparkline.js" type="text/javascript"></script>
+    <script src="/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
+    <script src="/js/owl.carousel.js" ></script>
+    <!-- jQuery full calendar -->
+    <script src="/js/fullcalendar.min.js"></script> <!-- Full Google Calendar - Calendar -->
+	<script src="/assets/fullcalendar/fullcalendar/fullcalendar.js"></script>
+    <!--script for this page only-->
+    <script src="/js/calendar-custom.js"></script>
+	<script src="/js/jquery.rateit.min.js"></script>
+    <!-- custom select -->
+    <script src="/js/jquery.customSelect.min.js" ></script>
+	<script src="/assets/chart-master/Chart.js"></script>
+
+    <!--custome script for all page-->
+    <script src="/js/scripts.js"></script>
+    <!-- custom script for this page-->
+    <script src="/js/sparkline-chart.js"></script>
+    <script src="/js/easy-pie-chart.js"></script>
+	<script src="/js/jquery-jvectormap-1.2.2.min.js"></script>
+	<script src="/js/jquery-jvectormap-world-mill-en.js"></script>
+	<script src="/js/xcharts.min.js"></script>
+	<script src="/js/jquery.autosize.min.js"></script>
+	<script src="/js/jquery.placeholder.min.js"></script>
+	<script src="/js/gdp-data.js"></script>
+	<script src="/js/morris.min.js"></script>
+	<script src="/js/sparklines.js"></script>
+	<script src="/js/charts.js"></script>
+	<script src="/js/jquery.slimscroll.min.js"></script>
+  <script>
+
+      //knob
+      $(function() {
+        $(".knob").knob({
+          'draw' : function () {
+            $(this.i).val(this.cv + '%')
+          }
+        })
+      });
+
+      //carousel
+      $(document).ready(function() {
+          $("#owl-slider").owlCarousel({
+              navigation : true,
+              slideSpeed : 300,
+              paginationSpeed : 400,
+              singleItem : true
+
+          });
+      });
+
+      //custom select box
+
+      $(function(){
+          $('select.styled').customSelect();
+      });
+
+	  /* ---------- Map ---------- */
+/*	$(function(){
+	  $('#map').vectorMap({
+	    map: 'world_mill_en',
+	    series: {
+	      regions: [{
+	        values: gdpData,
+	        scale: ['#000', '#000'],
+	        normalizeFunction: 'polynomial'
+	      }]
+	    },
+		backgroundColor: '#eef3f7',
+	    onLabelShow: function(e, el, code){
+	      el.html(el.html()+' (GDP - '+gdpData[code]+')');
+	    }
+	  });
+	});
+
+
+
+  </script>
+
+
+
+<script>
+
+function initMap() {
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 2,
+    center: {lat: 35.746512, lng: -39.462891}
+  });
+
+  setMarkers(map);
+}
+
+// Data for the markers consisting of a name, a LatLng and a zIndex for the
+// order in which these markers should display on top of each other.
+var events= [
+  ['san jose',37.338208,-121.886329,5],
+  ['san francisco',37.774929,-122.419416,6],
+  ['new york',40.712784,-74.005941,7],
+  ['los angeles',34.052234,-118.243685,8],
+  ['chicago',41.878114,-87.629798,9],
+  ['houston',29.760427,-95.369803,10],
+  ['philidelphia',39.952584,-75.165222,11],
+  ['phoenix',33.448377,-112.074037,12],
+  ['san antonio',29.424122,-98.493628,13],
+  ['san deiago',32.715738,-117.161084,14],
+  ['instanbul',41.008238,28.978359,15],
+  ['moscow',55.755826,37.617300,16],
+  ['london',51.507351,-0.127758,17],
+  ['berlin',52.520007,13.404954,18],
+  ['rome',41.902783,12.496366,19],
+  ['paris',48.856614,2.352222,20],
+  ['mumbai',19.075984,72.877656,21],
+  ['delhi',28.613939,77.209021,22],
+  ['banglore',12.971599,77.594563,23],
+  ['bejing',39.904211,116.407395,24],
+  ['singapore',1.352083,103.819836,25],
+  ['tokyo',35.689487,139.691706,26],
+  ['johannesburg',-26.204103,28.047305,27],
+  ['venezulla',6.423750,-66.589730,28],
+  ['buenosaries',-34.603684,-58.381559,29],
+  ['mexico city',19.432608,-99.133208,30],
+  ['brasilia',-14.235004,-51.925280,31],
+  ['cairo',30.044420,31.235712,32],
+  ['mali',17.570692,-3.996166,33],
+  ['nairobi',-1.292066,36.821946,34]
+
+];
+
+function setMarkers(map) {
+  // Adds markers to the map.
+
+  // Marker sizes are expressed as a Size of X,Y where the origin of the image
+  // (0,0) is located in the top left of the image.
+
+  // Origins, anchor positions and coordinates of the marker increase in the X
+  // direction to the right and in the Y direction down.
+  var image = {
+    
+    // This marker is 20 pixels wide by 32 pixels high.
+    size: new google.maps.Size(20,32),
+    // The origin for this image is (0, 0).
+    origin: new google.maps.Point(0, 0),
+    // The anchor for this image is the base of the flagpole at (0, 32).
+    anchor: new google.maps.Point(0, 32)
+  };
+  // Shapes define the clickable region of the icon. The type defines an HTML
+  // <area> element 'poly' which traces out a polygon as a series of X,Y points.
+  // The final coordinate closes the poly by connecting to the first coordinate.
+  var shape = {
+    coords: [1, 1, 1, 20, 18, 20, 18, 1],
+    type: 'poly'
+  };
+  for (var i = 0; i < events.length; i++) {
+    var event = events[i];
+    var marker = new google.maps.Marker({
+      position: {lat: event[1], lng: event[2]},
+      map: map,
+      shape: shape,
+      title: event[0],
+      zIndex: event[3]
+    });
+  }
+}
+
+    </script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvvq6byHH3zyBR4S31N9IKG7lFikH9qxw&signed_in=true&callback=initMap"></script>
+
+  </body>
+</html>

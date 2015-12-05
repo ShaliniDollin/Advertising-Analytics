@@ -262,6 +262,15 @@ exports.event_events = function(req, res){
 
 };
 
+exports.addEvent = function(req, res){
+
+    var sess = req.session;
+    var user = sess.user;
+
+    res.render('event_events', {user:user});
+
+};
+
 
 
 //ERROR API
