@@ -82,7 +82,7 @@
       				<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
       					<div class="info-box green-bg">
       						<i class="fa fa-cubes"></i>
-      						<div class="count">$<%= user.stock %></div>
+      						<div class="count" id="price1"></div>
       						<div class="title">Stock</div>
       					</div><!--/.info-box-->
       				</div><!--/.col-->
@@ -139,12 +139,7 @@
                       <a href="index.html#" class="btn-close"><i class="fa fa-times"></i></a>
                     </div>
                   </div>
-                  <ul class="list-group">
-                    <li class="list-group-item"></li>
-                    <li class="list-group-item"></li>
-                    <li class="list-group-item"></li>
-                    <li class="list-group-item"></li>
-                    <li class="list-group-item"></li>
+                  <ul class="list-group" id="twit_list">
                   </ul>
 
                 </div>
@@ -293,10 +288,24 @@
 
       $(document).ready(function() {
         var user = <%- JSON.stringify(user) %>;
+        $.getJSON("/lastTradePriceOnly", function(data){
+          var html = '';
+          var nums = document.getElementById("price1");
+          var i=0;
+          $.each(data, function(key, val){
+            i++;
+            if(i>0){
+              return false;
+            }
+            alert(val);
+            html = val.lastTradePriceOnly;
+          });
+          nums.innerHTML = html;
+        });
+
         $.getJSON("/news", function(data){
               var html = '';
               var nums = document.getElementById("news_list");
-      
               var i=0;
                $.each(data, function (key, val) {
                   i++;
@@ -304,23 +313,27 @@
                     return false;
                   }
                   news = JSON.stringify(data);
-                  alert(news);
                   html += "<li class='list-group-item'>" + val.description + "</li>";
-                  console.log(val.description);
                 });
                 nums.innerHTML = html;
 
         });
 
-        $.getJSON("/lastTradePriceOnly", function(data){
-          if(data){
-          alert(data);
-          user.stock = data;
-        }
+        $.getJSON("/gettweets", function(data){
+              var html = '';
+              var nums = document.getElementById("twit_list");
+              var i=0;
+               $.each(data, function (key, val) {
+                  i++;
+                  if(i>5){
+                    return false;
+                  }
+                  news = JSON.stringify(data);
+                  html += "<li class='list-group-item'>" + val.text + "</li>";
+                });
+                nums.innerHTML = html;
 
         });
-
-
 
           $("#owl-slider").owlCarousel({
               navigation : true,

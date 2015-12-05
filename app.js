@@ -24,10 +24,17 @@ app.use(express.methodOverride());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({secret: 'ssshhhhh'}));
 app.use(app.router);
+var twit = require('twit');
 // development only
 if ('development' === app.get('env')) {
   app.use(express.errorHandler());
 }
+
+
+//twitter handler
+
+
+
 
 //Index Page
 app.get('/', routes.index);
@@ -49,6 +56,7 @@ app.get('/:company_name/:fname_lname/statistics', routes.statistics);
 app.get('/:company_name/:fname_lname/products', routes.products);
 app.get('/news', routes.news);
 app.get('/lastTradePriceOnly', routes.lastTradePriceOnly);
+app.get('/gettweets', routes.gettweets);
 app.get('/:company_name/:fname_lname/events', routes.events);
 app.get('/:company_name/:fname_lname/adAnalytics', routes.adAnalytics);
 app.post('/:company_name/:fname_lname/addProduct', routes.addProduct);
