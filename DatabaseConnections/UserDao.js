@@ -14,8 +14,8 @@ var client = new cassandra.Client(options);
 var insertQ = 'INSERT INTO advertising.user (fname, lname, company_event, dob, email, password, type_user) VALUES(?, ?, ?, ?, ?, ?, ?)';
 var checkQ = 'select * from advertising.user where email = ?';
 var authQ = 'select * from advertising.user where email = ?';
-var insertProductQ = 'INSERT INTO advertising.product (name, aud_age_e, aud_age_s, audience_gender, category, description, genre, tag) VALUES (?,?,?,?,?,?,?,?)';
-var getProductsQ = 'select * from advertising.product where genre = ?';
+var insertProductQ = 'INSERT INTO advertising.product (name, aud_age_e, aud_age_s, audience_gender, category, company, description, genre, tag) VALUES (?,?,?,?,?,?,?,?,?)';
+var getProductsQ = 'select * from advertising.product where company = ?';
 
 
 function UserDao() {
@@ -105,7 +105,7 @@ UserDao.prototype.getUserById = function (callback, email){
 	};
 
 
-UserDao.prototype.addProduct = function(callback, name, age_group, gender, category, description, genre, tags ){
+UserDao.prototype.addProduct = function(callback, name, age_group, gender, category, description, company, tags ){
 	var aud_age_s, aud_age_e;
 	switch(parseInt(age_group)){
 		case 5:
@@ -132,7 +132,13 @@ UserDao.prototype.addProduct = function(callback, name, age_group, gender, categ
 			aud_age_s = "41";
 			aud_age_e = "100";
 	};
-	var param = [name, aud_age_s, aud_age_e, gender, category, description, genre, tags];
+	var genre;
+	if(company == 'nike'){
+		genre = 'sports';
+	}else{
+		genre = 'beauty';
+	}
+	var param = [name, aud_age_s, aud_age_e, gender, category, company, description, genre, tags];
 	client.execute(insertProductQ, param, {prepare: true}, function(err){
 		if(err){
 			console.log(err);
