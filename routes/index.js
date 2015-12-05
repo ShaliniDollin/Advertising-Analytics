@@ -79,6 +79,27 @@ exports.news = function(req, res) {
         });
   };
 
+exports.followers_count = function(req,res){
+    var sess = req.session;
+    var user = sess.user;
+    if(user.company_event === 'nike'){
+      symbol = 'Nike';
+    }
+    else {
+      symbol = 'Loreal';
+    }
+    twitter.get('followers/ids', { screen_name: 'tolga_tezel' },  function (err, data, response) {
+      if(data){
+        var coun = data.length;
+        console.log(coun);
+        res.send(coun);
+      }
+      else{
+        res.render('error', { error: err});
+      }
+});
+
+};
 exports.gettweets = function (req,res){
     var sess = req.session;
     var user = sess.user;
