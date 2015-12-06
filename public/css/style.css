@@ -63,6 +63,13 @@ table tr th { color: #688a7e;}
   height: 80%;
   width: 50%;
 }
+#eventmodal {
+  left: 40px;
+  top: 30px;
+  right: 30px;
+  height: 95%;
+  width: 50%;
+}
 
 .formcontainer label {
       width:180px;
@@ -71,7 +78,7 @@ table tr th { color: #688a7e;}
       padding-right:10px;
   }
 
-.formcontainer input select label { 
+.formcontainer input select label {
       float:left;
     }
 

@@ -95,7 +95,7 @@
                 Add Events
             </header>
         	<div class="panel-body">
-                <a href="#" data-toggle="modal" data-target="#productmodal" class="btn btn-success"> Add </a>
+                <a href="#" data-toggle="modal" data-target="#eventmodal" class="btn btn-success"> Add </a>
                 <!-- <a class="btn btn-success" data-toggle="modal" href="#myModal">
                     Add
                 </a> -->
@@ -103,7 +103,7 @@
             </div>
             </div>
             <!-- Modal -->
-                 <div class="modal fade" id="productmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                 <div class="modal fade" id="eventmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                   <div class="" role="document" style="100%">
                       <div class="modal-content">
                           <div class="modal-header">
@@ -130,7 +130,7 @@
                                     </select>
                                 </p>
                                 <br>
-                                
+
                                 <p>
                                     <label for="gender" class="uname" > Gender</label>
                                     <select id="gender" name="gender">
@@ -181,22 +181,26 @@
 
                                  <p>
                                     <label for="tags" class="uname" > Tags </label>
-                                    <input type="checkbox" name="tags" value="action_sports">Action Sports</input>
-                                    <input type="checkbox" name="tags" value="basketball">Basketball</input>
-                                    <input type="checkbox" name="tags" value="golf">Golf</input>
-                                    <input type="checkbox" name="tags" value="football">Football</input>
-                                    <input type="checkbox" name="tags" value="mens_training">Mens Training</input>
-                                    <input type="checkbox" name="tags" value="running">Running</input>
-                                    <input type="checkbox" name="tags" value="sportswear">Sportswear</input>
-                                    <input type="checkbox" name="tags" value="womens_training">Womens Training</input>
-                                    <input type="checkbox" name="tags" value="makeup">Makeup</input>
-                                    <input type="checkbox" name="tags" value="perfumes">Perfumes</input>
-                                    <input type="checkbox" name="tags" value="skin care">Skin Care</input>
-                                    <input type="checkbox" name="tags" value="hair care and styling">Hair Care and Styling</input>
-                                    <input type="checkbox" name="tags" value="hair colourants">Hair Colourants</input>
-    								<input type="checkbox" name="tags" value="hair care">Hair Care</input>
-                                    <input type="checkbox" name="tags" value="shampoo and hair care">Shampoo and Hair Care</input>
-                                    <input type="checkbox" name="tags" value="Styling and Textures">Styling and Textures</input>
+                                    <select id="tags" name="tags" multiple>
+                                      <option value="action_sports">Action Sports</option>
+                                      <option value="basketball">Basketball</option>
+                                      <option value="golf">Golf</option>
+                                      <option value="football">Football</option>
+                                      <option value="mens_training">Mens Training</option>
+                                      <option value="running">Running</option>
+                                      <option value="sportswear">Sportswear</option>
+                                      <option value="womens_training">Womens Training</option>
+                                      <option value="makeup">Makeup</option>
+                                      <option value="perfumes">Perfumes</option>
+                                      <option value="skin_care">Skin Care</option>
+                                      <option value="hair_care and styling">Hair Care and Styling</option>
+                                      <option value="hair colourants">Hair Colourants</option>
+                                      <option value="hair care">Hair Care</option>
+                                      <option value="shampoo and hair care">Shampoo and Hair Care</option>
+                                      <option value="Styling and Textures">Styling and Textures</option>
+                                      <option value="others">Others</option>
+                                    </select>
+
                                 </p>
                                 <br>
 
@@ -217,7 +221,7 @@
 
 			<br><br><br>
 
-	  
+
 
 <!-- End, so adding jquery -->
     <!-- javascripts -->

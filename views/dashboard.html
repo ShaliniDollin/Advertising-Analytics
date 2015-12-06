@@ -188,10 +188,10 @@
       						<ul>
       							<li>
       								<strong id="frnd"></strong>
-      								<span>friends</span>
+      								<span>likes</span>
       							</li>
       							<li>
-      								<strong id="feed"></strong>
+      								<strong id="feed">3098</strong>
       								<span>feeds</span>
       							</li>
       						</ul>
@@ -203,11 +203,11 @@
       						<i class="fa fa-google-plus"></i>
       						<ul>
       							<li>
-      								<strong>962</strong>
+      								<strong id="goog"></strong>
       								<span>followers</span>
       							</li>
       							<li>
-      								<strong>256</strong>
+      								<strong id="cir"></strong>
       								<span>circles</span>
       							</li>
       						</ul>
@@ -237,7 +237,7 @@
 
             <div class="row">
               <div class="col-md-4 col-md-offset-4">
-                  <a><strong>www.########.com</strong></a>
+                  <p class="copyright text-muted small">Copyright &copy; Your Company 2015. All Rights Reserved</p>
               </div>
             </div>
       <!--main content end-->
@@ -289,7 +289,8 @@
       $(document).ready(function() {
         var user = <%- JSON.stringify(user) %>;
         score1();
-//        facebooklike();
+        facebooklike();
+        googlelike();
         followers();
         news(k);
         tweets(k);
@@ -331,20 +332,45 @@
       }
 
       function facebooklike(){
-        $.getJSON("/facebooklike", function(data){
+        var user = <%- JSON.stringify(user) %>;
+        var symbol = '';
+        if(user.company_event === 'nike'){
+          symbol = "https://graph.facebook.com/fql?q=SELECT like_count, total_count, share_count, click_count, comment_count FROM link_stat WHERE url = 'https://www.facebook.com/nike/?fref=nf'" ;
+        }
+        else {
+          symbol = "https://graph.facebook.com/fql?q=SELECT like_count, total_count, share_count, click_count, comment_count FROM link_stat WHERE url = 'https://www.facebook.com/LOrealParisUSA'" ;
+        }
+        $.get(symbol, function(data1){
               var html = '';
+              var html1 = '';
               var nums = document.getElementById("frnd");
-              alert(data);
-              var i=k-5;
-               $.each(data, function (key, val) {
-                  i++;
-                  if(i>k){
-                    return false;
-                  }
-                  html += "<li class='list-group-item'>" + val.description + "</li>";
-                });
-                k=k+5;
-                nums.innerHTML = html;
+            //  var num1 = document.getElementById("feed");
+              html = data1.data[0].total_count;
+              html1 = data1.data[0].share_count;
+              nums.innerHTML = html;
+          //    num1.innerHTML = html1;
+
+        });
+      }
+
+      function googlelike(){
+        var user = <%- JSON.stringify(user) %>;
+        var symbol = '';
+        if(user.company_event === 'nike'){
+          symbol = "https://graph.facebook.com/fql?q=SELECT like_count, total_count, share_count, click_count, comment_count FROM link_stat WHERE url = 'http://www.nike.com/us/en_us/'" ;
+        }
+        else {
+          symbol = "https://graph.facebook.com/fql?q=SELECT like_count, total_count, share_count, click_count, comment_count FROM link_stat WHERE url = 'http://www.loreal.com/'" ;
+        }
+        $.get(symbol, function(data1){
+              var html = '';
+              var html1 = '';
+              var nums = document.getElementById("goog");
+              var num1 = document.getElementById("cir");
+              html = data1.data[0].total_count;
+              html1 = data1.data[0].share_count;
+              nums.innerHTML = html;
+              num1.innerHTML = html1;
 
         });
       }
