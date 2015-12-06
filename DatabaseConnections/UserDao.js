@@ -18,15 +18,13 @@ var insertProductQ = 'INSERT INTO advertising.product (name, aud_age_e, aud_age_
 var getProductsQ = 'select * from advertising.product where company = ?';
 var insertEventQ = 'INSERT INTO advertising.event (name, aud_age_e, aud_age_s, audience_gender, audience_number, city, description, event_company_name, genre, organizer_contact, organizer_name ,region, tag ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)';
 var getEventsQ = 'Select * from advertising.event where event_company_name = ?';
-<<<<<<< HEAD
+
 var getAllEventsQ = 'Select * from advertising.event';
-=======
-var getAllEventsQ = 'Select * from advertising.event'; 
 var getAllEventsForProductQ1 = 'Select * from advertising.event where audience_gender =  ? and genre = ? and aud_age_e = ? and aud_age_s = ? ALLOW FILTERING';
 var getAllEventsForProductQ2 = 'Select * from advertising.event where genre = ? and aud_age_e = ? and aud_age_s = ? ALLOW FILTERING';
 var getRevenuesQ = "Select * from advertising.revenue where company = ?";
 var addProductRecommendationsQ = 'INSERT INTO advertising.recommendation (product_name, company, events) VALUES (?,?,?)';
->>>>>>> 3668ca817b1b3138ca381f8bcb92d76b83f87604
+
 
 function UserDao() {
 
@@ -259,7 +257,7 @@ UserDao.prototype.getAllEventsForProduct = function(callback, gender, genre, age
 			aud_age_s = "41";
 			aud_age_e = "100";
 	};
-	
+
 	var query = getAllEventsForProductQ1;
 	var param = [ gender, genre, aud_age_e, aud_age_s];
 
