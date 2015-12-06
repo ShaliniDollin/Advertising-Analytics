@@ -316,7 +316,7 @@ exports.event_dashboard = function(req, res){
       }
   }, req);
 
-  
+
 
 };
 
@@ -350,7 +350,7 @@ exports.addEvent = function(req, res){
         res.render('error', {error: err});
 
       }
-    }, req);    
+    }, req);
 
 };
 
