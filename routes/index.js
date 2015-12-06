@@ -2,6 +2,9 @@ var user = require('../Model/User');
 var vendor = require('../Model/Vendor');
 var product = require('../Model/Product');
 var event = require('../Model/Event');
+
+var twit = require('twit');
+
 var ejs = require("ejs");
 var express = require('express');
 var googleFinance = require('google-finance');
@@ -12,6 +15,14 @@ var http = require('http');
 var https = require("https");
 // create our app
 var app = express();
+
+var twitter = new twit({
+	consumer_key: 'wR9CdHxufxPyKgsqo85Cxop1T',
+  consumer_secret: 'RK8QIrTVayXsW7jSTB94oV1CG6c4RxQuJMJ29d2bX83oGgEh7I',
+  access_token: '2372331446-eGzAm0vExfI2yBNQDGmBgXkk0k6wlv85AWzXAJy',
+  access_token_secret: 'u4VVpg3shX4ZIYrSpdfilW6nKKqUsjuKiLi0Gtemy8MPX'
+});
+
 
 app.use(session({secret: 'ssshhhhh'}));
 /*
@@ -43,7 +54,7 @@ exports.dashboard = function(req, res){
       res.render('dashboard', { user: sess.user});
     }
     else{
-      res.render('error', { error: error});
+      res.render('error', { error: err});
     }
   },user.year,user.company_event);
 };
@@ -64,15 +75,55 @@ exports.news = function(req, res) {
         symbol: symbol
       }, function (err, news) {
         if(news){
-          console.log("you send");
-          console.log(JSON.stringify(news));
           res.send(news);
         }
         else{
-          res.render('error', { error: error});
+          res.render('error', { error: err});
         }
         });
   };
+
+exports.followers_count = function(req,res){
+    var sess = req.session;
+    var user = sess.user;
+    if(user.company_event === 'nike'){
+      symbol = 'Nike';
+    }
+    else {
+      symbol = 'Loreal';
+    }
+    twitter.get('followers/ids', { screen_name: 'tolga_tezel' },  function (err, data, response) {
+      if(data){
+        var coun = data.length;
+        console.log(coun);
+        res.send(coun);
+      }
+      else{
+        res.render('error', { error: err});
+      }
+});
+
+};
+exports.gettweets = function (req,res){
+    var sess = req.session;
+    var user = sess.user;
+    if(user.company_event === 'nike'){
+      symbol = 'NIKE';
+    }
+    else {
+      symbol = 'loreal';
+    }
+
+  	twitter.get('search/tweets', {q: symbol,count:1000}, function(err, data) {
+      if(data){
+        res.send(data.statuses);
+      }
+      else{
+        res.render('error', { error: err});
+      }
+    });
+
+};
 
 exports.lastTradePriceOnly = function(req, res) {
           console.log("stock price");
@@ -91,14 +142,10 @@ exports.lastTradePriceOnly = function(req, res) {
             fields: ['l1']
             }, function (err, snapshot) {
             if (!err){
-                var stock = snapshot.lastTradePriceOnly;
-                console.log("stock not price");
-                console.log(stock);
-                res.send(stock);
+                res.send(snapshot);
               }
             else{
-                var stock1 = "2";
-                res.send(stock1);
+                res.render('error', { error: error});
               }
       });
 };

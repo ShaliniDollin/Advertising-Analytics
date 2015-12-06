@@ -82,7 +82,7 @@
       				<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
       					<div class="info-box green-bg">
       						<i class="fa fa-cubes"></i>
-      						<div class="count">$<%= user.stock %></div>
+      						<div class="count" id="price1"></div>
       						<div class="title">Stock</div>
       					</div><!--/.info-box-->
       				</div><!--/.col-->
@@ -115,9 +115,9 @@
                   <div class="panel-heading">
                     <h2><strong>News</strong></h2>
                     <div class="panel-actions">
-                      <a href="index.html#" class="btn-setting"><i class="fa fa-rotate-right"></i></a>
+                      <a href="#" onclick="news(5);return false;" class="btn-setting"><i class="fa fa-rotate-right"></i></a>
                       <a href="index.html#" class="btn-minimize"><i class="fa fa-chevron-up"></i></a>
-                      <a href="/maincontent" class="btn-close"><i class="fa fa-times"></i></a>
+                      <a href="#" class="btn-close"><i class="fa fa-times"></i></a>
                     </div>
                   </div>
                   <ul class="list-group" id="news_list">
@@ -134,17 +134,12 @@
                   <div class="panel-heading">
                     <h2><strong>Twitter Feed</strong></h2>
                     <div class="panel-actions">
-                      <a href="index.html#" class="btn-setting"><i class="fa fa-rotate-right"></i></a>
+                      <a href="#" onclick="tweets(7);return false;"  class="btn-setting"><i class="fa fa-rotate-right"></i></a>
                       <a href="index.html#" class="btn-minimize"><i class="fa fa-chevron-up"></i></a>
-                      <a href="index.html#" class="btn-close"><i class="fa fa-times"></i></a>
+                      <a href="#" class="btn-close"><i class="fa fa-times"></i></a>
                     </div>
                   </div>
-                  <ul class="list-group">
-                    <li class="list-group-item"></li>
-                    <li class="list-group-item"></li>
-                    <li class="list-group-item"></li>
-                    <li class="list-group-item"></li>
-                    <li class="list-group-item"></li>
+                  <ul class="list-group" id="twit_list">
                   </ul>
 
                 </div>
@@ -225,7 +220,7 @@
       						<i class="fa fa-twitter"></i>
       						<ul>
       							<li>
-      								<strong>1562k</strong>
+      								<strong id="hello"></strong>
       								<span>followers</span>
       							</li>
       							<li>
@@ -289,37 +284,14 @@
 	<script src="/js/sparklines.js"></script>
 	<script src="/js/charts.js"></script>
 	<script src="/js/jquery.slimscroll.min.js"></script>
-  <script >
-
+  <script>
+      var k=0;
       $(document).ready(function() {
         var user = <%- JSON.stringify(user) %>;
-        $.getJSON("/news", function(data){
-              var html = '';
-              var nums = document.getElementById("news_list");
-      
-              var i=0;
-               $.each(data, function (key, val) {
-                  i++;
-                  if(i>5){
-                    return false;
-                  }
-                  news = JSON.stringify(data);
-                  html += "<li class='list-group-item'>" + val.description + "</li>";
-                  console.log(val.description);
-                });
-                nums.innerHTML = html;
-
-        });
-
-        $.getJSON("/lastTradePriceOnly", function(data){
-          if(data){
-          alert(data);
-          user.stock = data;
-        }
-
-        });
-
-
+        score();
+        followers();
+        news(k);
+        tweets(k);
 
           $("#owl-slider").owlCarousel({
               navigation : true,
@@ -330,6 +302,76 @@
           });
       });
 
+      function score() {
+        $.getJSON("/lastTradePriceOnly", function(data){
+          var html = '';
+          var nums = document.getElementById("price1");
+          var i=0;
+          $.each(data, function(key, val){
+            i++;
+            if(i>0){
+              return false;
+            }
+            html = val.lastTradePriceOnly;
+          });
+          nums.innerHTML = html;
+        });
+
+      }
+
+      function news(k){
+        $.getJSON("/news", function(data){
+              var html = '';
+              var nums = document.getElementById("news_list");
+              var i=k-5;
+               $.each(data, function (key, val) {
+                  i++;
+                  if(i>k){
+                    return false;
+                  }
+                  news = JSON.stringify(data);
+                  html += "<li class='list-group-item'>" + val.description + "</li>";
+                });
+                k=k+5;
+                nums.innerHTML = html;
+
+        });
+      }
+      function followers(){
+          $.getJSON("/followers_count", function(data){
+            var html = '';
+            var nums = document.getElementById("hello");
+            var i=0;
+            $.each(data, function(key, val){
+              i++;
+              if(i>0){
+                return false;
+              }
+              html = val.lastTradePriceOnly;
+            });
+            nums.innerHTML = html;
+          });
+
+      }
+      function tweets(k){
+        $.getJSON("/gettweets", function(data){
+              var html = '';
+              var nums = document.getElementById("twit_list");
+              var i=k-8;
+               $.each(data, function (key, val) {
+                  i++;
+                  if(i>k){
+                    return false;
+                  }
+                  news = JSON.stringify(data);
+                  html += "<li class='list-group-item'>" + val.text + "</li>";
+                });
+                k=k+8;
+                nums.innerHTML = html;
+
+        });
+
+      }
       //custom select box
 
       $(function(){
