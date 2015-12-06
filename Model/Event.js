@@ -8,6 +8,7 @@ function Event() {
 
 Event.prototype.addEvent = function(callback, request)
 {
+
 	userobj.addEvent(function(err,res) {
 		callback(err,res);
 
