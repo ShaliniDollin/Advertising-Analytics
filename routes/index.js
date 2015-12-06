@@ -60,7 +60,7 @@ exports.dashboard = function(req, res){
 						console.log(err);
 					}
 			},user.year,user.company_event);
-			
+
       res.render('dashboard', { user: sess.user});
     }
     else{
