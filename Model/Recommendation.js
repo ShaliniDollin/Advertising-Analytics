@@ -33,9 +33,9 @@ Recommendation.prototype.addProductRecommendation = function(callback, request)
 				//console.log(revenues);
 				for(i = 0; i < revenues.rows.length; i++){
 					if(product_revenue[revenues.rows[i].region] == 0){
-						product_revenue[revenues.rows[i].region] = product_revenue[revenues.rows[i].region] + revenues.rows[i].revenue;
+						product_revenue[revenues.rows[i].region] = product_revenue[revenues.rows[i].region] + (revenues.rows[i].revenue/1000);
 					}else{
-						product_revenue[revenues.rows[i].region] = (product_revenue[revenues.rows[i].region] + revenues.rows[i].revenue)/2;
+						product_revenue[revenues.rows[i].region] = (product_revenue[revenues.rows[i].region] + (revenues.rows[i].revenue)/1000)/2;
 					}
 					
 				}
