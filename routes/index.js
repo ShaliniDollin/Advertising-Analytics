@@ -51,6 +51,16 @@ exports.dashboard = function(req, res){
 	newVendor.getVendorIncome(function(err, result){
 		if(!err){
 			sess.user.netIncome= result;
+			newVendor.getAdvertisingExpense(function(err, result){
+				if(!err){
+					user.expense = result;
+				}
+
+					else{
+						console.log(err);
+					}
+			},user.year,user.company_event);
+			
       res.render('dashboard', { user: sess.user});
     }
     else{
@@ -221,13 +231,13 @@ exports.events = function(req, res){
         res.render('error', {user:user, error : err});
       }
   }, req);
-	
+
 };
 
 exports.adAnalytics = function(req, res){
   var sess = req.session;
   res.render('adAnalytics', {user: sess.user});
- 	
+
 };
 
 exports.getProducts = function(req, res){
@@ -239,7 +249,7 @@ exports.getProducts = function(req, res){
     }else{
       res.render('error', {error: err});
     }
-    
+
   }, req);
 }
 
@@ -325,7 +335,7 @@ exports.addProduct = function(req, res){
             res.render('error', {error: err});
           }
         }, req);
-        
+
       }else{
         //Render a error page
         res.render('error', {user: user, error:err});
@@ -421,8 +431,8 @@ exports.getDesicionTreeEvents = function(req, res){
       res.render('error', {user:user, error : err + "<br>Could not get products!"});
     }
   }, req);
-  
- 
+
+
 }
 
 
