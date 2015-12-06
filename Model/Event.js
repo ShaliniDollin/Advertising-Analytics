@@ -13,7 +13,7 @@ Event.prototype.addEvent = function(callback, request)
 
 	},request.body.eventName, request.body.ageGroup, request.body.gender, request.body.audienceNumber,
 	request.body.city, request.body.description,request.session.user.company_event, 
-	request.body.genre, request.body.organizerContact, request.body.organizerName,
+	request.body.genre, request.body.organizerContact, request.body.organizerName, request.body.region,
 	 request.body.tags );
 
 };
