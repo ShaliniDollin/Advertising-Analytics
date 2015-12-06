@@ -211,7 +211,17 @@ exports.products = function(req, res){
 
 exports.events = function(req, res){
   var sess = req.session;
-	res.render('events', {title: 'events'});
+  var eventObj = new event();
+  eventObj.getAllEvents(function(err, events){
+    if(!err){
+        sess.events = events;
+        res.render('events', { user: user, events: events});
+      }
+      else{
+        res.render('error', {user:user, error : err});
+      }
+  }, req);
+	
 };
 
 exports.adAnalytics = function(req, res){

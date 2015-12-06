@@ -54,7 +54,7 @@
 			</div>
 
 			<div class="row">
-			<div class="col-lg-6">
+			<div class="col-lg-8">
 				
 					
 					<div class="panel-body-map">
@@ -63,39 +63,46 @@
 
 				
 				</div>
-
-			<div class="col-lg-6">
-				<div class="panel panel-default">
-				<div class="panel-heading">
-                  <h2><strong>Calendar</strong></h2>
-				<div class="panel-actions">
-                    <a href="#" class="wminimize"><i class="fa fa-chevron-up"></i></a>
-                    <a href="#" class="wclose"><i class="fa fa-times"></i></a>
-                </div>
-
-                </div><br><br><br>
-                <div class="panel-body">
-                  <!-- Widget content -->
-
-                    <!-- Below line produces calendar. I am using FullCalendar plugin. -->
-                    <div id="calendar"></div>
-
-                </div>
-              </div>
-              </div>
 			</div>
+      <br><br><br>
 
-			<div class="row">
-				<div class="col-md-12">
-				<div class = "panel">
-				<header class="panel-heading">
-					Events:
-				</header>
-				<div class="panel-body">
-				</div>
-			</div>
-			</div>
-			</div>
+      <div class = "panel">
+        <header class="panel-heading">
+          Events:
+        </header>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Gender</th>
+                <th>genre</th>
+                <th>Description</th>
+                <th>City</th>
+                <th>Organizer Name</th>
+                <th>Organizer Contact</th>
+                <th>Tag</th>
+              </tr>
+            </thead>
+            <tbody>
+               <% for (i = 0; i < events.rows.length; i++){ %>
+              <tr>
+                <td><%= i+1 %></td>
+                <td><%= events.rows[i].name %></td>
+                <td><%= events.rows[i].audience_gender %></td>
+                <td><%= events.rows[i].genre %></td>
+                <td><%= events.rows[i].description %></td>
+                <td><%= events.rows[i].city %></td>
+                <td><%= events.rows[i].organizer_name %></td>
+                <td><%= events.rows[i].organizer_contact %></td>
+                <td><%= events.rows[i].tag %></td>
+              </tr>
+              <%}%>
+            </tbody>
+          </table>
+        </div>
+      </div>
 	  
 
 <!-- End, so adding jquery -->
@@ -168,7 +175,7 @@
       });
 
 
-
+  var events = <%- JSON.stringify(events) %>;
 function initMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 2,
@@ -176,11 +183,12 @@ function initMap() {
 });
   var geocoder = new google.maps.Geocoder();
 
-  geocodeAddress(geocoder, map);
+    for (i= 0; i < events.rowLength; i++){
+      geocodeAddress(geocoder, map, events.rows[i].city);
+    }
 }
 
-function geocodeAddress(geocoder, resultsMap){
-  var address = "moscow"
+function geocodeAddress(geocoder, resultsMap, address){
   geocoder.geocode({'address': address}, function(results, status) {
     if (status === google.maps.GeocoderStatus.OK) {
       resultsMap.setCenter(results[0].geometry.location);
