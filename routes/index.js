@@ -1,11 +1,13 @@
 var user = require('../Model/User');
 var vendor = require('../Model/Vendor');
+var product = require('../Model/Product');
+var event = require('../Model/Event');
 var ejs = require("ejs");
 var express = require('express');
 var googleFinance = require('google-finance');
 var yahooFinance = require('yahoo-finance');
 var session = require('express-session');
-var product = require('../Model/Product');
+
 var http = require('http');
 var https = require("https");
 // create our app
@@ -239,8 +241,18 @@ exports.event_dashboard = function(req, res){
 
     var sess = req.session;
     var user = sess.user;
+    var eventobj = new event();
+    eventobj.getEvents(function(err, events){
+      if(!err){
+        sess.events = events;
+        res.render('event_dashboard', { user: user, events: events});
+      }
+      else{
+        res.render('error', {user:user, error : err});
+      }
+  }, req);
 
-    res.render('event_dashboard', {user:user});
+  
 
 };
 
@@ -256,9 +268,8 @@ exports.event_statistics= function(req, res){
 exports.event_events = function(req, res){
 
     var sess = req.session;
-    var user = sess.user;
 
-    res.render('event_events', {user:user});
+    res.render('event_events', {title: 'Events', user: sess.user, events: sess.events});
 
 };
 
@@ -266,12 +277,18 @@ exports.addEvent = function(req, res){
 
     var sess = req.session;
     var user = sess.user;
+    var newEvent = new event();
+    newEvent.addEvent(function(err, success){
+      if(!err){
+        res.redirect('/'+ sess.user.company_event + '/'+user.fname+'_'+user.lname+'/event_events');
+      }else{
+        //Render a error page
+        res.render('error', {error: err});
 
-    res.render('event_events', {user:user});
+      }
+    }, req);    
 
 };
-
-
 
 //ERROR API
 exports.error = function(req, res){
