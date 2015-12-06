@@ -398,7 +398,17 @@ exports.addEvent = function(req, res){
     newEvent.addEvent(function(err, success){
       if(!err){
         // DO RECOMMENDATION ON PRODUCTS
-        res.redirect('/'+ sess.user.company_event + '/'+user.fname+'_'+user.lname+'/event_events');
+
+        //var recommendationObj = new recommendation();
+        //recommendationObj.addEventRecommendation(function(err, success){
+         // if(!err){
+            res.redirect('/'+ sess.user.company_event + '/'+user.fname+'_'+user.lname+'/event_events');
+         // }else{
+            res.render('error', {error:err});
+         // }
+
+
+        //}, req);
       }else{
         //Render a error page
         res.render('error', {error: err});

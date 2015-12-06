@@ -10,10 +10,19 @@ function Product() {
 
 Product.prototype.addProduct = function(callback, request)
 {
+	var tags;
+	if(request.body.tags instanceof Array){
+		tags = request.body.tags;
+	}
+	else{
+		tags = [];
+		tags[0] = request.body.tags;
+	}
+	
 	userobj.addProduct(function(err,res) {
 		callback(err,res);
 
-	},request.body.productName, request.body.ageGroup, request.body.gender, request.body.category, request.body.description, request.session.user.company_event, request.body.tags);
+	},request.body.productName, request.body.ageGroup, request.body.gender, request.body.category, request.body.description, request.session.user.company_event, tags);
 
 };
 
