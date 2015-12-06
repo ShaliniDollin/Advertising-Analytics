@@ -58,6 +58,7 @@ app.get('/news', routes.news);
 app.get('/lastTradePriceOnly', routes.lastTradePriceOnly);
 app.get('/gettweets', routes.gettweets);
 app.get('/followers_count', routes.followers_count);
+app.get('/facebooklike', routes.facebooklike);
 app.get('/:company_name/:fname_lname/events', routes.events);
 app.get('/:company_name/:fname_lname/adAnalytics', routes.adAnalytics);
 app.post('/:company_name/:fname_lname/addProduct', routes.addProduct);

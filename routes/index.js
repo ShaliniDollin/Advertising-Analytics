@@ -56,7 +56,6 @@ exports.dashboard = function(req, res){
 };
 
 exports.news = function(req, res) {
-      console.log("you came");
       var sess = req.session;
       var user = sess.user;
       if(user.company_event === 'nike'){
@@ -88,9 +87,9 @@ exports.followers_count = function(req,res){
     else {
       symbol = 'Loreal';
     }
-    twitter.get('followers/ids', { screen_name: 'tolga_tezel' },  function (err, data, response) {
+    twitter.get('users/lookup', { screen_name: symbol},  function (err, data, response) {
       if(data){
-        var coun = data.length;
+        var coun = {followers_count: data[0].followers_count, status_count:data[0].statuses_count};
         console.log(coun);
         res.send(coun);
       }
@@ -99,6 +98,27 @@ exports.followers_count = function(req,res){
       }
 });
 
+};
+exports.facebooklike = function(req, res){
+  var sess = req.session;
+  var user = sess.user;
+  if(user.company_event === 'nike'){
+    symbol = "SELECT share_count, total_count FROM link_stat WHERE url = www.nike.com/us/en_us/" ;
+  }
+  else {
+    symbol = "SELECT share_count, total_count FROM link_stat WHERE url = http://www.loreal.com/" ;
+  }
+
+  http.get('graph.facebook.com/fql?q='+symbol, function(data,err){
+    if(data){
+        console.log(data);
+        res.send(data);
+    }
+    else{
+        res.render('error', { error: err});
+    }
+
+  });
 };
 exports.gettweets = function (req,res){
     var sess = req.session;
@@ -110,7 +130,7 @@ exports.gettweets = function (req,res){
       symbol = 'loreal';
     }
 
-  	twitter.get('search/tweets', {q: symbol,count:1000}, function(err, data) {
+  	twitter.get('search/tweets', {q: symbol, count:1000}, function(err, data) {
       if(data){
         res.send(data.statuses);
       }
@@ -122,7 +142,6 @@ exports.gettweets = function (req,res){
 };
 
 exports.lastTradePriceOnly = function(req, res) {
-          console.log("stock price");
           var sess = req.session;
           var user = sess.user;
           if(user.company_event === 'nike'){
@@ -131,11 +150,11 @@ exports.lastTradePriceOnly = function(req, res) {
           }
           else {
             symbol = 'EPA:OR';
-            stocksymbol = 'OR';
+            stocksymbol = 'OR.PA';
           }
           yahooFinance.snapshot({
             symbol: stocksymbol,
-            fields: ['l1']
+            fields: ['s', 'n', 'd1', 'l1', 'y', 'r']
             }, function (err, snapshot) {
             if (!err){
                 res.send(snapshot);
@@ -198,11 +217,9 @@ exports.adAnalytics = function(req, res){
 
 exports.validateUser =function(req,res){
   var sess = req.session;
-	console.log("validate user");
 	var newUser = new user();
 	newUser.validateUser(function(err,result) {
 		if(err){
-			console.log("Error"+err);
 			res.render('error', {error: err});
 		}else{
       sess.user = result;
@@ -321,9 +338,9 @@ exports.addEvent = function(req, res){
 //ERROR API
 exports.error = function(req, res){
   res.render('error', {user: req.session.user});
-}
+};
 
 
 exports.NotFoundErrorPage = function(req,res){
   res.render('NotFoundErrorPage');
-}
+};

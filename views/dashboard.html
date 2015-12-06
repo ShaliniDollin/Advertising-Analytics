@@ -187,11 +187,11 @@
       						<i class="fa fa-facebook"></i>
       						<ul>
       							<li>
-      								<strong>256k</strong>
+      								<strong id="frnd"></strong>
       								<span>friends</span>
       							</li>
       							<li>
-      								<strong>359</strong>
+      								<strong id="feed"></strong>
       								<span>feeds</span>
       							</li>
       						</ul>
@@ -220,11 +220,11 @@
       						<i class="fa fa-twitter"></i>
       						<ul>
       							<li>
-      								<strong id="hello"></strong>
+      								<strong id="follow"></strong>
       								<span>followers</span>
       							</li>
       							<li>
-      								<strong>2562</strong>
+      								<strong id="tweet1"></strong>
       								<span>tweets</span>
       							</li>
       						</ul>
@@ -260,7 +260,7 @@
     <script src="/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
     <script src="/js/owl.carousel.js" ></script>
     <!-- jQuery full calendar -->
-    <<script src="/js/fullcalendar.min.js"></script> <!-- Full Google Calendar - Calendar -->
+    <script src="/js/fullcalendar.min.js"></script> <!-- Full Google Calendar - Calendar -->
 	<script src="/assets/fullcalendar/fullcalendar/fullcalendar.js"></script>
     <!--script for this page only-->
     <script src="/js/calendar-custom.js"></script>
@@ -288,11 +288,11 @@
       var k=0;
       $(document).ready(function() {
         var user = <%- JSON.stringify(user) %>;
-        score();
+        score1();
+        facebooklike();
         followers();
         news(k);
         tweets(k);
-
           $("#owl-slider").owlCarousel({
               navigation : true,
               slideSpeed : 300,
@@ -302,18 +302,11 @@
           });
       });
 
-      function score() {
+      function score1() {
         $.getJSON("/lastTradePriceOnly", function(data){
           var html = '';
           var nums = document.getElementById("price1");
-          var i=0;
-          $.each(data, function(key, val){
-            i++;
-            if(i>0){
-              return false;
-            }
-            html = val.lastTradePriceOnly;
-          });
+          html = data.lastTradePriceOnly;
           nums.innerHTML = html;
         });
 
@@ -329,7 +322,6 @@
                   if(i>k){
                     return false;
                   }
-                  news = JSON.stringify(data);
                   html += "<li class='list-group-item'>" + val.description + "</li>";
                 });
                 k=k+5;
@@ -337,19 +329,36 @@
 
         });
       }
+
+      function facebooklike(){
+        $.getJSON("/facebooklike", function(data){
+              var html = '';
+              var nums = document.getElementById("frnd");
+              alert(data);
+              var i=k-5;
+               $.each(data, function (key, val) {
+                  i++;
+                  if(i>k){
+                    return false;
+                  }
+                  html += "<li class='list-group-item'>" + val.description + "</li>";
+                });
+                k=k+5;
+                nums.innerHTML = html;
+
+        });
+      }
+
       function followers(){
           $.getJSON("/followers_count", function(data){
             var html = '';
-            var nums = document.getElementById("hello");
-            var i=0;
-            $.each(data, function(key, val){
-              i++;
-              if(i>0){
-                return false;
-              }
-              html = val.lastTradePriceOnly;
-            });
+            var html1 = '';
+            var nums = document.getElementById("follow");
+            var num1 = document.getElementById("tweet1");
+            html = data.followers_count;
+            html1 = data.status_count;
             nums.innerHTML = html;
+            num1.innerHTML = html1;
           });
 
       }
@@ -363,7 +372,6 @@
                   if(i>k){
                     return false;
                   }
-                  news = JSON.stringify(data);
                   html += "<li class='list-group-item'>" + val.text + "</li>";
                 });
                 k=k+8;

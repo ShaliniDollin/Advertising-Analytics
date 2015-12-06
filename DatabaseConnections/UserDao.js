@@ -34,7 +34,6 @@ UserDao.prototype.createUser = function(callback, fname, lname, company_event, d
                   if(!error){
                     if(json.rows.length > 0){
                           var user = json.rows[0];
-                          console.log( 'created'+ user.fname);
                           callback( null,user);
                     }
                   }
@@ -65,12 +64,10 @@ UserDao.prototype.createUser = function(callback, fname, lname, company_event, d
 
 UserDao.prototype.validateUser = function(callback, email, password){
 		var param = [email];
-		console.log("email" +email);
 		client.execute(authQ, param, {prepare: true}, function (err, result){
       if(!err){
 			if (result.rows.length > 0){
           var user = result.rows[0];
-          console.log(user);
           if(user.password === password){
             callback(null, user);
           }
