@@ -2,7 +2,7 @@ var user = require('../Model/User');
 var vendor = require('../Model/Vendor');
 var product = require('../Model/Product');
 var event = require('../Model/Event');
-
+var recommendation = require('../Model/Recommendation');
 var twit = require('twit');
 
 var ejs = require("ejs");
@@ -226,8 +226,25 @@ exports.events = function(req, res){
 
 exports.adAnalytics = function(req, res){
   var sess = req.session;
-	res.render('adAnalytics', {title: 'adAnalytics'});
+  res.render('adAnalytics', {user: sess.user});
+ 	
 };
+
+exports.getProducts = function(req, res){
+  productModel = new product();
+
+  productModel.getProducts(function(err, products){
+    if(!err){
+      res.send(products.rows);
+    }else{
+      res.render('error', {error: err});
+    }
+    
+  }, req);
+}
+
+
+
 
 exports.validateUser =function(req,res){
   var sess = req.session;
@@ -299,10 +316,19 @@ exports.addProduct = function(req, res){
 
     newProduct.addProduct(function(err, success){
       if(!err){
-        res.redirect('/'+ sess.user.company_event + '/'+user.fname+'_'+user.lname+'/products');
+        // Add product to recommendation
+        var recommendationObj = new recommendation();
+        recommendationObj.addProductRecommendation(function(err, success){
+          if(!err){
+            res.redirect('/'+ sess.user.company_event + '/'+user.fname+'_'+user.lname+'/products');
+          }else{
+            res.render('error', {error: err});
+          }
+        }, req);
+        
       }else{
         //Render a error page
-        res.render('error', {user: user});
+        res.render('error', {user: user, error:err});
 
       }
     }, req);
@@ -361,6 +387,7 @@ exports.addEvent = function(req, res){
     var newEvent = new event();
     newEvent.addEvent(function(err, success){
       if(!err){
+        // DO RECOMMENDATION ON PRODUCTS
         res.redirect('/'+ sess.user.company_event + '/'+user.fname+'_'+user.lname+'/event_events');
       }else{
         //Render a error page
@@ -370,6 +397,34 @@ exports.addEvent = function(req, res){
     }, req);
 
 };
+
+//ANALTYTICS API
+exports.getDesicionTreeEvents = function(req, res){
+  var user = req.session.user;
+
+  var products = new product();
+  products.getProducts(function(err, products){
+    if(!err){
+      console.log(products);
+      var eventobj = new event();
+      eventobj.getAllEvents(function(err, events){
+        if(!err){
+          console.log(events);
+
+        }
+        else{
+          res.render('error', {user:user, error : err + "<br> Could not get Events"});
+        }
+      }, req);
+    }
+    else{
+      res.render('error', {user:user, error : err + "<br>Could not get products!"});
+    }
+  }, req);
+  
+ 
+}
+
 
 //ERROR API
 exports.error = function(req, res){
