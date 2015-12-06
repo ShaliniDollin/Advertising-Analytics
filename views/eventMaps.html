@@ -20,7 +20,26 @@ function initMap() {
     center: {lat: 35.746512, lng: -39.462891}
   });
 
-  setMarkers(map);
+  var geocoder = new google.maps.Geocoder();
+
+  geocodeAddress(geocoder, map);
+
+  //setMarkers();
+}
+
+function geocodeAddress(geocoder, resultsMap){
+  var address = "tiptur"
+  geocoder.geocode({'address': address}, function(results, status) {
+    if (status === google.maps.GeocoderStatus.OK) {
+      resultsMap.setCenter(results[0].geometry.location);
+      var marker = new google.maps.Marker({
+        map: resultsMap,
+        position: results[0].geometry.location
+      });
+    } else {
+      alert('Geocode was not successful for the following reason: ' + status);
+    }
+  });
 }
 
 // Data for the markers consisting of a name, a LatLng and a zIndex for the

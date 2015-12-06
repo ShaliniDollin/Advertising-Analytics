@@ -45,18 +45,18 @@
 
 			<div class="row">
 				<div class="col-lg-12">
-					<h3 class="page-header"><i class="icon_documents_alt"></i> Products</h3>
+					<h3 class="page-header"><i class="icon_table"></i> Events</h3>
 					<ol class="breadcrumb">
 						<li><i class="fa fa-home"></i><a href="/">Home</a></li>
-						<li><i class="icon_documents_alt"></i>Products</li>
+						<li><i class="icon_table"></i>Events</li>
 					</ol>
 				</div>
 			</div>
 
-			<div class = "panel">
-				<header class="panel-heading">
-					Products:
-				</header>
+      <div class = "panel">
+        <header class="panel-heading">
+          Events:
+        </header>
         <div class="table-responsive">
           <table class="table">
             <thead>
@@ -64,29 +64,35 @@
                 <th>#</th>
                 <th>Name</th>
                 <th>Gender</th>
-                <th>Category</th>
+                <th>genre</th>
                 <th>Description</th>
+                <th>City</th>
+                <th>Organizer Name</th>
+                <th>Organizer Contact</th>
                 <th>Tag</th>
               </tr>
             </thead>
             <tbody>
-               <% for (i = 0; i < products.rows.length; i++){ %>
+               <% for (i = 0; i < events.rows.length; i++){ %>
               <tr>
                 <td><%= i+1 %></td>
-                <td><%= products.rows[i].name %></td>
-                <td><%= products.rows[i].audience_gender %></td>
-                <td><%= products.rows[i].category %></td>
-                <td><%= products.rows[i].description %></td>
-                <td><%= products.rows[i].tag %></td>
+                <td><%= events.rows[i].name %></td>
+                <td><%= events.rows[i].audience_gender %></td>
+                <td><%= events.rows[i].genre %></td>
+                <td><%= events.rows[i].description %></td>
+                <td><%= events.rows[i].city %></td>
+                <td><%= events.rows[i].organizer_name %></td>
+                <td><%= events.rows[i].organizer_contact %></td>
+                <td><%= events.rows[i].tag %></td>
               </tr>
               <%}%>
             </tbody>
           </table>
         </div>
-			</div>
-				    <div class="panel">
+      </div>
+			<div class="panel">
             <header class="panel-heading">
-                Add Products
+                Add Events
             </header>
         	<div class="panel-body">
                 <a href="#" data-toggle="modal" data-target="#productmodal" class="btn btn-success"> Add </a>
@@ -102,15 +108,15 @@
                       <div class="modal-content">
                           <div class="modal-header">
                               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                              <h4 class="modal-title">Add a Product</h4>
+                              <h4 class="modal-title">Add an Event</h4>
                           </div>
                           <div class="modal-body formcontainer">
 
-                             <form action="/<%= user.company_event %>/<%= user.fname %>_<%= user.lname %>/addProduct" method="post" autocomplete="on">
+                             <form action="/<%= user.company_event %>/<%= user.fname %>_<%= user.lname %>/addEvent" method="post" autocomplete="on">
 
                                 <p>
-                                    <label for="productName" class="uname" > Name </label>
-                                    <input id="productName" name="productName" required="required" type="text" placeholder="Product Name"/>
+                                    <label for="eventName" class="uname" > Name </label>
+                                    <input id="eventName" name="eventName" required="required" type="text" placeholder="Product Name"/>
                                 </p>
                                 <br>
                                 <p>
@@ -124,53 +130,58 @@
                                     </select>
                                 </p>
                                 <br>
-                                <% if (user.company_event == 'nike'){ %>
+                                
                                 <p>
                                     <label for="gender" class="uname" > Gender</label>
                                     <select id="gender" name="gender">
-                                      <option value="men">Men</option>
-                                      <option value="women">Women</option>
-                                      <option value="young_atheletes">Young Athletes</option>
-                                      <option value="others">Others</option>
+                                      <option value="men">Male</option>
+                                      <option value="women">Female</option>
+                                      <option value="both">Both</option>
                                     </select>
                                 </p>
                                 <br>
-                                <% }else {%>
-                                    <input id="gender" name="gender" type="hidden" value="Women" />
-                                <% } %>
 
-                                <% if (user.company_event == 'nike'){ %>
                                 <p>
-                                    <label for="category" class="uname" > Cagtegory </label>
-                                    <select id="category" name="category">
-                                      <option value="footwear">Footwear</option>
-                                      <option value="equipment">Equipment</option>
-                                      <option value="brand_division">Brand Division</option>
-                                      <option value="apparel">Apparel</option>
+                                    <label for="audienceNumber" class="uname" > Audience Excepting </label>
+                                    <input id="audienceNumber" name="audienceNumber" required="required" type="number"  min ='1'/>
+                                </p>
+
+                                <br>
+                                <p>
+                                    <label for="genre" class="uname" > Genre </label>
+                                    <select id="genre" name="genre">
+                                      <option value="sports">Sports</option>
+                                      <option value="beauty">Beauty</option>
                                     </select>
                                 </p>
                                 <br>
-                                <% }else {%>
-                                <p>
-                                    <label for="category" class="uname" > Cagtegory </label>
-                                    <select id="category" name="category">
-                                      <option value="active cosmetics">Active Cosmetics</option>
-                                      <option value="consumer products">Consumer Products</option>
-                                      <option value="loreal luxe">Loreal Luxe</option>
-                                      <option value="professional product">Professional Product</option>
-                                    </select>
-                                </p>
-                                <br>
-                                <% }%>
-                                <p>
+
+								<p>
                                     <label for="description" class="uname" > Description     </label>
                                     <textarea class="" rows="5" cols="50" id="" placeholder="Enter description" name="description"></textarea>
                                 </p>
                                 <br>
-                                <% if (user.company_event == 'nike'){ %>
-                                  <p>
+
+                                <p>
+                                    <label for="organizerContact" class="uname" > Organizer Contact </label>
+                                    <input id="organizerContact" name="organizerContact" required="required" type="tel" />
+                                </p>
+
+                                <p>
+                                    <label for="organizerName" class="uname" > Organizer Name </label>
+                                    <input id="organizerName" name="organizerName" required="required" type="text" />
+                                </p>
+
+                                <br>
+
+                                <p>
+                                    <label for="city" class="uname" > City </label>
+                                    <input id="city" name="city" required="required" type="text" />
+                                </p>
+
+                                 <p>
                                     <label for="tags" class="uname" > Tags </label>
-                                     <input type="checkbox" name="tags" value="action_sports">Action Sports</input>
+                                    <input type="checkbox" name="tags" value="action_sports">Action Sports</input>
                                     <input type="checkbox" name="tags" value="basketball">Basketball</input>
                                     <input type="checkbox" name="tags" value="golf">Golf</input>
                                     <input type="checkbox" name="tags" value="football">Football</input>
@@ -178,24 +189,16 @@
                                     <input type="checkbox" name="tags" value="running">Running</input>
                                     <input type="checkbox" name="tags" value="sportswear">Sportswear</input>
                                     <input type="checkbox" name="tags" value="womens_training">Womens Training</input>
-                                    <input type="checkbox" name="tags" value="others">Others</input>
-                                </p>
-                                <br>
-                                <% }else {%>
-                                  <p>
-                                    <label for="tags" class="uname" > Tags </label>
                                     <input type="checkbox" name="tags" value="makeup">Makeup</input>
                                     <input type="checkbox" name="tags" value="perfumes">Perfumes</input>
                                     <input type="checkbox" name="tags" value="skin care">Skin Care</input>
                                     <input type="checkbox" name="tags" value="hair care and styling">Hair Care and Styling</input>
                                     <input type="checkbox" name="tags" value="hair colourants">Hair Colourants</input>
-                    <input type="checkbox" name="tags" value="hair care">Hair Care</input>
+    								<input type="checkbox" name="tags" value="hair care">Hair Care</input>
                                     <input type="checkbox" name="tags" value="shampoo and hair care">Shampoo and Hair Care</input>
                                     <input type="checkbox" name="tags" value="Styling and Textures">Styling and Textures</input>
-                                    <input type="checkbox" name="tags" value="others">Others</input>
                                 </p>
                                 <br>
-                                <% }%>
 
 
 
@@ -212,8 +215,9 @@
                 <!-- modal -->
 
 
+			<br><br><br>
 
-  <!-- container section end -->
+	  
 
 <!-- End, so adding jquery -->
     <!-- javascripts -->
@@ -284,27 +288,9 @@
           $('select.styled').customSelect();
       });
 
-	  /* ---------- Map ---------- */
-	$(function(){
-	  $('#map').vectorMap({
-	    map: 'world_mill_en',
-	    series: {
-	      regions: [{
-	        values: gdpData,
-	        scale: ['#000', '#000'],
-	        normalizeFunction: 'polynomial'
-	      }]
-	    },
-		backgroundColor: '#eef3f7',
-	    onLabelShow: function(e, el, code){
-	      el.html(el.html()+' (GDP - '+gdpData[code]+')');
-	    }
-	  });
-	});
-
-
-
   </script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvvq6byHH3zyBR4S31N9IKG7lFikH9qxw&signed_in=true&callback=initMap"></script>
 
   </body>
 </html>

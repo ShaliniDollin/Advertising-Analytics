@@ -2,7 +2,6 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
     <meta name="author" content="Shalini">
     <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
@@ -42,68 +41,38 @@
   </head>
 
   <body>
+  <!-- container section start -->
 
-			<div class="row">
-				<div class="col-lg-12">
-					<h3 class="page-header"><i class="icon_table"></i> Events</h3>
-					<ol class="breadcrumb">
-						<li><i class="fa fa-home"></i><a href="/">Home</a></li>
-						<li><i class="icon_table"></i>Events</li>
-					</ol>
-				</div>
-			</div>
+              <!--overview start-->
+      			  <div class="row">
+      				<div class="col-lg-12">
+      					<h3 class="page-header"><i class="fa fa-laptop"></i> Dashboard</h3>
+      					<ol class="breadcrumb">
+      						<li><i class="fa fa-home"></i><a href="/">Home</a></li>
+      						<li><i class="fa fa-laptop"></i>Dashboard</li>
+      					</ol>
+      				</div>
+      			</div>
 
-			<div class="row">
-			<div class="col-lg-8">
+      		<div class="row">
+			<div class="col-lg-6">
 				
 					
-					<div class="panel-body-map">
-						<div id="map" style="height:380px;width:1080px"></div>
-					</div>
+			<div class="panel-body-map">
+			<div id="map" style="height:380px;width:1080px"></div>
+			</div>
 
 				
 				</div>
 			</div>
-      <br><br><br>
 
-      <div class = "panel">
-        <header class="panel-heading">
-          Events:
-        </header>
-        <div class="table-responsive">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Gender</th>
-                <th>genre</th>
-                <th>Description</th>
-                <th>City</th>
-                <th>Organizer Name</th>
-                <th>Organizer Contact</th>
-                <th>Tag</th>
-              </tr>
-            </thead>
-            <tbody>
-               <% for (i = 0; i < events.rows.length; i++){ %>
-              <tr>
-                <td><%= i+1 %></td>
-                <td><%= events.rows[i].name %></td>
-                <td><%= events.rows[i].audience_gender %></td>
-                <td><%= events.rows[i].genre %></td>
-                <td><%= events.rows[i].description %></td>
-                <td><%= events.rows[i].city %></td>
-                <td><%= events.rows[i].organizer_name %></td>
-                <td><%= events.rows[i].organizer_contact %></td>
-                <td><%= events.rows[i].tag %></td>
-              </tr>
-              <%}%>
-            </tbody>
-          </table>
-        </div>
-      </div>
-	  
+            <div class="row">
+              <div class="col-md-4 col-md-offset-4">
+                  <a><strong>www.########.com</strong></a>
+              </div>
+            </div>
+      <!--main content end-->
+  <!-- container section end -->
 
 <!-- End, so adding jquery -->
     <!-- javascripts -->
@@ -146,49 +115,22 @@
 	<script src="/js/sparklines.js"></script>
 	<script src="/js/charts.js"></script>
 	<script src="/js/jquery.slimscroll.min.js"></script>
-  <script>
-
-      //knob
-      $(function() {
-        $(".knob").knob({
-          'draw' : function () {
-            $(this.i).val(this.cv + '%')
-          }
-        })
-      });
-
-      //carousel
-      $(document).ready(function() {
-          $("#owl-slider").owlCarousel({
-              navigation : true,
-              slideSpeed : 300,
-              paginationSpeed : 400,
-              singleItem : true
-
-          });
-      });
-
-      //custom select box
-
-      $(function(){
-          $('select.styled').customSelect();
-      });
-
-
+	<script>
   var events = <%- JSON.stringify(events) %>;
-function initMap() {
-  var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 2,
-    center: {lat: 35.746512, lng: -39.462891}
-});
-  var geocoder = new google.maps.Geocoder();
-
+  
+		function initMap() {
+      var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 2,
+      center: {lat: 35.746512, lng: -39.462891}
+      });
+    var geocoder = new google.maps.Geocoder();
     for (i= 0; i < events.rowLength; i++){
       geocodeAddress(geocoder, map, events.rows[i].city);
     }
-}
+  }
 
 function geocodeAddress(geocoder, resultsMap, address){
+  
   geocoder.geocode({'address': address}, function(results, status) {
     if (status === google.maps.GeocoderStatus.OK) {
       resultsMap.setCenter(results[0].geometry.location);
@@ -201,10 +143,8 @@ function geocodeAddress(geocoder, resultsMap, address){
     }
   });
 }
-
-</script>
-    <script async defer
+	</script>
+	    <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvvq6byHH3zyBR4S31N9IKG7lFikH9qxw&signed_in=true&callback=initMap"></script>
-
   </body>
 </html>

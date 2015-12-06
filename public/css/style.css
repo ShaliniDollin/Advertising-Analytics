@@ -55,6 +55,28 @@ table tr th { color: #688a7e;}
   overflow-y:scroll;
   border: none;
 }
+
+#productmodal {
+  left: 40px;
+  top: 30px;
+  right: 30px;
+  height: 80%;
+  width: 50%;
+}
+
+.formcontainer label {
+      width:180px;
+      clear:left;
+      text-align:right;
+      padding-right:10px;
+  }
+
+.formcontainer input select label { 
+      float:left;
+    }
+
+
+
 .Creative-pro, .Creative-pro h3{
     display: block;
     position: fixed;
