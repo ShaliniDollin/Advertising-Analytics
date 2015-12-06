@@ -211,7 +211,17 @@ exports.products = function(req, res){
 
 exports.events = function(req, res){
   var sess = req.session;
-	res.render('events', {title: 'events'});
+  var eventObj = new event();
+  eventObj.getAllEvents(function(err, events){
+    if(!err){
+        sess.events = events;
+        res.render('events', { user: user, events: events});
+      }
+      else{
+        res.render('error', {user:user, error : err});
+      }
+  }, req);
+	
 };
 
 exports.adAnalytics = function(req, res){
@@ -332,9 +342,16 @@ exports.event_statistics= function(req, res){
 exports.event_events = function(req, res){
 
     var sess = req.session;
-
-    res.render('event_events', {title: 'Events', user: sess.user, events: sess.events});
-
+    var eventobj = new event();
+    eventobj.getEvents(function(err, events){
+      if(!err){
+        sess.events = events;
+        res.render('event_events', {title: 'Events', user: sess.user, events: sess.events});
+      }
+      else{
+        res.render('error', {user:user, error : err});
+      }
+  }, req);
 };
 
 exports.addEvent = function(req, res){
