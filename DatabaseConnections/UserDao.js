@@ -16,7 +16,9 @@ var checkQ = 'select * from advertising.user where email = ?';
 var authQ = 'select * from advertising.user where email = ?';
 var insertProductQ = 'INSERT INTO advertising.product (name, aud_age_e, aud_age_s, audience_gender, category, company, description, genre, tag) VALUES (?,?,?,?,?,?,?,?,?)';
 var getProductsQ = 'select * from advertising.product where company = ?';
-
+var insertEventQ = 'INSERT INTO advertising.event (name, aud_age_e, aud_age_s, audience_gender, audience_number, city, description, event_company_name, genre, organizer_contact, organizer_name , tag ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)';
+var getEventsQ = 'Select * from advertising.event where event_company_name = ?';
+var getAllEventsQ = 'Select * from advertising.event'; 
 
 function UserDao() {
 
@@ -155,6 +157,72 @@ UserDao.prototype.getProducts = function(callback, company){
 		}
 	});
 }
+
+UserDao.prototype.addEvent = function(callback, eventName, ageGroup, gender, audienceNumber,
+	city, description,eventCompanyName,genre, organizerContact, organizerName, tags ){
+	var aud_age_s, aud_age_e;
+	switch(parseInt(ageGroup)){
+		case 5:
+			aud_age_s = "0";
+			aud_age_e = "5";
+			break;
+		case 11:
+			aud_age_s = "6";
+			aud_age_e = "11";
+			break;
+		case 19:
+			aud_age_s = "12";
+			aud_age_e = "19";
+			break;
+		case 30:
+			aud_age_s = "20";
+			aud_age_e = "30";
+			break;
+		case 40:
+			aud_age_s = "30";
+			aud_age_e = "40";
+			break;
+		default:
+			aud_age_s = "41";
+			aud_age_e = "100";
+	};
+
+	var param = [eventName, aud_age_e, aud_age_s, gender, audienceNumber, city, description, eventCompanyName,genre, organizerContact, organizerName, tags ];
+	client.execute(insertEventQ, param, {prepare: true}, function(err){
+		if(err){
+			console.log(err);
+			callback("ERROR", null);
+		}else{
+			callback(null, "Event Inserted");
+		}
+		
+	});
+}
+
+
+
+UserDao.prototype.getEvents = function(callback, event_company_name){
+	var param = [event_company_name];
+	client.execute(getEventsQ, param, {prepare: true}, function(err, result){
+		if(!err){
+			callback(null, result);
+		}else{
+			callback(err, result);
+		}
+	});
+}
+
+
+UserDao.prototype.getAllEvents = function(callback){
+	client.execute(getAllEventsQ, function(err, result){
+		if(!err){
+			callback(null, result);
+		}else{
+			callback(err, result);
+		}
+	});
+}
+
 
 //db.connection.close();
 module.exports = UserDao;

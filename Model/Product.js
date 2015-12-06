@@ -23,25 +23,6 @@ Product.prototype.getProducts = function(callback, request){
 		callback(err, result);
 	}, request.session.user.company_event);
 };
-/*
-User.prototype.validateUser = function(callback,request)
-{
 
 
-	userobj.validateUser(function(err,res) {
-		callback(err,res);
-
-	},request.email,request.password);
-
-};
-
-User.prototype.getUserById = function(callback, email){
-
-
-	userobj.getUserById(function(err,res){
-		callback(err,res);
-	},email);
-};
-
-*/
 module.exports = Product;
