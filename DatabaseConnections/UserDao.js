@@ -18,7 +18,7 @@ var insertProductQ = 'INSERT INTO advertising.product (name, aud_age_e, aud_age_
 var getProductsQ = 'select * from advertising.product where company = ?';
 var insertEventQ = 'INSERT INTO advertising.event (name, aud_age_e, aud_age_s, audience_gender, audience_number, city, description, event_company_name, genre, organizer_contact, organizer_name , tag ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)';
 var getEventsQ = 'Select * from advertising.event where event_company_name = ?';
-var getAllEventsQ = 'Select * from advertising.event'; 
+var getAllEventsQ = 'Select * from advertising.event';
 
 function UserDao() {
 
@@ -130,7 +130,7 @@ UserDao.prototype.addProduct = function(callback, name, age_group, gender, categ
 		default:
 			aud_age_s = "41";
 			aud_age_e = "100";
-	};
+	}
 	var genre;
 	if(company == 'nike'){
 		genre = 'sports';
@@ -145,7 +145,7 @@ UserDao.prototype.addProduct = function(callback, name, age_group, gender, categ
 		}
 		callback(null, "Product Inserted");
 	});
-}
+};
 
 UserDao.prototype.getProducts = function(callback, company){
 	var param = [company];
@@ -156,7 +156,7 @@ UserDao.prototype.getProducts = function(callback, company){
 			callback(err, result);
 		}
 	});
-}
+};
 
 UserDao.prototype.addEvent = function(callback, eventName, ageGroup, gender, audienceNumber,
 	city, description,eventCompanyName,genre, organizerContact, organizerName, tags ){
@@ -195,9 +195,9 @@ UserDao.prototype.addEvent = function(callback, eventName, ageGroup, gender, aud
 		}else{
 			callback(null, "Event Inserted");
 		}
-		
+
 	});
-}
+};
 
 
 
@@ -210,7 +210,7 @@ UserDao.prototype.getEvents = function(callback, event_company_name){
 			callback(err, result);
 		}
 	});
-}
+};
 
 
 UserDao.prototype.getAllEvents = function(callback){
@@ -221,7 +221,7 @@ UserDao.prototype.getAllEvents = function(callback){
 			callback(err, result);
 		}
 	});
-}
+};
 
 
 //db.connection.close();
