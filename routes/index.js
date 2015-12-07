@@ -45,7 +45,7 @@ exports.login = function(req, res){
 exports.dashboard = function(req, res){
   var sess = req.session;
 	var user = sess.user;
-	user.year = (new Date()).getFullYear();
+	user.year = (new Date()).getFullYear() -1;
 
 	var newVendor = new vendor();
 	newVendor.getVendorIncome(function(err, result){
@@ -53,7 +53,8 @@ exports.dashboard = function(req, res){
 			sess.user.netIncome= result;
 			newVendor.getAdvertisingExpense(function(err1, result1){
 				if(!err){
-					user.expense = result1;
+					sess.user.expense = result1;
+					console.log("session",sess.user);
 					res.render('dashboard', { user: sess.user});
 				}
 
