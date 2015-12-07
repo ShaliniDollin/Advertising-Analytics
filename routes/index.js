@@ -241,6 +241,7 @@ exports.adAnalytics = function(req, res){
 	var user = sess.user;
 	console.log("i am adAnalytics");
 	var recommendationObj = new recommendation();
+	
 	recommendationObj.showperformance(function(err, success){
 		if(!err){
 			res.render('adAnalytics', {success:success, user:user});
@@ -416,7 +417,7 @@ exports.addEvent = function(req, res){
         //  }
 
 
-        }, req);
+        //}, req);
       }else{
         //Render a error page
         res.render('error', {error: err});

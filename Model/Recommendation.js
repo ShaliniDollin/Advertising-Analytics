@@ -30,21 +30,21 @@ Recommendation.prototype.addProductRecommendation = function(callback, request)
 				"Japan" : 0,
 				"Emerging Markets" : 0
 			};
-			console.log(events);	
+			console.log(events);
 			userobj.getRevenuesByCompany(function(err, revenues){
 				//console.log(revenues);
 				for(i = 0; i < revenues.rows.length; i++){
-					if(product_revenue[revenues.rows[i].region] == 0){
+					if(product_revenue[revenues.rows[i].region] === 0){
 						product_revenue[revenues.rows[i].region] = product_revenue[revenues.rows[i].region] + (revenues.rows[i].revenue/1000);
 					}else{
 						product_revenue[revenues.rows[i].region] = (product_revenue[revenues.rows[i].region] + (revenues.rows[i].revenue)/1000)/2;
 					}
-					
+
 				}
-				
+
 				var numerator = 0;
 				var denominator = 0;
-				
+
 				for(i = 0; i < events.rows.length; i++){
 					for(j = 0; j < events.rows[i].tags; j++){
 						if (events.rows[i].tags[j] in product_tags){
@@ -60,7 +60,7 @@ Recommendation.prototype.addProductRecommendation = function(callback, request)
 													Math.pow(product_revenue["Greater China"], 2) +
 													Math.pow(product_revenue["Japan"], 2) +
 													Math.pow(product_revenue["Emerging Markets"], 2));
-					
+
 					events.rows[i].cosine = numerator / denominator;
 					//console.log(events.rows[i]);
 				}
@@ -69,7 +69,7 @@ Recommendation.prototype.addProductRecommendation = function(callback, request)
 				var ele = {};
 				for (i = 0; i < events.rows.length; i++){
 					ele = {};
-					ele[events.rows[i].name] = events.rows[i].cosine
+					ele[events.rows[i].name] = events.rows[i].cosine;
 					events_result.push(JSON.stringify(ele));
 					//events_result.push(events.rows[i].name);
 				}
@@ -81,14 +81,24 @@ Recommendation.prototype.addProductRecommendation = function(callback, request)
 					}
 				}, request.body.productName, request.session.user.company_event, events_result);
 			}, request.session.user.company_event);
-			
+
 		}else{
 			callback(err, null);
 		}
 	}, request.body.gender, genre, request.body.ageGroup);
-	
+
 };
 
+Recommendation.prototype.showperformance = function(callback, request){
+
+
+	userobj.showperformance(function(err,res) {
+		console.log("rec.js", res);
+		callback(err,res);
+
+	},request.session.user.company_event);
+
+};
 /*
 Recommendation.prototype.addEventRecommendation = function(callback, request)
 {
@@ -169,10 +179,10 @@ Recommendation.prototype.addEventRecommendation = function(callback, request)
 												Math.pow(loreal_revenue["Japan"], 2) +
 												Math.pow(loreal_revenue["Emerging Markets"], 2));
 								}
-								
+
 								var ele = {};
 								ele[request.body.eventName] = numerator / denominator;
-								
+
 
 								//cosine = {request.body.eventName : numerator / denominator};
 
@@ -189,19 +199,19 @@ Recommendation.prototype.addEventRecommendation = function(callback, request)
 							}
 
 						}else{
-							callback(err, null);	
+							callback(err, null);
 							}
 					}, "loreal");
 				}else{
 					callback(err, null);
 				}
 			}, "nike");
-			
+
 		}else{
 			callback(err, null);
 		}
 	}, request.body.gender, genre, request.body.ageGroup);
-	
+
 };*/
 
 
