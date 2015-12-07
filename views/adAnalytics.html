@@ -193,16 +193,18 @@
                 return keys;
             }
           $.each(success, function (key, product) {
-            console.log(Object.keys(product.events)[0]);
-          if(!product.events[1] && !product.events[2]){
+            console.log(product);
+          if(product.events){
+          if(product.events.length === 1){
             html += "<tr> <td>"+ product.product_name 	+"</td> <td>"+ product.events[0]+"</td> </tr>";
           }
-          else if (!product.events[2]) {
+          else if (product.events.length === 2) {
             html += "<tr> <td>"+ product.product_name 	+"</td> <td>"+ product.events[0]+"</td> <td>"+  product.events[1] +"</td> </tr>";
           }
           else {
               html += "<tr> <td>"+ product.product_name 	+"</td> <td>"+ product.events[0]+"</td> <td>"+  product.events[1] +"</td> <td>"+  product.events[2] +"</td></tr>";
           }
+        }
           });
 
           nums.innerHTML = html;
