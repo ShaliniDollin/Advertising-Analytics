@@ -8,14 +8,21 @@ function Event() {
 
 Event.prototype.addEvent = function(callback, request)
 {
-
+	var tags;
+	if(request.body.tags instanceof Array){
+		tags = request.body.tags;
+	}
+	else{
+		tags = [];
+		tags[0] = request.body.tags;
+	}
 	userobj.addEvent(function(err,res) {
 		callback(err,res);
 
 	},request.body.eventName, request.body.ageGroup, request.body.gender, request.body.audienceNumber,
 	request.body.city, request.body.description,request.session.user.company_event, 
 	request.body.genre, request.body.organizerContact, request.body.organizerName, request.body.region,
-	 request.body.tags );
+	 tags );
 
 };
 
