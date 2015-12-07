@@ -24,9 +24,8 @@ var getAllEventsForProductQ1 = 'Select * from advertising.event where audience_g
 var getAllEventsForProductQ2 = 'Select * from advertising.event where genre = ? and aud_age_e = ? and aud_age_s = ? ALLOW FILTERING';
 var getRevenuesQ = "Select * from advertising.revenue where company = ?";
 var addProductRecommendationsQ = 'INSERT INTO advertising.recommendation (product_name, company, events) VALUES (?,?,?)';
-
-var getAllProductsForEventQ = 'Select * for advertising.product where audience_gender = ? and genre = ? and aud_age_e = ? and aud_age_s = ? ALLOW FILTERING ';
-
+var getAllProductsForEventQ = 'Select * from advertising.product where audience_gender = ? and genre = ? and aud_age_e = ? and aud_age_s = ? ALLOW FILTERING ';
+var getProductFromRecommendationQ = 'Select * from advertising.recommendation where product_name = ?';
 
 function UserDao() {
 
@@ -145,7 +144,7 @@ UserDao.prototype.addProduct = function(callback, name, age_group, gender, categ
 	}else{
 		genre = 'beauty';
 	}
-	var param = [name, aud_age_s, aud_age_e, gender, category, company, description, genre, tags];
+	var param = [name, aud_age_e, aud_age_s, gender, category, company, description, genre, tags];
 	client.execute(insertProductQ, param, {prepare: true}, function(err){
 		if(err){
 			console.log(err);
@@ -348,7 +347,7 @@ UserDao.prototype.getAllProductsForEvent = function(callback, gender, genre, age
 	console.log(param);
 	client.execute(query, param, {prepare: true}, function(err, result){
 		if(!err){
-			console.log(result);
+			//console.log(result);
 			callback(null, result);
 		}
 		else{
@@ -358,5 +357,15 @@ UserDao.prototype.getAllProductsForEvent = function(callback, gender, genre, age
 	});
 }
 
+UserDao.prototype.getProductFromRecommendation = function(callback, product_name){
+	var param = [product_name];
+	client.execute(getProductFromRecommendationQ, param, {prepare: true}, function(err, result){
+		if(!err){
+			callback(null, result);
+		}else{
+			callback(err, result);
+		}
+	});
+}
 //db.connection.close();
 module.exports = UserDao;
