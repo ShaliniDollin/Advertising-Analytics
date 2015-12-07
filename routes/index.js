@@ -51,17 +51,18 @@ exports.dashboard = function(req, res){
 	newVendor.getVendorIncome(function(err, result){
 		if(!err){
 			sess.user.netIncome= result;
-			newVendor.getAdvertisingExpense(function(err, result){
+			newVendor.getAdvertisingExpense(function(err1, result1){
 				if(!err){
-					user.expense = result;
+					user.expense = result1;
+					res.render('dashboard', { user: sess.user});
 				}
 
 					else{
-						console.log(err);
+						res.render('error', { error: err});
 					}
 			},user.year,user.company_event);
 
-      res.render('dashboard', { user: sess.user});
+
     }
     else{
       res.render('error', { error: err});
