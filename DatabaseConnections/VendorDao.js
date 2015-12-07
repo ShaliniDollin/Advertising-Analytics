@@ -16,7 +16,7 @@ var options1 = {
 var client1;
 
 var netIncomeQ='select net_income from financial_data where year=?';
-
+var advertisingExpense ='select demand_creation_expense from financial_data where year=?';
 function VendorDao() {
 
 }

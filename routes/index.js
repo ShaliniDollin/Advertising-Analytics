@@ -236,8 +236,16 @@ exports.events = function(req, res){
 
 exports.adAnalytics = function(req, res){
   var sess = req.session;
-  res.render('adAnalytics', {user: sess.user});
-
+	var user = sess.user;
+	console.log("i am adAnalytics");
+	var recommendationObj = new recommendation();
+	recommendationObj.showperformance(function(err, success){
+		if(!err){
+			res.render('adAnalytics', {success:success, user:user});
+		}else{
+			res.render('error', {error: err});
+		}
+	}, req);
 };
 
 exports.getProducts = function(req, res){
@@ -251,8 +259,7 @@ exports.getProducts = function(req, res){
     }
 
   }, req);
-}
-
+};
 
 
 
@@ -443,7 +450,7 @@ exports.getDesicionTreeEvents = function(req, res){
   }, req);
 
 
-}
+};
 
 
 //ERROR API

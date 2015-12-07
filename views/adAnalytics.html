@@ -70,9 +70,10 @@
 							<table class="table bootstrap-datatable countries">
 								<thead>
 									<tr>
-										<th>#</th>
 										<th>Product</th>
-										<th>Top Events Recommended</th>
+										<th>First Event</th>
+                    <th>Second Event</th>
+                    <th>Third Event</th>
 									</tr>
 								</thead>
 								<tbody id="product_table">
@@ -163,8 +164,8 @@
 
       $(document).ready(function() {
         var user = <%- JSON.stringify(user) %>;
-
-       	displayProducts();
+        var success = <%- JSON.stringify(success) %>;
+       	displayProducts(success);
 
         $("#owl-slider").owlCarousel({
               navigation : true,
@@ -176,27 +177,36 @@
       });
 
 
-      function displayProducts(){
-        $.getJSON("getProducts", function(products){
-        	console.log(products);
+      function displayProducts(success){
+        console.log(success);
+        	var html = '';
+        	var nums = document.getElementById("product_table");
+          var i =0;
+          Object.keys = Object_keys;
+            function Object_keys(obj) {
+                var keys = [], name;
+                for (name in obj) {
+                    if (obj.hasOwnProperty(name)) {
+                        keys.push(name);
+                    }
+                }
+                return keys;
+            }
+          $.each(success, function (key, product) {
+            console.log(Object.keys(product.events)[0]);
+          if(!product.events[1] && !product.events[2]){
+            html += "<tr> <td>"+ product.product_name 	+"</td> <td>"+ product.events[0]+"</td> </tr>";
+          }
+          else if (!product.events[2]) {
+            html += "<tr> <td>"+ product.product_name 	+"</td> <td>"+ product.events[0]+"</td> <td>"+  product.events[1] +"</td> </tr>";
+          }
+          else {
+              html += "<tr> <td>"+ product.product_name 	+"</td> <td>"+ product.events[0]+"</td> <td>"+  product.events[1] +"</td> <td>"+  product.events[2] +"</td></tr>";
+          }
+          });
 
-              i = 1;
-
-              $.getJSON("getDesicionTreeEvents", function(result){
-              	var html = '';
-              	var nums = document.getElementById("product_table");
-	              $.each(products, function (key, product) {
-	              	$.getJSON()
-	                html += "<tr> <td>"+ (parseInt(key)+1) 	+"</td> <td>"+ .name+"</td> <td>"+ "THREE" +"</td> </tr>";
-						i++;
-	              });
-
-	              nums.innerHTML = html;
-              });
-
-        });
-
-      }
+          nums.innerHTML = html;
+        }
 
 
 
