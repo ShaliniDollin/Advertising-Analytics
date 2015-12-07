@@ -71,6 +71,14 @@ table tr th { color: #688a7e;}
   width: 50%;
 }
 
+#google_translate_element{
+  float: right;
+  display: inline;
+  margin-right: 0;
+  position: relative;
+  right: -200px;
+}
+
 .formcontainer label {
       width:180px;
       clear:left;

@@ -44,6 +44,7 @@
                 <a class="navbar-brand topnav" id="logo" href="#" style="color:Black;">Advertising Analytics<img src="/img/handshake_icon.png" width="50" height="50"></a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
+            <div id="google_translate_element"></div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li id= "dash">
@@ -77,7 +78,9 @@
                        <a href="#" data-toggle="modal" data-target="#LoginModal" > Login </a>
                       </li>
                 </ul>
+
             </div>
+
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container -->
@@ -353,6 +356,7 @@
 
     <!-- custom form validation script for this page-->
     <script src="/js/form-validation-script.js"></script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
     <script type="text/javascript" >
     $( document ).ready(function() {
@@ -378,6 +382,10 @@
        $('#LoginModal').modal('hide');
      }
 
+
+      function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+      }
 
      </script>
 
